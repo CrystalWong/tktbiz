@@ -2,158 +2,500 @@
   "msg" : "success",
   "code" : 0,
   "data" : {
-    "buyerForm" : [ {//购票人表单
+    "buyerForm" : [ {
       "name" : "姓名",
       "code" : "buyername",
-      "type" : "text",//file:文件上传，img:图片上传，list:列表框，text:输入框，radio:单选，checkbox:多选
+      "type" : "text",
       "required" : true,
-      "data" : { }
+      "data" : [ ]
     }, {
       "name" : "邮箱",
       "code" : "buyeremail",
       "type" : "email",
       "required" : true,
-      "data" : { }
+      "data" : [ ]
     }, {
       "name" : "手机",
       "code" : "buyermobile",
       "type" : "mobile",
       "required" : true,
-      "data" : { }
+      "data" : [ ]
     } ],
-    "orderPrice" : "应付\r\n￥2980.0\r\n（或美元 $ 470.77）",
-    "attendForms" : [ {//参会信息表单
-      "inputs" : [ {
+    "orderPrice" : "￥2980.0",
+    "attendForms" : [ {
+      "formItems" : [ {
         "name" : "姓名",
         "code" : "name1",
         "type" : "text",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "邮箱",
         "code" : "email1",
         "type" : "email",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "手机",
         "code" : "mobile1",
         "type" : "mobile",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "行业",
         "code" : "industry1",
         "type" : "list",
         "required" : true,
-        "data" : {//列表选择项
-          "1" : "行业1",
-          "2" : "行业2",
-          "3" : "行业3",
-          "4" : "行业4",
-          "5" : "行业5"
-        }
+        "data" : [ {
+          "name" : "行业1",
+          "value" : "1",
+          "depth" : 0,
+          "children" : [ ]
+        }, {
+          "name" : "行业2",
+          "value" : "2",
+          "depth" : 0,
+          "children" : [ ]
+        }, {
+          "name" : "行业3",
+          "value" : "3",
+          "depth" : 0,
+          "children" : [ ]
+        }, {
+          "name" : "行业4",
+          "value" : "4",
+          "depth" : 0,
+          "children" : [ ]
+        }, {
+          "name" : "行业5",
+          "value" : "5",
+          "depth" : 0,
+          "children" : [ ]
+        } ]
       }, {
         "name" : "公司名称",
         "code" : "companyName1",
         "type" : "text",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "职位",
         "code" : "title1",
         "type" : "text",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "备注",
         "code" : "remark1",
         "type" : "text",
         "required" : false,
-        "data" : { }
+        "data" : [ ]
+      }, {
+        "name" : "省|市|区",
+        "code" : "p|c|d1",
+        "type" : "3c",
+        "required" : true,
+        "data" : [ {
+          "name" : "省1",
+          "value" : "1",
+          "depth" : 0,
+          "children" : [ {
+            "name" : "城市1",
+            "value" : "1",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区1",
+              "value" : "1",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区2",
+              "value" : "2",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          }, {
+            "name" : "城市2",
+            "value" : "2",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区3",
+              "value" : "3",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区4",
+              "value" : "4",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          } ]
+        }, {
+          "name" : "省2",
+          "value" : "2",
+          "depth" : 0,
+          "children" : [ {
+            "name" : "城市3",
+            "value" : "3",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区5",
+              "value" : "5",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区6",
+              "value" : "6",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          }, {
+            "name" : "城市4",
+            "value" : "4",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区7",
+              "value" : "7",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区8",
+              "value" : "8",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "name" : "省|市",
+        "code" : "p|c1",
+        "type" : "2c",
+        "required" : true,
+        "data" : [ {
+          "name" : "省1",
+          "value" : "1",
+          "depth" : 0,
+          "children" : [ {
+            "name" : "城市1",
+            "value" : "1",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区1",
+              "value" : "1",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区2",
+              "value" : "2",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          }, {
+            "name" : "城市2",
+            "value" : "2",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区3",
+              "value" : "3",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区4",
+              "value" : "4",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          } ]
+        }, {
+          "name" : "省2",
+          "value" : "2",
+          "depth" : 0,
+          "children" : [ {
+            "name" : "城市3",
+            "value" : "3",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区5",
+              "value" : "5",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区6",
+              "value" : "6",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          }, {
+            "name" : "城市4",
+            "value" : "4",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区7",
+              "value" : "7",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区8",
+              "value" : "8",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          } ]
+        } ]
       } ],
-      "num" : 3,//数量
-      "name" : "三日通票",//门票名称
-      "tid" : 1//门票id
+      "num" : 3,
+      "name" : "三日通票",
+      "tid" : 1
     }, {
-      "inputs" : [ {
+      "formItems" : [ {
         "name" : "姓名",
         "code" : "name2",
         "type" : "text",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "邮箱",
         "code" : "email2",
         "type" : "email",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "手机",
         "code" : "mobile2",
         "type" : "mobile",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "行业",
         "code" : "industry2",
         "type" : "list",
         "required" : true,
-        "data" : {
-          "1" : "行业1",
-          "2" : "行业2",
-          "3" : "行业3",
-          "4" : "行业4",
-          "5" : "行业5"
-        }
+        "data" : [ {
+          "name" : "行业1",
+          "value" : "1",
+          "depth" : 0,
+          "children" : [ ]
+        }, {
+          "name" : "行业2",
+          "value" : "2",
+          "depth" : 0,
+          "children" : [ ]
+        }, {
+          "name" : "行业3",
+          "value" : "3",
+          "depth" : 0,
+          "children" : [ ]
+        }, {
+          "name" : "行业4",
+          "value" : "4",
+          "depth" : 0,
+          "children" : [ ]
+        }, {
+          "name" : "行业5",
+          "value" : "5",
+          "depth" : 0,
+          "children" : [ ]
+        } ]
       }, {
         "name" : "公司名称",
         "code" : "companyName2",
         "type" : "text",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "职位",
         "code" : "title2",
         "type" : "text",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "备注",
         "code" : "remark2",
         "type" : "text",
         "required" : false,
-        "data" : { }
+        "data" : [ ]
       }, {
         "name" : "图片上传",
         "code" : "file2",
         "type" : "file",
         "required" : true,
-        "data" : { }
+        "data" : [ ]
+      }, {
+        "name" : "省|市|区",
+        "code" : "p|c|d2",
+        "type" : "3c",
+        "required" : true,
+        "data" : [ {
+          "name" : "省1",
+          "value" : "1",
+          "depth" : 0,
+          "children" : [ {
+            "name" : "城市1",
+            "value" : "1",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区1",
+              "value" : "1",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区2",
+              "value" : "2",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          }, {
+            "name" : "城市2",
+            "value" : "2",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区3",
+              "value" : "3",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区4",
+              "value" : "4",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          } ]
+        }, {
+          "name" : "省2",
+          "value" : "2",
+          "depth" : 0,
+          "children" : [ {
+            "name" : "城市3",
+            "value" : "3",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区5",
+              "value" : "5",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区6",
+              "value" : "6",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          }, {
+            "name" : "城市4",
+            "value" : "4",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区7",
+              "value" : "7",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区8",
+              "value" : "8",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "name" : "省|市",
+        "code" : "p|c2",
+        "type" : "2c",
+        "required" : true,
+        "data" : [ {
+          "name" : "省1",
+          "value" : "1",
+          "depth" : 0,
+          "children" : [ {
+            "name" : "城市1",
+            "value" : "1",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区1",
+              "value" : "1",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区2",
+              "value" : "2",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          }, {
+            "name" : "城市2",
+            "value" : "2",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区3",
+              "value" : "3",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区4",
+              "value" : "4",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          } ]
+        }, {
+          "name" : "省2",
+          "value" : "2",
+          "depth" : 0,
+          "children" : [ {
+            "name" : "城市3",
+            "value" : "3",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区5",
+              "value" : "5",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区6",
+              "value" : "6",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          }, {
+            "name" : "城市4",
+            "value" : "4",
+            "depth" : 1,
+            "children" : [ {
+              "name" : "区7",
+              "value" : "7",
+              "depth" : 2,
+              "children" : [ ]
+            }, {
+              "name" : "区8",
+              "value" : "8",
+              "depth" : 2,
+              "children" : [ ]
+            } ]
+          } ]
+        } ]
       } ],
       "num" : 2,
       "name" : "学生票",
       "tid" : 2
     } ],
-    "orderItems" : [ {//订单条目
-      "tid" : 1,
+    "orderItems" : [ {
       "name" : "票1",
+      "num" : 1,
       "price" : "￥ 2980.0"
     }, {
-      "tid" : 2,
       "name" : "票2",
+      "num" : 1,
       "price" : "￥ 2980.0"
     }, {
-      "tid" : 3,
       "name" : "票3",
+      "num" : 1,
       "price" : "￥ 2980.0"
     }, {
-      "tid" : 4,
       "name" : "票4",
+      "num" : 1,
       "price" : "￥ 2980.0"
     } ],
-    "onlinePay" : "paypal,alipay,wechatpay",//支持的在线支付方式
-    "pays" : "online,offline",//支持的支付方式
-    "token" : "1"//令牌
+    "onlinePay" : [ "paypal", "alipay", "wechatpay" ],
+    "pays" : [ "online", "offline" ],
+    "token" : "1"
   }
 }

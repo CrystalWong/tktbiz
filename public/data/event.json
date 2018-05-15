@@ -11,6 +11,7 @@
     "tieredPricingTitles" : [ "2月15日前购买 (￥)", "现在 - 6月30日(￥)", "7月1日 - 7月31日(￥)" ],
     "tickets" : [ {
       "name" : "VIP贵宾票",
+      "id" : "001",
       "price" : 15000.0,
       "tieredPricing" : "yes",
       "prices" : [ 15000.0, 15000.0, 15000.0 ],
@@ -29,24 +30,26 @@
       "endTime" : ""
     }, {
       "name" : "三日通票",
+      "id" : "002",
       "price" : 2980.0,
       "tieredPricing" : "yes",
       "prices" : [ 1490.0, 1980.0, 2480.0 ],
-      "open" : "yes",
+      "open" : "no",
       "openDesc" : "",
       "invite" : "no",
-      "minNum" : 1,
-      "maxNum" : 20,
+      "minNum" : 2,
+      "maxNum" : 10,
       "discounts" : "yes",
-      "discountsNum" : 10,
+      "discountsNum" : 2,
       "discountsType" : 2,
       "discountsAmount" : 0.0,
       "freeNum" : 2,
-      "discountsInfo" : "买10张赠2张",
+      "discountsInfo" : "买2张赠2张",
       "info" : "",
       "endTime" : "20180906 17:30"
     }, {
       "name" : "单日票",
+      "id" : "003",
       "price" : 1680.0,
       "tieredPricing" : "yes",
       "prices" : [ 1680.0, 1680.0, 1680.0 ],
@@ -65,6 +68,7 @@
       "endTime" : "20180906 17:30"
     }, {
       "name" : "学生票",
+      "id" : "004",
       "price" : 680.0,
       "tieredPricing" : "yes",
       "prices" : [ 680.0, 680.0, 680.0 ],
@@ -83,6 +87,7 @@
       "endTime" : "20180906 17:30"
     }, {
       "name" : "三日通票-五一特惠",
+      "id" : "005",
       "price" : 1490.0,
       "tieredPricing" : "no",
       "prices" : [ 1490.0, 1490.0, 1490.0],

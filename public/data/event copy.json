@@ -20,9 +20,9 @@
       "minNum" : 1,//最小购买数量
       "maxNum" : 20,//最大购买数量
       "discounts" : "no",//是否团购优惠
-      "discountsNum" : 0,//当购买门票数量大于或者等于
-      "discountsType" : 0,//0:无优惠；1:每张优惠金额；2:免费赠送张数；3:免费
-      "discountsAmount" : 0.0,//当discountsType=1时有效
+      "discountsNum" : 3,//当购买门票数量大于或者等于
+      "discountsType" : 1,//0:无优惠；1:每张优惠金额；2:免费赠送张数；3:免费
+      "discountsAmount" : 1.0,//当discountsType=1时有效
       "freeNum" : 0,//当discountsType=2时有效
       "discountsInfo" : "",//优惠提示信息
       "info" : "",//门票提示信息

@@ -60,7 +60,7 @@
           <div id="list-wrap">
             <script id="list" type="text/x-handlebars-template">
               {{#if data.tieredPricing}}
-              <table class="list table">
+              <table class="list table" data-currPriceIndex="{{{data.currPriceIndex}}}">
                 <thead>
                   <th width="10%">{{ data.nameTitle }}</th>
                   {{#each data.tieredPricingTitles}}
@@ -70,20 +70,20 @@
                   <th width="20%">{{ data.numTitle }}</th>
                 </thead>
                 {{#each data.tickets}}
-                <tr>
+                <tr class="tickets" data-id={{{id}}}>
                   <td class="bg-coupon">
                     <button type="button" class="btn" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}">
                       {{ name }}
                     </button>
                   </td>
                   {{#each prices}}
-                  <td>{{ this }}</td>
+                  <td class="prices1">{{ this }}</td>
                   {{/each}}
-                  <td>{{ price }}</td>
+                  <td class="prices2">{{ price }}</td>
                   <td>
-                    <ul class="list-inline">
+                    <ul class="list-inline" data-tieredPricing="{{{tieredPricing}}}" data-discounts="{{{discounts}}}" data-discountsType="{{{discountsType}}}" data-discountsNum="{{{discountsNum}}}" data-discountsAmount="{{{discountsAmount}}}" data-freeNum="{{{freeNum}}}">
                       <li class="subtract"><img src="/imgs/minus.png" width="100%"></li>
-                      <li class="num">0</li>
+                      <li class="num" data-minNum="{{{minNum}}}" data-maxNum="{{{maxNum}}}">0</li>
                       <li class="add"><img src="/imgs/plus.png" width="100%"></li>
                     </ul>
                   </td>
@@ -132,13 +132,13 @@
               <td colspan="2">
                 <ul class="list-inline wrap">
                   <li class="money-wrap wrap text-left">
-                    <div class="money">实付：<span class="green">¥&nbsp;</span><span class="green">977</span></div>
-                    <div class="money">优惠：¥ <span>0</span></div>
+                    <div class="money">实付：<span class="green">¥&nbsp;</span><span class="green payment">0</span></div>
+                    <div class="money">优惠：¥ <span class="discount">0</span></div>
                   </li>                  
                   <li class="clip wrap">
                     <div class="clip-line"></div>
                   </li>
-                  <li class="num wrap text-right">已选择<span>10</span>张票</li>
+                  <li class="num wrap text-right">已选择<span>0</span>张票</li>
                 </ul>
                 <div class="use-coupon">使用优惠或优惠码</div>
                 <button id="submit" class="submit">立即报名</button>

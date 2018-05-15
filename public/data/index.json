@@ -11,6 +11,7 @@
     "tieredPricingTitles" : [ ],
     "tickets" : [ {
       "name" : "三日通票",
+      "id" : "002",
       "price" : 200.0,
       "tieredPricing" : "no",
       "prices" : [ ],
@@ -27,6 +28,7 @@
       "endTime" : "20180906 17:30"
     }, {
       "name" : "单日票",
+      "id" : "003",
       "price" : 210.0,
       "tieredPricing" : "no",
       "prices" : [ ],
@@ -43,6 +45,7 @@
       "endTime" : "20180906 17:30"
     }, {
       "name" : "免费票",
+      "id" : "006",
       "price" : 0.0,
       "tieredPricing" : "no",
       "prices" : [ ],
@@ -59,6 +62,7 @@
       "endTime" : "20180906 17:30"
     }, {
       "name" : "免费票",
+      "id" : "006",
       "price" : 0.0,
       "tieredPricing" : "no",
       "prices" : [ ],

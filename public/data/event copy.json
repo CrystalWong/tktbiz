@@ -2,31 +2,31 @@
   "msg" : "success",
   "code" : 0,
   "data" : {
-    "tieredPricing" : "yes",
+    "tieredPricing" : "yes",//是否阶梯价格
     "nameTitle" : "门票名称",
     "priceTitle" : "原价",
     "numTitle" : "数量",
     "timeTitle" : "",
-    "currPriceIndex" : 1,
-    "tieredPricingTitles" : [ "2月15日前购买 (￥)", "现在 - 6月30日(￥)", "7月1日 - 7月31日(￥)" ],
+    "currPriceIndex" : 1,//阶梯价格当前生效排序值
+    "tieredPricingTitles" : [ "2月15日前购买 (￥)", "现在 - 6月30日(￥)", "7月1日 - 7月31日(￥)" ],//阶梯时间标题列表
     "tickets" : [ {
       "name" : "VIP贵宾票",
-      "price" : 15000.0,
-      "tieredPricing" : "yes",
-      "prices" : [ 15000.0, 15000.0, 15000.0 ],
-      "open" : "yes",
-      "openDesc" : "",
-      "invite" : "no",
-      "minNum" : 1,
-      "maxNum" : 20,
-      "discounts" : "no",
-      "discountsNum" : 0,
-      "discountsType" : 0,
-      "discountsAmount" : 0.0,
-      "freeNum" : 0,
-      "discountsInfo" : "",
-      "info" : "",
-      "endTime" : ""
+      "price" : 15000.0,//原价
+      "tieredPricing" : "yes",//是否阶梯价格
+      "prices" : [ 15000.0, 15000.0, 15000.0 ],//阶梯价格
+      "open" : "yes",//是否开启
+      "openDesc" : "",//不开启时的提示信息
+      "invite" : "no",//是否邀请
+      "minNum" : 1,//最小购买数量
+      "maxNum" : 20,//最大购买数量
+      "discounts" : "no",//是否团购优惠
+      "discountsNum" : 0,//当购买门票数量大于或者等于
+      "discountsType" : 0,//0:无优惠；1:每张优惠金额；2:免费赠送张数；3:免费
+      "discountsAmount" : 0.0,//当discountsType=1时有效
+      "freeNum" : 0,//当discountsType=2时有效
+      "discountsInfo" : "",//优惠提示信息
+      "info" : "",//门票提示信息
+      "endTime" : ""//当上级没有阶梯价格时显示的截止时间
     }, {
       "name" : "三日通票",
       "price" : 2980.0,
@@ -44,7 +44,7 @@
       "freeNum" : 2,
       "discountsInfo" : "买10张赠2张",
       "info" : "",
-      "endTime" : "20180906 17:30"
+      "endTime" : ""
     }, {
       "name" : "单日票",
       "price" : 1680.0,
@@ -62,7 +62,7 @@
       "freeNum" : 0,
       "discountsInfo" : "",
       "info" : "9月4日单日票，2张以上购买9折。 \r\n9月5日单日票，2张以上购买8折。 \r\n9月6日单日票，2张以上购买7折。",
-      "endTime" : "20180906 17:30"
+      "endTime" : ""
     }, {
       "name" : "学生票",
       "price" : 680.0,
@@ -80,12 +80,12 @@
       "freeNum" : 0,
       "discountsInfo" : "买3张单张减60元",
       "info" : "1、学生票3张购买，套票1500元。 \r\n2、学生票一次性买4张及以上每张5折购票。 ",
-      "endTime" : "20180906 17:30"
+      "endTime" : ""
     }, {
       "name" : "三日通票-五一特惠",
       "price" : 1490.0,
       "tieredPricing" : "no",
-      "prices" : [ 1490.0, 1490.0, 1490.0],
+      "prices" : [ ],
       "open" : "yes",
       "openDesc" : "",
       "invite" : "no",
@@ -98,7 +98,7 @@
       "freeNum" : 0,
       "discountsInfo" : "",
       "info" : "五一特惠门票，优惠截止日期2018年5月11日18点",
-      "endTime" : "20180906 17:30"
+      "endTime" : ""
     } ]
   }
 }

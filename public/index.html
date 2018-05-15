@@ -62,12 +62,12 @@
               {{#if data.tieredPricing}}
               <table class="list table">
                 <thead>
-                  <th width="25%">{{ data.nameTitle }}</th>
+                  <th width="10%">{{ data.nameTitle }}</th>
                   {{#each data.tieredPricingTitles}}
-                  <th width="25%">{{ 1 }}</th>
+                  <th width="20%">{{ this }}</th>
                   {{/each}}
-                  <th width="25%">{{ data.timeTitle }}</th>
-                  <th width="25%">{{ data.numTitle }}</th>
+                  <th width="10%">{{ data.priceTitle }}</th>
+                  <th width="20%">{{ data.numTitle }}</th>
                 </thead>
                 {{#each data.tickets}}
                 <tr>
@@ -79,7 +79,7 @@
                   {{#each prices}}
                   <td>{{ this }}</td>
                   {{/each}}
-                  <td>{{ endTime }}</td>
+                  <td>{{ price }}</td>
                   <td>
                     <ul class="list-inline">
                       <li class="subtract"><img src="/imgs/minus.png" width="100%"></li>
@@ -99,10 +99,14 @@
                   <th width="25%">{{ data.numTitle }}</th>
                 </thead>
                 {{#each data.tickets}}
+                {{#if open}}
                 <tr>
+                {{else}}
+                <tr class="disable">
+                {{/if}}
                   <td class="bg-coupon">
                     <button type="button" class="btn" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}">
-                      {{ name }}
+                      {{ open }}
                     </button>
                   </td>
                   <td>{{ price }}</td>

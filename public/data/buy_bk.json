@@ -1,0 +1,159 @@
+{
+  "msg" : "success",
+  "code" : 0,
+  "data" : {
+    "buyerForm" : [ {
+      "name" : "姓名",
+      "code" : "buyername",
+      "type" : "text",
+      "required" : true,
+      "data" : { }
+    }, {
+      "name" : "邮箱",
+      "code" : "buyeremail",
+      "type" : "email",
+      "required" : true,
+      "data" : { }
+    }, {
+      "name" : "手机",
+      "code" : "buyermobile",
+      "type" : "mobile",
+      "required" : true,
+      "data" : { }
+    } ],
+    "orderPrice" : "￥2980.0",
+    "attendForms" : [ {
+      "inputs" : [ {
+        "name" : "姓名",
+        "code" : "name1",
+        "type" : "text",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "邮箱",
+        "code" : "email1",
+        "type" : "email",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "手机",
+        "code" : "mobile1",
+        "type" : "mobile",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "行业",
+        "code" : "industry1",
+        "type" : "list",
+        "required" : true,
+        "data" : {
+          "1" : "行业1",
+          "2" : "行业2",
+          "3" : "行业3",
+          "4" : "行业4",
+          "5" : "行业5"
+        }
+      }, {
+        "name" : "公司名称",
+        "code" : "companyName1",
+        "type" : "text",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "职位",
+        "code" : "title1",
+        "type" : "text",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "备注",
+        "code" : "remark1",
+        "type" : "text",
+        "required" : false,
+        "data" : { }
+      } ],
+      "num" : 3,
+      "name" : "三日通票",
+      "tid" : 1
+    }, {
+      "inputs" : [ {
+        "name" : "姓名",
+        "code" : "name2",
+        "type" : "text",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "邮箱",
+        "code" : "email2",
+        "type" : "email",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "手机",
+        "code" : "mobile2",
+        "type" : "mobile",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "行业",
+        "code" : "industry2",
+        "type" : "list",
+        "required" : true,
+        "data" : {
+          "1" : "行业1",
+          "2" : "行业2",
+          "3" : "行业3",
+          "4" : "行业4",
+          "5" : "行业5"
+        }
+      }, {
+        "name" : "公司名称",
+        "code" : "companyName2",
+        "type" : "text",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "职位",
+        "code" : "title2",
+        "type" : "text",
+        "required" : true,
+        "data" : { }
+      }, {
+        "name" : "备注",
+        "code" : "remark2",
+        "type" : "text",
+        "required" : false,
+        "data" : { }
+      }, {
+        "name" : "图片上传",
+        "code" : "file2",
+        "type" : "file",
+        "required" : true,
+        "data" : { }
+      } ],
+      "num" : 2,
+      "name" : "学生票",
+      "tid" : 2
+    } ],
+    "orderItems" : [ {
+      "num" : 1,
+      "name" : "票1",
+      "price" : "￥ 2980.0"
+    }, {
+      "num" : 2,
+      "name" : "票2",
+      "price" : "￥ 2980.0"
+    }, {
+      "num" : 3,
+      "name" : "票3",
+      "price" : "￥ 2980.0"
+    }, {
+      "num" : 4,
+      "name" : "票4",
+      "price" : "￥ 2980.0"
+    } ],
+    "onlinePay" : "paypal,alipay,wechatpay",
+    "pays" : "online,offline",
+    "token" : "1"
+  }
+}

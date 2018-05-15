@@ -25,7 +25,7 @@ $(function(){
 		}
 		var str = JSON.stringify(list)
 		sessionStorage.setItem("list", str)
-		// window.location.href = '/buy.html'
+		window.location.href = '/buy.html'
 	})
 	$('#return-top .up').on('click', function(){
 		$('html,body').animate({scrollTop:0}, 500);

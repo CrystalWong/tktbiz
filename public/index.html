@@ -59,8 +59,8 @@
           <img src="/imgs/list-tit.png" width="10%">
           <div id="list-wrap">
             <script id="list" type="text/x-handlebars-template">
-              {{#if data.tieredPricing}}
               <table class="list table" data-currPriceIndex="{{{data.currPriceIndex}}}">
+                {{#if data.tieredPricing}}
                 <thead>
                   <th width="10%">{{ data.nameTitle }}</th>
                   {{#each data.tieredPricingTitles}}
@@ -69,10 +69,26 @@
                   <th width="10%">{{ data.priceTitle }}</th>
                   <th width="20%">{{ data.numTitle }}</th>
                 </thead>
+                {{else}}
+                <thead>
+                  <th width="25%">{{ data.nameTitle }}</th>
+                  <th width="25%">{{ data.priceTitle }}</th>
+                  <th width="25%">{{ data.timeTitle }}</th>
+                  <th width="25%">{{ data.numTitle }}</th>
+                </thead>
+                {{/if}}
                 {{#each data.tickets}}
+                {{#if open}}
                 <tr class="tickets" data-id={{{id}}}>
+                {{else}}
+                <tr class="disable"  data-id={{{id}}}>
+                {{/if}}
                   <td class="bg-coupon">
+                    {{#if open}}
                     <button type="button" class="btn" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}">
+                    {{else}}
+                    <button type="button" class="btn">
+                    {{/if}}
                       {{ name }}
                     </button>
                   </td>
@@ -80,48 +96,26 @@
                   <td class="prices1">{{ this }}</td>
                   {{/each}}
                   <td class="prices2">{{ price }}</td>
+                  {{#if tieredPricing}}
+                  {{else}}
+                  <td>{{ endTime }}</td>
+                  {{/if}}
                   <td>
+                    {{#if open}}
                     <ul class="list-inline" data-tieredPricing="{{{tieredPricing}}}" data-discounts="{{{discounts}}}" data-discountsType="{{{discountsType}}}" data-discountsNum="{{{discountsNum}}}" data-discountsAmount="{{{discountsAmount}}}" data-freeNum="{{{freeNum}}}">
-                      <li class="subtract"><img src="/imgs/minus.png" width="100%"></li>
+                      <li class="subtract disabled"><img src="/imgs/minus.png" width="100%"></li>
                       <li class="num" data-minNum="{{{minNum}}}" data-maxNum="{{{maxNum}}}">0</li>
                       <li class="add"><img src="/imgs/plus.png" width="100%"></li>
                     </ul>
+                    {{else}}
+                    <p class="list-inline">
+                      {{ openDesc }}
+                    </p>
+                    {{/if}}
                   </td>
                 </tr>
                 {{/each}}
               </table>
-              {{else}}
-              <table class="list table">
-                <thead>
-                  <th width="25%">{{ data.nameTitle }}</th>
-                  <th width="25%">{{ data.priceTitle }}</th>
-                  <th width="25%">{{ data.timeTitle }}</th>
-                  <th width="25%">{{ data.numTitle }}</th>
-                </thead>
-                {{#each data.tickets}}
-                {{#if open}}
-                <tr>
-                {{else}}
-                <tr class="disable">
-                {{/if}}
-                  <td class="bg-coupon">
-                    <button type="button" class="btn" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}">
-                      {{ open }}
-                    </button>
-                  </td>
-                  <td>{{ price }}</td>
-                  <td>{{ endTime }}</td>
-                  <td>
-                    <ul class="list-inline">
-                      <li class="subtract"><img src="/imgs/minus.png" width="100%"></li>
-                      <li class="num">0</li>
-                      <li class="add"><img src="/imgs/plus.png" width="100%"></li>
-                    </ul>
-                  </td>
-                </tr>
-                {{/each}}
-              </table>
-              {{/if}}
             </script>
           </div>
           <table class="list table settlement">

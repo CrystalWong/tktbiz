@@ -1,5 +1,5 @@
 $(function(){
-	console.log(sessionStorage.getItem("list"))
+	//点击提交
 	$('#submit').on('click', function(){
 		var list = {
 			payment: $('.payment').text(),
@@ -9,10 +9,10 @@ $(function(){
 		var prices = 0;
 		for(var j=0;j<$('.tickets').length;j++) {
 			if($('.tickets').eq(j).find('.num').text() != 0){
-				if($('.tickets').eq(j).find('.list-inline').attr('data-tieredPricing') == 'no'){
+				if($('.tickets').eq(j).find('.list-inline').attr('data-tieredPricing') == false){
 		 			//固定价格计算
 		 			prices = $('.tickets').eq(j).find('.prices2').text()
-		 		} else if($('.tickets').eq(j).find('.list-inline').attr('data-tieredPricing') == 'yes'){
+		 		} else if($('.tickets').eq(j).find('.list-inline').attr('data-tieredPricing')){
 		 			//阶梯价格计算
 		 			prices = $('.tickets').eq(j).find('.prices1').eq(currPriceIndex).text()
 		 		}
@@ -26,7 +26,8 @@ $(function(){
 		var str = JSON.stringify(list)
 		sessionStorage.setItem("list", str)
 		window.location.href = '/buy.html'
-	})
+	});
+
 	$('#return-top .up').on('click', function(){
 		$('html,body').animate({scrollTop:0}, 500);
 	})
@@ -60,8 +61,14 @@ $(function(){
  		var maxNum = parseInt($(this).prev().attr('data-maxNum'));
  		if (num == 0) {
  			num = minNum;
+ 			$(this).removeClass('disabled');
+ 			$(this).siblings('.subtract').removeClass('disabled');
  		}else if (num < maxNum) {
  			num++;
+ 			$(this).removeClass('disabled');
+ 			$(this).siblings('.subtract').removeClass('disabled');
+ 		} else {
+ 			$(this).addClass('disabled');
  		}
  		$(this).prev().text(num)
  		calculation (num, $(this))
@@ -69,159 +76,150 @@ $(function(){
 
  	function calculation (num, tab) {
  		var sum = 0; //已选票数
- 		var prices1 = 0;
- 		var prices2 = 0;
+ 		// var prices1 = 0;
+ 		var prices = 0;
  		var amount = 0;
- 		var payment1 = 0;//实付金额
- 		var payment2 = 0;//实付金额
+ 		// var payment1 = 0;//实付金额
+ 		var payment = 0;//实付金额
  		var discount = 0;//优惠金额
  		var currPriceIndex = tab.parents('.table').attr('data-currPriceIndex')
  		//计算已选票数
- 		for(var i=0;i<tab.parents('.tickets').siblings().length;i++) {
- 			var number = parseInt(tab.parents('.tickets').siblings().eq(i).find('.num').text())
+ 		for(var i=0;i<tab.parents('.tickets').siblings('.tickets').length;i++) {
+ 			var number = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.num').text())
 	 		//计算优惠
-	 		if (tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discounts') == 'yes') {
-	 			if(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsType') == 1) {
+	 		if (tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discounts')) {
+	 			if(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsType') == 1) {
 	 				//每张优惠金额
-	 				if(number >= tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsNum')) {
-	 					amount += parseInt(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsAmount')) * number
-	 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+	 				if(number >= tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsNum')) {
+	 					discount += parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsAmount')) * number
+	 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 				 			//固定价格计算
-				 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
-				 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
+				 		} else {
 				 			//阶梯价格计算
-				 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 				 		}
-				 		payment1 += prices1 * number - amount
+				 		payment += prices * number - parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsAmount')) * number
+				 		console.log(payment)
 	 				} else {
 	 					//没有优惠
-			 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+			 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 				 			//固定价格计算
-				 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
-				 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
-				 			//阶梯价格计算
-				 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
-				 		}
-				 		payment1 += prices1 * number
-	 				}
-		 		} else if (tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsType') == 2) {
-		 			//赠送
-	 				if(number >= tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsNum')) {
-	 					if(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-tieredPricing') == 'no'){
-	 						prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
-				 		} else if(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-tieredPricing') == 'yes'){
-				 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
-				 		}
-				 		var votes = number - tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsNum')
-				 		if( votes <= tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-freeNum')) {
-				 			amount = votes * prices1 + amount
-				 			// console.log(amount)
-				 			payment1 += (number * prices1) - (votes * prices1)
-				 			// console.log(payment1)
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
 				 		} else {
-				 			amount = tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-freeNum') * prices1  + amount
-				 			
-				 			payment1 += (number * prices1) - (tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-freeNum') * prices1)
+				 			//阶梯价格计算
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
+				 		}
+				 		payment += prices * number
+	 				}
+		 		} else if (tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsType') == 2) {
+		 			//赠送
+	 				if(number >= tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsNum')) {
+	 					if(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-tieredPricing') == false){
+	 						prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
+				 		} else if(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-tieredPricing')){
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
+				 		}
+				 		var votes = number - tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsNum')
+				 		if( votes <= tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-freeNum')) {
+				 			discount = votes * prices + discount
+				 			// console.log(discount)
+				 			payment += (number * prices) - (votes * prices)
+				 		} else {
+				 			discount = tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-freeNum') * prices  + discount
+				 			payment += (number * prices) - (tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-freeNum') * prices)
 				 		}
 	 				}
 	 				else {
 	 					//没有优惠
-			 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+			 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 				 			//固定价格计算
-				 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
-				 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
+				 		} else {
 				 			//阶梯价格计算
-				 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 				 		}
-				 		payment1 += prices1 * number
+				 		payment += prices * number
 	 				}
 		 		}else {
 					//没有优惠
-		 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+		 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 			 			//固定价格计算
-			 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
-			 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
+			 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
+			 		} else {
 			 			//阶梯价格计算
-			 			prices1 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+			 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 			 		}
-			 		payment1 += prices1 * number
+			 		payment += prices * number
 				}
 	 		} else {
 	 			//没有优惠
-	 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+	 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 		 			//固定价格计算
-		 			prices2 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
-		 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
+		 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
+		 		} else {
 		 			//阶梯价格计算
-		 			prices2 = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+		 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 		 		}
-		 		payment2 += prices2 * number
+		 		payment += prices * number
 	 		}
 	 		sum += number
-	 		payment = parseInt(payment1) + parseInt(payment2)
-	 		discount = amount
-	 		// console.log(discount)
  		}
  		sum = num + sum
  		
- 		if (tab.parent('.list-inline').attr('data-discounts') == 'yes') {
+ 		if (tab.parent('.list-inline').attr('data-discounts')) {
  			if(tab.parent('.list-inline').attr('data-discountsType') == 1) {
  				//每张优惠金额
  				if(num >= tab.parent('.list-inline').attr('data-discountsNum')) {
- 					var money;
- 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
- 						money = parseInt(tab.parents('.tickets').find('.prices2').text())
-			 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
-			 			money = parseInt(tab.parents('.tickets').find('.prices1').eq(currPriceIndex).text())
+ 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
+ 						prices = parseInt(tab.parents('.tickets').find('.prices2').text())
+			 		} else {
+			 			prices = parseInt(tab.parents('.tickets').find('.prices1').eq(currPriceIndex).text())
 			 		}
 			 		discount = num * tab.parent('.list-inline').attr('data-discountsAmount') + discount
-			 		payment += num * money - num * tab.parent('.list-inline').attr('data-discountsAmount')
+			 		payment += num * prices - num * tab.parent('.list-inline').attr('data-discountsAmount')
  				} else {
- 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+ 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 			 			payment = num * parseInt(tab.parents('.tickets').find('.prices2').text()) + payment
-			 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
+			 		} else {
 			 			payment = num * parseInt(tab.parents('.tickets').find('.prices1').eq(currPriceIndex).text()) + payment
 			 		}
  				}
-
  			} else if (tab.parent('.list-inline').attr('data-discountsType') == 2) {
  				//赠送
  				if(num >= tab.parent('.list-inline').attr('data-discountsNum')) {
- 					var money;
- 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
- 						money = parseInt(tab.parents('.tickets').find('.prices2').text())
-			 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
-			 			money = parseInt(tab.parents('.tickets').find('.prices1').eq(currPriceIndex).text())
+ 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
+ 						prices = parseInt(tab.parents('.tickets').find('.prices2').text())
+			 		} else {
+			 			prices = parseInt(tab.parents('.tickets').find('.prices1').eq(currPriceIndex).text())
 			 		}
 			 		var votes = num - tab.parent('.list-inline').attr('data-discountsNum')
 			 		if( votes <= tab.parents('.tickets').find('.list-inline').attr('data-freeNum')) {
-			 			discount = votes * money + discount
-			 			payment = (num * money  + payment) - (votes * money) + payment
+			 			discount = votes * prices + discount
+			 			payment = (num * prices) - (votes * prices) + payment
 			 		} else {
-			 			discount = tab.parents('.tickets').find('.list-inline').attr('data-freeNum') * money  + discount
-			 			payment = (num * money  + payment) - (tab.parents('.tickets').find('.list-inline').attr('data-freeNum') * money) + payment
+			 			discount = tab.parents('.tickets').find('.list-inline').attr('data-freeNum') * prices  + discount
+			 			payment = (num * prices) - (tab.parents('.tickets').find('.list-inline').attr('data-freeNum') * prices) + payment
 			 		}
  				} else {
- 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+ 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 			 			payment = num * parseInt(tab.parents('.tickets').find('.prices2').text()) + payment
-			 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
+			 		} else {
 			 			payment = num * parseInt(tab.parents('.tickets').find('.prices1').eq(currPriceIndex).text()) + payment
 			 		}
  				}
  			}else {
-				if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+				if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 		 			payment = num * parseInt(tab.parents('.tickets').find('.prices2').text()) + payment
-		 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
+		 		} else {
 		 			payment = num * parseInt(tab.parents('.tickets').find('.prices1').eq(currPriceIndex).text()) + payment
-		 			console.log(num)
 		 		}
 			}
  		} else {
- 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'no'){
+ 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 	 			payment = num * parseInt(tab.parents('.tickets').find('.prices2').text()) + payment
-	 		} else if(tab.parent('.list-inline').attr('data-tieredPricing') == 'yes'){
+	 		} else {
 	 			payment = num * parseInt(tab.parents('.tickets').find('.prices1').eq(currPriceIndex).text()) + payment
-	 			console.log(payment)
 	 		}
  		}
  		$('.count .num span').text(sum)
@@ -234,8 +232,11 @@ $(function(){
  		var minNum = parseInt($(this).next().attr('data-minNum'));
  		if (num != 0) {
  			num = num-1;
+ 			$(this).removeClass('disabled');
  			if (num < minNum) {
 	 			num = 0;
+	 			$(this).addClass('disabled');
+	 			$(this).siblings('.add').removeClass('disabled');
 	 		}
  		}
  		$(this).next().text(num)

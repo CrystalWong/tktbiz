@@ -1,5 +1,7 @@
 $(function(){
+
 	init();
+
 	$('#submit').on('click', function(){
 		window.location.href = '/result.html'
 	});
@@ -58,9 +60,7 @@ $(function(){
  		var handleHelper_2 = Handlebars.registerHelper("compareType",function(type){
 	        return type === "list";
 		 });
- 		console.log({"attendForms": attendForms}, 999)
  		bindHtml("#attendForms", {"attendForms": attendForms});
- 		// bindHtml("#attendForms", attendForms);
  	};
  	/**
  	 * [renderBuyerForm description]    渲染购票者信息
@@ -68,7 +68,7 @@ $(function(){
  	 * @return {[type]}     [description]
  	 */
  	function renderBuyerForm (res) {
- 		bindHtml("#buyerForm", res.data.buyerForm);
+ 		bindHtml("#buyerForm", {"buyerForm": res.data.buyerForm});
  	};
  	/**
  	 * [bindHtml description]			数据注入html模版
@@ -86,10 +86,12 @@ $(function(){
 		var html = template(context);
 		//输入模板
 		$(domId + "-wrap").html(html);
+		creatCopySele();
  	}
-
- 	setTimeout(creatCopySele,500)
-
+ 	/**
+ 	 * [creatCopySele description]     创建复制信息下拉框
+ 	 * @return {[type]} [description]
+ 	 */
  	function creatCopySele () {
  		var htmlSele = $('.header-tit');
  		var htmlStr = '';
@@ -97,18 +99,24 @@ $(function(){
  			htmlStr +="<option value='"+ i +"'>" + htmlSele[i].innerText + "</option>";
  		}
  		var tarHtml = "<select class='copySele form-control'><option>请选择要复制的参会者信息</option>" + htmlStr + "</select>"
- 		console.log(htmlSele, tarHtml)
+ 		// console.log(htmlSele, tarHtml)
 		$('.copySele-wrap').html(tarHtml);
 		$('.copySele-wrap').eq(0).html('')
-		$('.copySele').change("change", function() {
+		copyInfo();
+ 	}
+ 	/**
+ 	 * [copyInfo description]			实现信息复制功能
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function copyInfo () {
+		$('.copySele').on("change", function() {
 			var tarIndex = $('.copySele').index(this);
 			var index = $(this).children('option:selected').val();
-			// console.log($('.copySele').index(this), 999)
-			var inputs = $('.panel').eq(index).find("input")
-			inputs.each(function(){
+			var doms = $('.panel').eq(index).find(".form-control")
+			doms.each(function(){
 				var name = $(this).attr('posi')
 				var value = $(this).val()
-				$('.panel').eq(tarIndex+1).find("input[posi='" + name + "']").val(value);
+				$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
 			})
 		})
  	}

@@ -41,14 +41,13 @@
                       {{#each this.formItemsBox}}
                       <div class="row floor text-left panel">
                           <div class="col-xs-12 header">
-                          <div class="row">
-                            <div class="col-xs-6 header-tit">
-                              <span>{{../name}}</span>
-                              <span>第{{addOne @index}}张参会信息</span>
+                            <div class="row">
+                              <div class="col-xs-12 col-sm-6 header-tit">
+                                <span>{{../name}}</span>
+                                <span>第{{addOne @index}}张参会信息</span>
+                              </div>
+                              <div class="col-xs-6 copySele-wrap"></div>                           
                             </div>
-                            <div class="col-xs-6 copySele-wrap"></div>                           
-                          </div>
-
                           </div>
                           <form class="form-horizontal">
                             {{#each formItems}}
@@ -60,23 +59,19 @@
                               {{name}}:
                               </label>
                               <div class="col-xs-10">
-                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" id="{{{code}}}" name="{{{code}}}" placeholder="">
+                                {{#if type}}
+                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
+                                {{else}}
+                                  <select class="form-control" posi="{{{name}}}" name="{{{code}}}">
+                                    <option>请选择</option>
+                                    {{#each data}}
+                                    <option value="{{{value}}}">{{name}}</option>
+                                    {{/each}}                                   
+                                  </select>
+                                {{/if}}
                               </div>
                             </div>
                             {{/each}}
-                            <!-- <div class="form-group">
-                              <label for="inputPhone" class="col-xs-2 control-label">行业:</label>
-                              <div class="col-xs-10">
-                                <select class="form-control">
-                                  <option>请选择</option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                              </div>
-                            </div> -->
                           </form>
                       </div>
                       {{/each}}
@@ -89,7 +84,7 @@
                       <div class="col-xs-12 header">
                         <div class="row">
                           <div class="col-xs-12 col-sm-6">
-                            <span>购票者信息</span>
+                            <span class="header-tit">购票者信息</span>
                             <span>
                               <small class="grey">购票订单邮件将会发送给购票者</small>
                             </span>
@@ -97,7 +92,7 @@
                           <div class="col-xs-12 col-sm-6">
                             <div class="row">
                               <div class="col-xs-4 text-right">
-                                <small>订单发送</small>
+                                <small class="copySele-tit">订单发送</small>
                               </div>
                               <div class="col-xs-8 copySele-wrap"></div>
                             </div>
@@ -105,24 +100,19 @@
                         </div>
                       </div>
                       <form class="form-horizontal">
+                        {{#each buyerForm}}
                         <div class="form-group">
-                          <label for="inputName" class="col-xs-2 control-label"><span class="red">*</span>姓名:</label>
+                          <label for="inputName" class="col-xs-2 control-label">
+                          {{#if required}}
+                          <span class="red">*</span>
+                          {{/if}}
+                          {{name}}:
+                          </label>
                           <div class="col-xs-10">
-                            <input type="text" class="form-control" id="inputName" placeholder="Password">
+                              <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
                           </div>
                         </div>
-                        <div class="form-group">
-                          <label for="inputEmail" class="col-xs-2 control-label"><span class="red">*</span>邮箱:</label>
-                          <div class="col-xs-10">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>手机:</label>
-                          <div class="col-xs-10">
-                            <input type="tel" class="form-control" id="inputPhone" placeholder="Email">
-                          </div>
-                        </div>
+                        {{/each}}
                         <div class="checkbox">
                           <label>
                             <input type="checkbox" value="" checked>

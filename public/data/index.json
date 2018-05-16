@@ -16,6 +16,7 @@
       "tieredPricing" : false,
       "prices" : [ ],
       "open" : true,
+      "openDesc" : "",
       "minNum" : 1,
       "maxNum" : 10,
       "discounts" : true,
@@ -25,7 +26,7 @@
       "freeNum" : 0,
       "discountsInfo" : "买三张立减20",
       "info" : "这是备注",
-      "endTime" : "20180906 17:30"
+      "endTime" : "2018.09.06 17:30"
     }, {
       "name" : "单日票",
       "id" : "003",
@@ -33,6 +34,7 @@
       "tieredPricing" : false,
       "prices" : [ ],
       "open" : true,
+      "openDesc" : "",
       "minNum" : 2,
       "maxNum" : 3,
       "discounts" : true,
@@ -42,7 +44,7 @@
       "freeNum" : 1,
       "discountsInfo" : "买5张赠1张",
       "info" : "这是备注",
-      "endTime" : "20180906 17:30"
+      "endTime" : "2018.09.06 17:30"
     }, {
       "name" : "免费票",
       "id" : "006",
@@ -50,6 +52,7 @@
       "tieredPricing" : false,
       "prices" : [ ],
       "open" : false,
+      "openDesc" : "已结束",
       "minNum" : 1,
       "maxNum" : 1,
       "discounts" : true,
@@ -59,7 +62,7 @@
       "freeNum" : 0,
       "discountsInfo" : "买三张立减20",
       "info" : "免费",
-      "endTime" : "20180906 17:30"
+      "endTime" : "2018.09.06 17:30"
     }, {
       "name" : "免费票",
       "id" : "006",
@@ -67,6 +70,7 @@
       "tieredPricing" : false,
       "prices" : [ ],
       "open" : true,
+      "openDesc" : "",
       "minNum" : 1,
       "maxNum" : 1,
       "discounts" : true,
@@ -76,7 +80,7 @@
       "freeNum" : 0,
       "discountsInfo" : "买三张立减20",
       "info" : "免费",
-      "endTime" : "20180906 17:30"
+      "endTime" : "2018.09.06 17:30"
     } ]
   }
 }

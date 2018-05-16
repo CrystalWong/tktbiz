@@ -81,10 +81,14 @@
                 {{#if open}}
                 <tr class="tickets" data-id={{{id}}}>
                 {{else}}
-                <tr class="tickets disable"  data-id={{{id}}}>
+                <tr class="disable"  data-id={{{id}}}>
                 {{/if}}
                   <td class="bg-coupon">
+                    {{#if open}}
                     <button type="button" class="btn" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}">
+                    {{else}}
+                    <button type="button" class="btn">
+                    {{/if}}
                       {{ name }}
                     </button>
                   </td>
@@ -97,11 +101,17 @@
                   <td>{{ endTime }}</td>
                   {{/if}}
                   <td>
+                    {{#if open}}
                     <ul class="list-inline" data-tieredPricing="{{{tieredPricing}}}" data-discounts="{{{discounts}}}" data-discountsType="{{{discountsType}}}" data-discountsNum="{{{discountsNum}}}" data-discountsAmount="{{{discountsAmount}}}" data-freeNum="{{{freeNum}}}">
-                      <li class="subtract"><img src="/imgs/minus.png" width="100%"></li>
+                      <li class="subtract disabled"><img src="/imgs/minus.png" width="100%"></li>
                       <li class="num" data-minNum="{{{minNum}}}" data-maxNum="{{{maxNum}}}">0</li>
                       <li class="add"><img src="/imgs/plus.png" width="100%"></li>
                     </ul>
+                    {{else}}
+                    <p class="list-inline">
+                      {{ openDesc }}
+                    </p>
+                    {{/if}}
                   </td>
                 </tr>
                 {{/each}}

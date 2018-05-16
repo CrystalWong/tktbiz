@@ -61,8 +61,14 @@ $(function(){
  		var maxNum = parseInt($(this).prev().attr('data-maxNum'));
  		if (num == 0) {
  			num = minNum;
+ 			$(this).removeClass('disabled');
+ 			$(this).siblings('.subtract').removeClass('disabled');
  		}else if (num < maxNum) {
  			num++;
+ 			$(this).removeClass('disabled');
+ 			$(this).siblings('.subtract').removeClass('disabled');
+ 		} else {
+ 			$(this).addClass('disabled');
  		}
  		$(this).prev().text(num)
  		calculation (num, $(this))
@@ -78,60 +84,60 @@ $(function(){
  		var discount = 0;//优惠金额
  		var currPriceIndex = tab.parents('.table').attr('data-currPriceIndex')
  		//计算已选票数
- 		for(var i=0;i<tab.parents('.tickets').siblings().length;i++) {
- 			var number = parseInt(tab.parents('.tickets').siblings().eq(i).find('.num').text())
+ 		for(var i=0;i<tab.parents('.tickets').siblings('.tickets').length;i++) {
+ 			var number = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.num').text())
 	 		//计算优惠
-	 		if (tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discounts')) {
-	 			if(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsType') == 1) {
+	 		if (tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discounts')) {
+	 			if(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsType') == 1) {
 	 				//每张优惠金额
-	 				if(number >= tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsNum')) {
-	 					discount += parseInt(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsAmount')) * number
+	 				if(number >= tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsNum')) {
+	 					discount += parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsAmount')) * number
 	 					if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 				 			//固定价格计算
-				 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
 				 		} else {
 				 			//阶梯价格计算
-				 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 				 		}
-				 		payment += prices * number - parseInt(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsAmount')) * number
+				 		payment += prices * number - parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsAmount')) * number
 				 		console.log(payment)
 	 				} else {
 	 					//没有优惠
 			 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 				 			//固定价格计算
-				 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
 				 		} else {
 				 			//阶梯价格计算
-				 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 				 		}
 				 		payment += prices * number
 	 				}
-		 		} else if (tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsType') == 2) {
+		 		} else if (tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsType') == 2) {
 		 			//赠送
-	 				if(number >= tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsNum')) {
-	 					if(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-tieredPricing') == false){
-	 						prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
-				 		} else if(tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-tieredPricing')){
-				 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+	 				if(number >= tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsNum')) {
+	 					if(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-tieredPricing') == false){
+	 						prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
+				 		} else if(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-tieredPricing')){
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 				 		}
-				 		var votes = number - tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-discountsNum')
-				 		if( votes <= tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-freeNum')) {
+				 		var votes = number - tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-discountsNum')
+				 		if( votes <= tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-freeNum')) {
 				 			discount = votes * prices + discount
 				 			// console.log(discount)
 				 			payment += (number * prices) - (votes * prices)
 				 		} else {
-				 			discount = tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-freeNum') * prices  + discount
-				 			payment += (number * prices) - (tab.parents('.tickets').siblings().eq(i).find('.list-inline').attr('data-freeNum') * prices)
+				 			discount = tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-freeNum') * prices  + discount
+				 			payment += (number * prices) - (tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-freeNum') * prices)
 				 		}
 	 				}
 	 				else {
 	 					//没有优惠
 			 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 				 			//固定价格计算
-				 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
 				 		} else {
 				 			//阶梯价格计算
-				 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+				 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 				 		}
 				 		payment += prices * number
 	 				}
@@ -139,10 +145,10 @@ $(function(){
 					//没有优惠
 		 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 			 			//固定价格计算
-			 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
+			 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
 			 		} else {
 			 			//阶梯价格计算
-			 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+			 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 			 		}
 			 		payment += prices * number
 				}
@@ -150,10 +156,10 @@ $(function(){
 	 			//没有优惠
 	 			if(tab.parent('.list-inline').attr('data-tieredPricing') == 'false'){
 		 			//固定价格计算
-		 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices2').text())
+		 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices2').text())
 		 		} else {
 		 			//阶梯价格计算
-		 			prices = parseInt(tab.parents('.tickets').siblings().eq(i).find('.prices1').eq(currPriceIndex).text())
+		 			prices = parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.prices1').eq(currPriceIndex).text())
 		 		}
 		 		payment += prices * number
 	 		}
@@ -226,8 +232,11 @@ $(function(){
  		var minNum = parseInt($(this).next().attr('data-minNum'));
  		if (num != 0) {
  			num = num-1;
+ 			$(this).removeClass('disabled');
  			if (num < minNum) {
 	 			num = 0;
+	 			$(this).addClass('disabled');
+	 			$(this).siblings('.add').removeClass('disabled');
 	 		}
  		}
  		$(this).next().text(num)

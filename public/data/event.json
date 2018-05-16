@@ -45,7 +45,7 @@
       "discountsAmount" : 0.0,
       "freeNum" : 2,
       "discountsInfo" : "买2张赠2张",
-      "info" : "",
+      "info" : "买2张赠2张",
       "endTime" : "20180906 17:30"
     }, {
       "name" : "单日票",
@@ -91,8 +91,8 @@
       "price" : 1490.0,
       "tieredPricing" : true,
       "prices" : [ 1490.0, 1490.0, 1490.0],
-      "open" : true,
-      "openDesc" : "",
+      "open" : false,
+      "openDesc" : "已结束",
       "invite" : false,
       "minNum" : 1,
       "maxNum" : 10,

@@ -71,6 +71,9 @@
 			.subtract, .add{
 				cursor: pointer;
 			}	
+			.disabled{
+				cursor: not-allowed;
+			}
 		}
 		.wrap {
 			height: 60px !important;
@@ -139,6 +142,16 @@
 		}
 	}
 	.disable {
-		background-color: #000;
+		color:#a3aaad;
+		cursor: not-allowed;
+		.btn{
+			color:#a3aaad;
+			cursor: not-allowed;
+		}
+		.list-inline{
+			.subtract, .add{
+				cursor: not-allowed;
+			}
+		}
 	}
 }

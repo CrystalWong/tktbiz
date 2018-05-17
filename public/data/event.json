@@ -96,7 +96,7 @@
       "invite" : false,
       "minNum" : 1,
       "maxNum" : 10,
-      "discounts" : false,
+      "discounts" : true,
       "discountsNum" : 0,
       "discountsType" : 0,
       "discountsAmount" : 0.0,

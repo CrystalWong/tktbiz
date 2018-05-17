@@ -1,13 +1,26 @@
 .index {
+	.col-xs-2,.col-xs-3{
+		padding-left: 0;
+		padding-right: 0;
+		cursor: pointer;
+		color: #333;
+	}
 	.active {
 		background-color: #5cc330;
 		color: #fff;
 	}
 	.header {
+		/*width: 100%;*/
 		height: 90px;
 		line-height: 90px;
 		font-size: 1rem;
 		background: #fff;
+		/*-moz-box-shadow: 0 1px 10px #888888; /* 老的 Firefox */
+		/*box-shadow: 0 1px 10px #888888;
+		z-index: 10000;
+		position: fixed;
+		left: 15px;
+		top: 0;*/
 		.logo {
 			padding: 0;
 			img {
@@ -22,6 +35,9 @@
 			}
 		}
 	}
+	/*.main{
+		margin-top: 90px;
+	}*/
 	.floor {
 		background: #fff;
 		margin-top: 30px;
@@ -45,22 +61,46 @@
 		}
 		th, td {
 			text-align: center;
-			padding: 15px !important;
+			padding: 15px 0 !important;
 			font-size: 0.9rem;
 			line-height: 30px !important;
+		}
+		.count{
+			th, td {
+				padding: 15px !important;
+			}
 		}
 		.bg-coupon {
 			background-image: url(/imgs/coupon.png);
 	    	background-repeat: no-repeat;
-			background-size: 100px 30px;
+			background-size: 85% 40px;
 			background-position:center;
 			position: relative;
+			cursor: pointer;
 			.btn {
 				padding: 0;
 			}
 			.btn:active:focus, .btn:focus {
 				outline: none;
 			}
+			img{
+				display: inline-block;
+				width: 20px;
+				margin-left: 5px;
+			}
+			.discounts{
+				border-radius: 5px;
+				padding: 3px 5px;
+				font-size: 12px;
+				margin-left: 6px;
+			}
+		}
+		.decoration-color{
+			color:#888;
+		}
+		.decoration{
+			text-decoration:line-through;
+			color:#888;
 		}
 		.list-inline {
 			margin-bottom: 0;
@@ -78,11 +118,13 @@
 		.wrap {
 			height: 60px !important;
 			line-height: 60px !important;
+			font-size: 16px;
 		}
 		.count {
 			.list-inline {
 				li {
 					float: right;	
+					font-size: 16px;
 				}
 				.num {
 					width: 55%;
@@ -131,6 +173,7 @@
 	}
 	#buy {
 		padding: 10px 20px;
+		border-radius: 5px;
 	}
 	#return-top {
 		width: 50px;
@@ -144,14 +187,25 @@
 	.disable {
 		color:#a3aaad;
 		cursor: not-allowed;
-		.btn{
-			color:#a3aaad;
+		.bg-coupon-dis {
+			background-image: url(/imgs/coupon_dis.png);
 			cursor: not-allowed;
+		}
+		.btn{
+			cursor: not-allowed;
+			color:#a3aaad;
 		}
 		.list-inline{
 			.subtract, .add{
 				cursor: not-allowed;
 			}
+		}
+		.green{
+			color:#a3aaad;
+		}
+		.discounts{
+			background: #ccc;
+			color:#fff;
 		}
 	}
 }

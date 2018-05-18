@@ -60,7 +60,7 @@ $(function(){
 				//输入模板
 				$('#list-wrap').html(html);
 	 			$("[data-toggle='popover']").popover();
-	 			console.log(res)
+	 			// console.log(res)
 	 			//特殊样式
 	 			if (res.data.tieredPricing) {
 	 				$('.tieredPricingTitles').eq(res.data.currPriceIndex).addClass('green').siblings('.tieredPricingTitles, .priceTitle').addClass('decoration-color')
@@ -142,8 +142,7 @@ $(function(){
 				 		discount = tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-freeNum') * unit (tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline'), tab.parents('.tickets').siblings('.tickets').eq(i), tab, currPriceIndex, prices)  + discount
 				 		payment += number * unit (tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline'), tab.parents('.tickets').siblings('.tickets').eq(i), tab, currPriceIndex, prices)
 				 		sum += parseInt(tab.parents('.tickets').siblings('.tickets').eq(i).find('.list-inline').attr('data-freeNum'))
-	 				}
-	 				else {
+	 				}else {
 	 					//没有优惠
 				 		payment += unit (tab.parent('.list-inline'), tab.parents('.tickets').siblings('.tickets').eq(i), tab, currPriceIndex, prices) * number
 	 				}

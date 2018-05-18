@@ -84,19 +84,24 @@
                 {{#each data.tickets}}
                 {{#if open}}
                 <tr class="tickets" data-id={{{id}}}>
+                  <!-- data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}" -->
                 {{else}}
                 <tr class="disable"  data-id={{{id}}}>
                 {{/if}}
                   {{#if open}}
                   <td class="bg-coupon">
+                    <!-- <div class="pover">
+                      <em>&#9670;</em>
+                      <span>&#9670;</span>
+                    </div> -->
                     <div data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}">
-                      <button type="button" class="btn">
-                        {{ name }}
-                      </button>
-                      {{#if discounts}}
-                      <span class="active discounts">团</span>
-                      {{/if}}
-                      <img src="/imgs/remarks.png">
+                    <button type="button" class="btn">
+                      {{ name }}
+                    </button>
+                    {{#if discounts}}
+                    <span class="active discounts">团</span>
+                    {{/if}}
+                    <img src="/imgs/remarks.png">
                     </div>
                   </td>
                   {{else}}
@@ -131,6 +136,7 @@
                     </p>
                     {{/if}}
                   </td>
+
                 </tr>
                 {{/each}}
               </table>

@@ -25,8 +25,19 @@ $(function(){
 		}
 		var str = JSON.stringify(list)
 		sessionStorage.setItem("list", str)
-		window.location.href = '/buy.html'
+		if($('.count .num span').text() == 0){
+			$('.dialog').fadeIn(500)
+			setTimeout(function(){
+				$('.dialog').fadeOut(500)
+			},3000)
+		} else {
+			window.location.href = '/buy.html'
+		}
 	});
+
+	$('.subclose').on('click', function(){
+		$('.dialog').fadeOut(500)
+	})
 
 	$('#return-top .up').on('click', function(){
 		$('html,body').animate({scrollTop:0}, 500);
@@ -35,6 +46,16 @@ $(function(){
 	$('.tab').on('click',function() {
  		$(this).addClass('active').siblings('.tab').removeClass('active');
  	});
+
+ 	// 滑动滚动条
+	$(window).scroll(function(){
+	// 滚动条距离顶部的距离 大于 200px时
+		if($(window).scrollTop() >= 200){
+			$("#return-top").fadeIn(1000); // 开始淡入
+		} else{
+			$("#return-top").stop(true,true).fadeOut(1000); // 如果小于等于 200 淡出
+		}
+	});
 
 	var minus='/imgs/minus.png';
 	var minus_no='/imgs/minus_no.png';
@@ -76,6 +97,12 @@ $(function(){
 	 			}
 	 			$('.add').on('click', add);
 	 			$('.subtract').on('click',subtract);
+
+	 			$('.tickets').mouseover(function(){
+	 				$(this).find('.pover').show()
+	 			}).mouseout(function(){
+	 				$(this).find('.pover').hide()
+	 			});
 	    }
 	 	});
 	};

@@ -10,17 +10,17 @@
 		color: #fff;
 	}
 	.header {
-		/*width: 100%;*/
+		width: 100%;
 		height: 90px;
 		line-height: 90px;
 		font-size: 1rem;
 		background: #fff;
-		/*-moz-box-shadow: 0 1px 10px #888888; /* 老的 Firefox */
-		/*box-shadow: 0 1px 10px #888888;
+		-moz-box-shadow: 0 1px 10px #888888; /* 老的 Firefox */
+		box-shadow: 0 1px 10px #888888;
 		z-index: 10000;
 		position: fixed;
 		left: 15px;
-		top: 0;*/
+		top: 0;
 		.logo {
 			padding: 0;
 			img {
@@ -35,9 +35,9 @@
 			}
 		}
 	}
-	/*.main{
+	.main{
 		margin-top: 90px;
-	}*/
+	}
 	.floor {
 		background: #fff;
 		margin-top: 30px;
@@ -76,15 +76,18 @@
 			background-size: 85% 40px;
 			background-position:center;
 			position: relative;
-			cursor: pointer;
 			.pover{
 				position: absolute;
-				left: 0;
+				left: 7%;
 				top: 60px;
 				background: #fff;
 				width: 300px;
-				height: 60px;
+				height: auto;
 				border:1px solid green;
+				z-index: 1;
+				text-align: left;
+				padding:5px 10px;
+				display: none;
 				em,span{
 					display:block;
 					width:30px;
@@ -95,7 +98,7 @@
 					margin-left:10px;
 				}
 				em{
-					margin-top:-16px;
+					margin-top:-21px;
 					color:green;
 					font-style:normal;
 				}
@@ -103,8 +106,13 @@
 					margin-top:-14px;
 					color:white;
 				}
+				p{
+					margin:0;
+					line-height: 27px;
+				}
 			}
 			.btn {
+				cursor: auto;
 				padding: 0;
 			}
 			.btn:active:focus, .btn:focus {
@@ -112,12 +120,12 @@
 			}
 			img{
 				display: inline-block;
-				width: 20px;
+				width: 18px;
 				margin-left: 5px;
 			}
 			.discounts{
 				border-radius: 5px;
-				padding: 3px 5px;
+				padding: 2px 3px;
 				font-size: 12px;
 				margin-left: 6px;
 			}
@@ -197,6 +205,31 @@
 	.bot {
 		margin-top: 30px;
 		padding: 0;
+		position: relative;
+		.contact{
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 33%;
+			margin: 6% auto;
+			.contact-main{
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: 6% auto;
+				width: 100%;
+				.active{
+					display: block;
+					margin:8px auto;
+					width: 28%;
+					height: 17%;
+				}
+			}
+		}
 	}
 	#buy {
 		padding: 10px 20px;
@@ -207,6 +240,7 @@
 		position: fixed;
 		top: 65%;
 		right: 20px;
+		display: none;
 		.return-con {
 			margin-bottom: 10px;
 		}
@@ -235,4 +269,30 @@
 			color:#fff;
 		}
 	}
+	.dialog{
+		width: 400px;
+		height: 200px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin: -150px -200px;
+		background:#fff;
+		-moz-box-shadow: 1px 1px 10px #888888; /* 老的 Firefox */
+		box-shadow: 1px 1px 10px #888888;
+		border:1px solid #ccc;
+		text-align: center;
+		display: none;
+		img{
+			margin-top: 50px;
+		}
+		.close{
+			padding: 10px;
+			font-size: 24px;
+		}
+		p{
+			margin-top: 20px;
+			font-size: 24px;
+		}
+	}
 }
+	

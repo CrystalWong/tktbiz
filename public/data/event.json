@@ -58,7 +58,7 @@
       "invite" : false,
       "minNum" : 1,
       "maxNum" : 20,
-      "discounts" : true,
+      "discounts" : false,
       "discountsNum" : 0,
       "discountsType" : 0,
       "discountsAmount" : 0.0,

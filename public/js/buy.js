@@ -48,18 +48,22 @@ $(function(){
  		var attendForms = res.data.attendForms
  		for (i in attendForms) {
  			attendForms[i].formItemsBox = [];
- 			console.log(attendForms[i])
+ 			// console.log(attendForms[i])
  			for (var k=0; k < attendForms[i].num; k++) {
+ 				var formItems = attendForms[i].formItems;
+ 				for (var j=0; j < formItems.length; j++) {
+ 					var typeFlag = formItems[j].type;
+ 					formItems[j][typeFlag] = true;
+ 				}
  				attendForms[i].formItemsBox.push({"formItems":attendForms[i].formItems})
  			}
  		}
+		// console.log(attendForms, 111)
  		var handleHelper_1 = Handlebars.registerHelper("addOne",function(index){
 	        //返回+1之后的结果
 	        return index+1;
 		 }); 		
- 		var handleHelper_2 = Handlebars.registerHelper("compareType",function(type){
-	        return type === "list";
-		 });
+		
  		bindHtml("#attendForms", {"attendForms": attendForms});
  	};
  	/**
@@ -103,6 +107,8 @@ $(function(){
 		$('.copySele-wrap').html(tarHtml);
 		$('.copySele-wrap').eq(0).html('')
 		copyInfo();
+		bindVld();
+		upload();
  	}
  	/**
  	 * [copyInfo description]			实现信息复制功能
@@ -120,5 +126,32 @@ $(function(){
 			})
 		})
  	}
-
+ 	/**
+ 	 * [bindVld description]		绑定数据校验
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function bindVld () {
+		var inputs = $('.form-control:input');
+		inputs.each(function(){
+			$(this).on('blur', function() {
+				var val = $(this).val();
+				if(!val) {
+					$(this).closest('.form-group').find('.hint').show();
+				} else {
+					$(this).closest('.form-group').find('.hint').hide();
+				}
+			})
+		})
+ 	}
+ 	/**
+ 	 * [upload description]			模拟图片上传点击事件
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function upload () {
+ 		$('.upload-dec').unbind('click');
+ 		$('.upload-dec').on('click', function () {
+ 			$(this).closest('.col-xs-10').find('.form-control').click();
+ 		})
+ 	}
 })
+

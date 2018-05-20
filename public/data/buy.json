@@ -44,7 +44,7 @@
       }, {
         "name" : "行业",
         "code" : "industry1",
-        "type" : false,
+        "type" : "select",
         "required" : true,
         "data" : [ {
           "name" : "行业1",
@@ -87,7 +87,7 @@
       }, {
         "name" : "备注",
         "code" : "remark1",
-        "type" : "textarea",
+        "type" : "text",
         "required" : false,
         "data" : [ ]
       }, {

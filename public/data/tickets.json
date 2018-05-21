@@ -1,0 +1,115 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "tieredPricing": true,
+    "nameTitle": "门票名称",
+    "priceTitle": "原价",
+    "numTitle": "数量",
+    "timeTitle": "",
+    "currPriceIndex": 1,
+    "tieredPricingTitles": [
+      "02月15日前购买 (￥)",
+      "现在 - 06月30日 (￥)",
+      "07月01日 - 07月31日 (￥)"
+    ],
+    "tickets": [
+      {
+        "ticketId": 700,
+        "name": "VIP贵宾票",
+        "price": 0,
+        "tieredPricing": true,
+        "prices": [
+          15000,
+          15000,
+          15000
+        ],
+        "open": true,
+        "openDesc": null,
+        "invite": false,
+        "minNum": 1,
+        "maxNum": 20,
+        "discounts": false,
+        "discountsNum": 0,
+        "discountsType": 1,
+        "discountsAmount": 0,
+        "freeNum": 0,
+        "discountsInfo": "",
+        "info": "",
+        "endTime": null
+      },
+      {
+        "ticketId": 701,
+        "name": "三日通票",
+        "price": 0,
+        "tieredPricing": true,
+        "prices": [
+          1490,
+          1980,
+          2480
+        ],
+        "open": true,
+        "openDesc": null,
+        "invite": false,
+        "minNum": 1,
+        "maxNum": 20,
+        "discounts": true,
+        "discountsNum": 10,
+        "discountsType": 2,
+        "discountsAmount": 0,
+        "freeNum": 2,
+        "discountsInfo": "此门票10张及以上赠送2张",
+        "info": "",
+        "endTime": null
+      },
+      {
+        "ticketId": 702,
+        "name": "单日票",
+        "price": 0,
+        "tieredPricing": true,
+        "prices": [
+          1680,
+          1680,
+          1680
+        ],
+        "open": true,
+        "openDesc": null,
+        "invite": false,
+        "minNum": 1,
+        "maxNum": 20,
+        "discounts": false,
+        "discountsNum": 2,
+        "discountsType": 1,
+        "discountsAmount": 168,
+        "freeNum": 0,
+        "discountsInfo": "此门票2张及以上有团购优惠",
+        "info": "9月4日单日票，2张以上购买9折。 \r\n 9月5日单日票，2张以上购买8折。 \r\n9月6日单日票，2张以上购买7折。 \r\n购买时请联系客服：010-52447986",
+        "endTime": null
+      },
+      {
+        "ticketId": 703,
+        "name": "学生票",
+        "price": 0,
+        "tieredPricing": true,
+        "prices": [
+          680,
+          680,
+          680
+        ],
+        "open": true,
+        "openDesc": null,
+        "invite": false,
+        "minNum": 1,
+        "maxNum": 20,
+        "discounts": true,
+        "discountsNum": 3,
+        "discountsType": 1,
+        "discountsAmount": 180,
+        "freeNum": 0,
+        "discountsInfo": "此门票3张及以上有团购优惠",
+        "info": "1、学生票3张购买，套票1500元。 \r\n2、学生票一次性买4张及以上每张360元购票。（购买时，请联系客服：010-52447986）",
+        "endTime": null
+      }
+    ]
+  }
+}

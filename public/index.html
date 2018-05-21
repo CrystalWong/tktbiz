@@ -83,17 +83,16 @@
                   {{/if}}
                   {{#each data.tickets}}
                   {{#if open}}
-                  <tr class="tickets" data-id={{{id}}}>
+                  <tr class="tickets" data-id={{{ticketId}}}>
                   {{else}}
-                  <tr class="disable"  data-id={{{id}}}>
+                  <tr class="disable"  data-id={{{ticketId}}}>
                   {{/if}}
                     {{#if open}}
                     <td class="bg-coupon">
-                      <!-- <div data-trigger="hover" data-container="body" data-toggle="#pover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}"> -->
                       <button type="button" class="btn">
                         {{ name }}
                       </button>
-                      {{#if discounts}}
+                      {{#if discountsInfo}}
                       <div class="pover" id="pover">
                         <em>&#9670;</em>
                         <span>&#9670;</span>
@@ -101,14 +100,39 @@
                           <item class="active discounts">团</item>
                           <item>{{discountsInfo}}</item>
                         </p>
+                        {{#if info}}
+                        <p>
+                          <img src="/imgs/remarks.png">
+                          <item>{{info}}</item>
+                        </p>
+                        {{/if}}
+                      </div>
+                      <span class="active discounts">团</span>
+                      {{#if info}}
+                      <img src="/imgs/remarks.png">
+                      {{/if}}
+                      {{else}}
+                      {{#if info}}
+                      <div class="pover" id="pover">
+                        <em>&#9670;</em>
+                        <span>&#9670;</span>
+                        {{#if discountsInfo}}
+                        <p>
+                          <item class="active discounts">团</item>
+                          <item>{{discountsInfo}}</item>
+                        </p>
+                        {{/if}}
                         <p>
                           <img src="/imgs/remarks.png">
                           <item>{{info}}</item>
                         </p>
                       </div>
+                      {{#if discountsInfo}}
                       <span class="active discounts">团</span>
                       {{/if}}
                       <img src="/imgs/remarks.png">
+                      {{/if}}
+                      {{/if}}
                       <!-- </div> -->
                     </td>
                     {{else}}
@@ -116,10 +140,12 @@
                       <button type="button" class="btn">
                         {{ name }}
                       </button>
-                      {{#if discounts}}
+                      {{#if discountsInfo}}
                       <span class="discounts">团</span>
                       {{/if}}
+                      {{#if info}}
                       <img src="/imgs/remarks_dis.png">
+                      {{/if}}
                     </td>
                     {{/if}}
                     {{#each prices}}
@@ -143,7 +169,6 @@
                       </p>
                       {{/if}}
                     </td>
-
                   </tr>
                   {{/each}}
                 </table>
@@ -158,12 +183,12 @@
                   <ul class="list-inline wrap">
                     <li class="money-wrap wrap text-left">
                       <div class="money">实付：<span class="green">¥&nbsp;</span><span class="green payment">0</span></div>
-                      <div class="money">优惠：¥ <span class="discount">0</span></div>
+                      <div class="money discountMoney">优惠：<span>¥&nbsp;</span><span class="discount">0</span></div>
                     </li>                  
-                    <li class="clip wrap">
+                    <!-- <li class="clip wrap">
                       <div class="clip-line"></div>
-                    </li>
-                    <li class="num wrap text-right">已选择<span class="green">0</span>张票</li>
+                    </li> -->
+                    <!-- <li class="num wrap text-right">已选择<span class="green">0</span>张票</li> -->
                   </ul>
                   <div class="use-coupon">使用优惠或优惠码</div>
                   <button id="submit" class="submit">立即报名</button>
@@ -193,17 +218,14 @@
       </div>
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">在这里添加一些的点点滴滴付付付付付付付付付付付付付付付付付文本点点滴滴付付付付付付付付付付付付付付付付付文本点点滴滴付付付付付付付付付付付付付付付付付文本点点滴滴付付付付付付付付付付付付付付付付付文本</div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
-            </div>
+          <div>
+            <img src="/imgs/scan_code.png">
           </div><!-- /.modal-content -->
         </div><!-- /.modal -->
       </div>
       <div class="dialog">
         <button type="button" class="close subclose">&times;</button>
-        <img src="/imgs/logo.png">
+        <img src="/imgs/dialog.png">
         <p>至少选择一张票</p>
       </div>
     </div>
@@ -215,5 +237,6 @@
     <script src="/lib/handlebars.js"></script>
     <script src="/js/index.js"></script>
     <script src="/js/map.js"></script>
+    <script src="/js/json2.js"></script>
   </body>
 </html>

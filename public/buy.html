@@ -59,16 +59,24 @@
                               {{name}}:
                               </label>
                               <div class="col-xs-10">
-                                {{#if type}}
-                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
-                                {{else}}
+                                {{#if select}}
                                   <select class="form-control" posi="{{{name}}}" name="{{{code}}}">
                                     <option>请选择</option>
                                     {{#each data}}
                                     <option value="{{{value}}}">{{name}}</option>
                                     {{/each}}                                   
                                   </select>
+                                {{else if file}}
+                                  <div class="upload-dec">
+                                    <img class="upload-img" src="/imgs/upload.png">
+                                    <span class="upload-text">上传您的学生证扫描件</span>
+                                  </div>
+                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
+                                {{else}}
+                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
                                 {{/if}}
+                                {{#if required}}
+                                <small class="required hint red">{{name}}&nbsp;不能为空</small>                   {{/if}}
                               </div>
                             </div>
                             {{/each}}
@@ -86,13 +94,13 @@
                           <div class="col-xs-12 col-sm-6">
                             <span class="header-tit">购票者信息</span>
                             <span>
-                              <small class="grey">购票订单邮件将会发送给购票者</small>
+                              <small class="grey">(购票订单邮件将会发送给购票者)</small>
                             </span>
                           </div>
                           <div class="col-xs-12 col-sm-6">
                             <div class="row">
                               <div class="col-xs-4 text-right">
-                                <small class="copySele-tit">订单发送</small>
+                                <small class="copySele-tit">订单发送:</small>
                               </div>
                               <div class="col-xs-8 copySele-wrap"></div>
                             </div>
@@ -110,6 +118,9 @@
                           </label>
                           <div class="col-xs-10">
                               <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
+                              {{#if required}}
+                                <small class="required hint red">{{name}}&nbsp;不能为空</small>                   
+                              {{/if}}
                           </div>
                         </div>
                         {{/each}}
@@ -126,8 +137,14 @@
                 <div class="col-xs-12">
                   <div class="row floor text-left">
                     <div class="col-xs-12 header">
-                        <span>发票：</span>
-                        <input type="checkbox" checked data-toggle="toggle">
+                      <div class="row">
+                        <div class="col-xs-2">
+                          <span>发票：</span>
+                        </div>
+                        <div class="col-xs-10">
+                          <input type="checkbox" checked data-toggle="toggle">
+                        </div>
+                      </div>
                     </div>
                     <form class="form-horizontal">
                       <div class="form-group">
@@ -137,16 +154,12 @@
                             <div class="col-xs-5 btn invType-active">增值税普通发票</div>
                             <div class="col-xs-5 col-xs-offset-1 btn">增值税专用发票</div>
                           </div>
-                          <!-- <div class="btn invType-active">
-                          </div>
-                          <input class="btn invType-active" type="button" value="增值税普通发票">
-                          <input class="btn" type="button" value="增值税专用发票"> -->
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputEmail" class="col-xs-2 control-label">收票人类型:</label>
                         <div class="col-xs-10">
-                          <div class="row">
+                          <div class="row acceptType">
                             <div class="col-xs-2 green">公司</div>
                             <div class="col-xs-2">个人</div>
                           </div>
@@ -156,22 +169,25 @@
                         <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>发票抬头:</label>
                         <div class="col-xs-10">
                           <input type="tel" class="form-control" id="inputPhone">
+                          <small class="required hint red">发票抬头&nbsp;不能为空</small>                   
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>服务项目:</label>
                         <div class="col-xs-10">
                           <input type="tel" class="form-control" id="inputPhone">
+                          <small class="required hint red">服务项目&nbsp;不能为空</small>                   
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label">纳税人识别号:</label>
+                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>纳税人识别号:</label>
                         <div class="col-xs-10">
                           <input type="tel" class="form-control" id="inputPhone">
+                          <small class="required hint red">纳税人识别号&nbsp;不能为空</small>                   
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>备注:</label>
+                        <label for="inputPhone" class="col-xs-2 control-label">备注:</label>
                         <div class="col-xs-10">
                           <textarea class="form-control" rows="3"></textarea>
                         </div>
@@ -189,24 +205,28 @@
                         <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>收件人姓名:</label>
                         <div class="col-xs-10">
                           <input type="tel" class="form-control" id="inputPhone">
+                          <small class="required hint red">收件人姓名&nbsp;不能为空</small>                   
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>联系电话:</label>
                         <div class="col-xs-10">
                           <input type="tel" class="form-control" id="inputPhone">
+                          <small class="required hint red">联系电话&nbsp;不能为空</small>                   
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>所在地区:</label>
                         <div class="col-xs-10">
                           <input type="tel" class="form-control" id="inputPhone">
+                          <small class="required hint red">所在地区&nbsp;不能为空</small>                   
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>详细地址:</label>
                         <div class="col-xs-10">
                           <input type="tel" class="form-control" id="inputPhone">
+                          <small class="required hint red">详细地址&nbsp;不能为空</small>                   
                         </div>
                       </div>
                     </form>
@@ -257,18 +277,6 @@
                   </div>
                   <div class="pay-item pull-left text-center">
                     <img src="/imgs/paypal.png" width="80%">
-                  </div>
-                </div>
-                <div class="col-xs-12 pay">
-                  <div class="pay-type"><img src="/imgs/circle.png" width="12"> 网银支付</div>
-                  <div class="pay-item pull-left text-center">
-                    <img src="/imgs/zs.png" width="80%">
-                  </div>
-                  <div class="pay-item pull-left text-center">
-                    <img src="/imgs/jt.png" width="80%">
-                  </div>
-                  <div class="pay-item pull-left text-center">
-                    <img src="/imgs/js.png" width="80%">
                   </div>
                 </div>
                 <div class="col-xs-12 pay">

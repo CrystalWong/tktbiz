@@ -17,7 +17,7 @@
 		background: #fff;
 		-moz-box-shadow: 0 1px 10px #888888; /* 老的 Firefox */
 		box-shadow: 0 1px 10px #888888;
-		z-index: 10000;
+		z-index: 1;
 		position: fixed;
 		left: 15px;
 		top: 0;
@@ -36,11 +36,14 @@
 		}
 	}
 	.main{
-		margin-top: 90px;
+		padding-top: 60px;
+	}
+	.floor-box{
+		margin-top: -60px;
+		padding-top: 90px;
 	}
 	.floor {
 		background: #fff;
-		margin-top: 30px;
 		padding-top: 15px;
 		-moz-box-shadow: 3px 3px 10px #999999;
 		box-shadow: 3px 3px 10px #999999;
@@ -50,9 +53,10 @@
 		padding-right: 0;
 	}
 	.info {
-		padding: 15px 30px;
+		padding: 20px 60px 40px;
 		text-indent: 2em;
 		font-size: 0.9rem;
+		line-height: 25px;
 	}
 	.list {
 		margin-top: 15px;
@@ -203,7 +207,6 @@
 		margin: 0 auto;
 	}
 	.bot {
-		margin-top: 30px;
 		padding: 0;
 		position: relative;
 		.contact{

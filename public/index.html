@@ -49,132 +49,138 @@
       </div>
       <div class="row main">
         <img src="/imgs/banner.png" width="100%">
-        <div id="introduction" class="col-xs-12 col-sm-10 col-sm-offset-1 floor floor1 text-center">
-          <img src="/imgs/info.png" width="35%">
-          <p class="info text-left">
-            中国互联网安全大会（ISC）始办于2013年，已成功举办五届。首届中国互联网大会引发了大众对“互联网安全”前所未有的关注热情；2014 年创造了超过两万人次的参会人数记录，美国首任国土安全部部长Tom Ridge、计算机病毒之父Fred Cohen等国内外顶级专家学者悉数到场。大会的召开引发国内安全概念股的全线飘红。2015 ISC规模空前，总参会人数超过三万人，大会主题“数据驱动安全”已成为业界公认的安全理念和发展趋势。 2016年，以“协同联动，共建安全+命运共同体”为主题，来自全球7个国家、16所知名大学、20余家科研机构、31家安全厂商的160多位安全领袖与专家与会。以“万物皆变 人是安全的尺度”为主题的2017 ISC来自10个国家的249位安全产业智库和行业安全专家发表了212场主题演讲，近4万网络安全从业者现场参会，上亿人在线观看。ISC已成为亚太地区规格最高，影响力最大的安全盛会！ 2018年，中国互联网安全大会将于9月4日在北京华丽登场，邀您共享信息安全的饕餮盛。
-          </p>
-        </div>
-        <div id="enroll" class="col-xs-12 col-sm-10 col-sm-offset-1 floor floor2 text-center">
-          <img src="/imgs/list-tit.png" width="10%">
-          <div id="list-wrap">
-            <script id="list" type="text/x-handlebars-template">
-              <table class="list table" data-currPriceIndex="{{{data.currPriceIndex}}}">
-                {{#if data.tieredPricing}}
-                <thead>
-                  <th width="21%">{{ data.nameTitle }}</th>
-                  {{#each data.tieredPricingTitles}}
-                  <th width="17%" class="tieredPricingTitles">{{ this }}</th>
-                  {{/each}}
-                  <th width="10%" class="priceTitle">{{ data.priceTitle }}</th>
-                  <th width="18%">{{ data.numTitle }}</th>
-                </thead>
-                {{else}}
-                <thead>
-                  <th width="25%">{{ data.nameTitle }}</th>
-                  <th width="25%" class="priceTitle">{{ data.priceTitle }}</th>
-                  <th width="25%">{{ data.timeTitle }}</th>
-                  <th width="25%">{{ data.numTitle }}</th>
-                </thead>
-                {{/if}}
-                {{#each data.tickets}}
-                {{#if open}}
-                <tr class="tickets" data-id={{{id}}}>
-                {{else}}
-                <tr class="disable"  data-id={{{id}}}>
-                {{/if}}
-                  {{#if open}}
-                  <td class="bg-coupon">
-                    <!-- <div data-trigger="hover" data-container="body" data-toggle="#pover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}"> -->
-                    <button type="button" class="btn">
-                      {{ name }}
-                    </button>
-                    {{#if discounts}}
-                    <div class="pover" id="pover">
-                      <em>&#9670;</em>
-                      <span>&#9670;</span>
-                      <p>
-                        <item class="active discounts">团</item>
-                        <item>{{discountsInfo}}</item>
-                      </p>
-                      <p>
-                        <img src="/imgs/remarks.png">
-                        <item>{{info}}</item>
-                      </p>
-                    </div>
-                    <span class="active discounts">团</span>
-                    {{/if}}
-                    <img src="/imgs/remarks.png">
-                    <!-- </div> -->
-                  </td>
-                  {{else}}
-                  <td class="bg-coupon bg-coupon-dis">
-                    <button type="button" class="btn">
-                      {{ name }}
-                    </button>
-                    {{#if discounts}}
-                    <span class="discounts">团</span>
-                    {{/if}}
-                    <img src="/imgs/remarks_dis.png">
-                  </td>
-                  {{/if}}
-                  {{#each prices}}
-                  <td class="price prices1">{{ this }}</td>
-                  {{/each}}
-                  <td class="price prices2">{{ price }}</td>
-                  {{#if tieredPricing}}
-                  {{else}}
-                  <td>{{ endTime }}</td>
-                  {{/if}}
-                  <td>
-                    {{#if open}}
-                    <ul class="list-inline" data-tieredPricing="{{{tieredPricing}}}" data-discounts="{{{discounts}}}" data-discountsType="{{{discountsType}}}" data-discountsNum="{{{discountsNum}}}" data-discountsAmount="{{{discountsAmount}}}" data-freeNum="{{{freeNum}}}">
-                      <li class="subtract disabled"><img src="/imgs/minus_no.png" width="100%"></li>
-                      <li class="num" data-minNum="{{{minNum}}}" data-maxNum="{{{maxNum}}}">0</li>
-                      <li class="add"><img src="/imgs/plus.png" width="100%"></li>
-                    </ul>
-                    {{else}}
-                    <p class="list-inline">
-                      {{ openDesc }}
-                    </p>
-                    {{/if}}
-                  </td>
-
-                </tr>
-                {{/each}}
-              </table>
-            </script>
+        <div id="introduction" class="col-xs-12 col-sm-10 floor-box col-sm-offset-1 floor1 text-center">
+          <div class="floor">
+            <img src="/imgs/info.png" width="35%">
+            <p class="info text-left">
+              中国互联网安全大会（ISC）始办于2013年，已成功举办五届。首届中国互联网大会引发了大众对“互联网安全”前所未有的关注热情；2014 年创造了超过两万人次的参会人数记录，美国首任国土安全部部长Tom Ridge、计算机病毒之父Fred Cohen等国内外顶级专家学者悉数到场。大会的召开引发国内安全概念股的全线飘红。2015 ISC规模空前，总参会人数超过三万人，大会主题“数据驱动安全”已成为业界公认的安全理念和发展趋势。 2016年，以“协同联动，共建安全+命运共同体”为主题，来自全球7个国家、16所知名大学、20余家科研机构、31家安全厂商的160多位安全领袖与专家与会。以“万物皆变 人是安全的尺度”为主题的2017 ISC来自10个国家的249位安全产业智库和行业安全专家发表了212场主题演讲，近4万网络安全从业者现场参会，上亿人在线观看。ISC已成为亚太地区规格最高，影响力最大的安全盛会！ 2018年，中国互联网安全大会将于9月4日在北京华丽登场，邀您共享信息安全的饕餮盛。
+            </p>
           </div>
-          <table class="list table settlement">
-            <tr class="count wrap">
-              <td colspan="3" class="tips">
-                <div class="wrap">退款说明：不支持退票，票务一旦售出，概不退票</div>
-              </td>
-              <td colspan="2">
-                <ul class="list-inline wrap">
-                  <li class="money-wrap wrap text-left">
-                    <div class="money">实付：<span class="green">¥&nbsp;</span><span class="green payment">0</span></div>
-                    <div class="money">优惠：¥ <span class="discount">0</span></div>
-                  </li>                  
-                  <li class="clip wrap">
-                    <div class="clip-line"></div>
-                  </li>
-                  <li class="num wrap text-right">已选择<span class="green">0</span>张票</li>
-                </ul>
-                <div class="use-coupon">使用优惠或优惠码</div>
-                <button id="submit" class="submit">立即报名</button>
-              </td>
-            </tr>             
-          </table>
+        </div>
+        <div id="enroll" class="col-xs-12 col-sm-10 floor-box col-sm-offset-1 floor2 text-center">
+          <div class="floor">
+            <img src="/imgs/list-tit.png" width="10%">
+            <div id="list-wrap">
+              <script id="list" type="text/x-handlebars-template">
+                <table class="list table" data-currPriceIndex="{{{data.currPriceIndex}}}">
+                  {{#if data.tieredPricing}}
+                  <thead>
+                    <th width="21%">{{ data.nameTitle }}</th>
+                    {{#each data.tieredPricingTitles}}
+                    <th width="17%" class="tieredPricingTitles">{{ this }}</th>
+                    {{/each}}
+                    <th width="10%" class="priceTitle">{{ data.priceTitle }}</th>
+                    <th width="18%">{{ data.numTitle }}</th>
+                  </thead>
+                  {{else}}
+                  <thead>
+                    <th width="25%">{{ data.nameTitle }}</th>
+                    <th width="25%" class="priceTitle">{{ data.priceTitle }}</th>
+                    <th width="25%">{{ data.timeTitle }}</th>
+                    <th width="25%">{{ data.numTitle }}</th>
+                  </thead>
+                  {{/if}}
+                  {{#each data.tickets}}
+                  {{#if open}}
+                  <tr class="tickets" data-id={{{id}}}>
+                  {{else}}
+                  <tr class="disable"  data-id={{{id}}}>
+                  {{/if}}
+                    {{#if open}}
+                    <td class="bg-coupon">
+                      <!-- <div data-trigger="hover" data-container="body" data-toggle="#pover" data-placement="bottom" data-title="{{{discountsInfo}}}" data-content="{{{info}}}"> -->
+                      <button type="button" class="btn">
+                        {{ name }}
+                      </button>
+                      {{#if discounts}}
+                      <div class="pover" id="pover">
+                        <em>&#9670;</em>
+                        <span>&#9670;</span>
+                        <p>
+                          <item class="active discounts">团</item>
+                          <item>{{discountsInfo}}</item>
+                        </p>
+                        <p>
+                          <img src="/imgs/remarks.png">
+                          <item>{{info}}</item>
+                        </p>
+                      </div>
+                      <span class="active discounts">团</span>
+                      {{/if}}
+                      <img src="/imgs/remarks.png">
+                      <!-- </div> -->
+                    </td>
+                    {{else}}
+                    <td class="bg-coupon bg-coupon-dis">
+                      <button type="button" class="btn">
+                        {{ name }}
+                      </button>
+                      {{#if discounts}}
+                      <span class="discounts">团</span>
+                      {{/if}}
+                      <img src="/imgs/remarks_dis.png">
+                    </td>
+                    {{/if}}
+                    {{#each prices}}
+                    <td class="price prices1">{{ this }}</td>
+                    {{/each}}
+                    <td class="price prices2">{{ price }}</td>
+                    {{#if tieredPricing}}
+                    {{else}}
+                    <td>{{ endTime }}</td>
+                    {{/if}}
+                    <td>
+                      {{#if open}}
+                      <ul class="list-inline" data-tieredPricing="{{{tieredPricing}}}" data-discounts="{{{discounts}}}" data-discountsType="{{{discountsType}}}" data-discountsNum="{{{discountsNum}}}" data-discountsAmount="{{{discountsAmount}}}" data-freeNum="{{{freeNum}}}">
+                        <li class="subtract disabled"><img src="/imgs/minus_no.png" width="100%"></li>
+                        <li class="num" data-minNum="{{{minNum}}}" data-maxNum="{{{maxNum}}}">0</li>
+                        <li class="add"><img src="/imgs/plus.png" width="100%"></li>
+                      </ul>
+                      {{else}}
+                      <p class="list-inline">
+                        {{ openDesc }}
+                      </p>
+                      {{/if}}
+                    </td>
+
+                  </tr>
+                  {{/each}}
+                </table>
+              </script>
+            </div>
+            <table class="list table settlement">
+              <tr class="count wrap">
+                <td colspan="3" class="tips">
+                  <div class="wrap">退款说明：不支持退票，票务一旦售出，概不退票</div>
+                </td>
+                <td colspan="2">
+                  <ul class="list-inline wrap">
+                    <li class="money-wrap wrap text-left">
+                      <div class="money">实付：<span class="green">¥&nbsp;</span><span class="green payment">0</span></div>
+                      <div class="money">优惠：¥ <span class="discount">0</span></div>
+                    </li>                  
+                    <li class="clip wrap">
+                      <div class="clip-line"></div>
+                    </li>
+                    <li class="num wrap text-right">已选择<span class="green">0</span>张票</li>
+                  </ul>
+                  <div class="use-coupon">使用优惠或优惠码</div>
+                  <button id="submit" class="submit">立即报名</button>
+                </td>
+              </tr>             
+            </table>
+          </div>
         </div>
       </div>
-      <div class="row bot text-center" id="address">
-        <img src="/imgs/callus.png" width="100%">
-        <div class="contact">
-          <img src="/imgs/callus_bg.png" width="100%">
-          <div class="contact-main">
-            <img src="/imgs/callus_img.png" width="30%">
-            <button type="button" class="active" data-toggle="modal" data-target="#myModal">联系我们</button>
+      <div class="row floor-box text-center" id="address">
+        <div class="bot">
+          <img src="/imgs/callus.png" width="100%">
+          <div class="contact">
+            <img src="/imgs/callus_bg.png" width="100%">
+            <div class="contact-main">
+              <img src="/imgs/callus_img.png" width="30%">
+              <button type="button" class="active" data-toggle="modal" data-target="#myModal">联系我们</button>
+            </div>
           </div>
         </div>
       </div>

@@ -7,19 +7,14 @@ $(function(){
 
 	//点击提交
 	$('#submit').on('click', function(){
-		// var list = {
-		// 	param: []
-		// };
 		var list = [];
 		var currPriceIndex = $('.tickets').parents('.table').attr('data-currPriceIndex');
 		var prices = 0;
 		for(var j=0;j<$('.tickets').length;j++) {
 			if($('.tickets').eq(j).find('.num').text() != 0){
 				list.push({
-					// 'ticketId': $('.tickets').eq(j).attr('data-id'),
-					// 'num': $('.tickets').eq(j).find('.num').text()
-					'ticketId': 701,
-					'num': 1
+					'ticketId': $('.tickets').eq(j).attr('data-id'),
+					'num': $('.tickets').eq(j).find('.num').text()
 				})
 			}
 		}
@@ -35,13 +30,12 @@ $(function(){
 		  	type: "POST",
 		   	url: "http://whereq.360.cn:8080/pco/common/api/083c18e8554a88fbf0b3a367e76bb488/ticket/checkout.json",
 		   	data: JSON.stringify(list),
-		   	// data: '[{"ticketId": 701, "num": 1}]',
-		   	// dataType: "json",
+		   	dataType: "json",
 		   	contentType:'application/json;charset=utf-8',
 		   	// jsonp: "callback",
 		   	success: function(res){
 		   		console.log(res)
-		   		// window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+		   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
 		    }
 		 	});
 		}
@@ -71,30 +65,30 @@ $(function(){
 
 	function init() {
 		$.ajax({
-	  	type: "GET",
-	   	// url: "/data/index.json",
-	   	// url: "/data/event.json",
-	   	url: "http://whereq.360.cn:8080/pco/common/api/083c18e8554a88fbf0b3a367e76bb488/ticket/list.json",
-	   	data: {},
-	   	dataType: "json",
-	   	// jsonp: "callback",
-	   	success: function(res){
-	   		// console.log(res)
-	   		var tpl =  $("#list").html();
-				//预编译模板
-				var template = Handlebars.compile(tpl);
-				//模拟json数据
-				var context = res;
-				//匹配json内容
-				var html = template(context);
-				//输入模板
-				$('#list-wrap').html(html);
-	 			$("[data-toggle='popover']").popover();
-	 			//特殊样式
-	 			specialStyle(res)
-	 			add(res)
-	 			subtract(res)
-	    }
+		  	type: "GET",
+		   	// url: "/data/index.json",
+		   	// url: "/data/event.json",
+		   	url: "http://whereq.360.cn:8080/pco/common/api/083c18e8554a88fbf0b3a367e76bb488/ticket/list.json",
+		   	data: {},
+		   	dataType: "json",
+		   	// jsonp: "callback",
+		   	success: function(res){
+		   		// console.log(res)
+		   		var tpl =  $("#list").html();
+					//预编译模板
+					var template = Handlebars.compile(tpl);
+					//模拟json数据
+					var context = res;
+					//匹配json内容
+					var html = template(context);
+					//输入模板
+					$('#list-wrap').html(html);
+		 			$("[data-toggle='popover']").popover();
+		 			//特殊样式
+		 			specialStyle(res)
+		 			add(res)
+		 			subtract(res)
+		    }
 	 	});
 	};
   

@@ -14,7 +14,7 @@ $(function(){
  	function AlipayQuick () {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/paypal.json",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/paypal/pay.json",
             headers: {
 		        'x-access-token': token
 		    },

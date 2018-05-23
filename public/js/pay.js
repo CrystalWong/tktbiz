@@ -58,7 +58,7 @@ $(function(){
 	         		if (res.state === "NOTPAY" || res.state === "USERPAYING") {
 	         			return;
 	         		} else {
-	         			window.location.href = '/result.html?token=' + token + "&orderNo=" + orderNo;
+	         			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
 	         		}
 	         	}
 	      	}

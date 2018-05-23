@@ -11,8 +11,10 @@ $(function(){
  			checkAliSignStr(bodyStr);
  		} else if (bodyStr && bodyStr.indexOf("item_number") >= 0) {
  			checkPaypalSignStr(bodyStr);
+ 		} else if (bodyStr && bodyStr.indexOf("wechat") >= 0) {
+ 			wechat();
  		} else {
- 			getData();
+ 			localPay();
  		}
  	};
  	/**
@@ -46,13 +48,31 @@ $(function(){
 	 	})
  	};
  	/**
- 	 * [getData description] 		预下单，获取付款二维码
+ 	 * [wechat description] 		微信支付
  	 * @return {[type]} [description]
  	 */
- 	function getData () {
+ 	function wechat () {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/codepay/return.json",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/codepay/return.json",
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: {'orderNo': orderNo},
+	     	dataType: "json",
+	     	success: function(res){
+	     		renderResultInfo(res);
+	      	}
+	 	})		
+ 	};
+ 	/**
+ 	 * [localPay description] 		现场支付
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function localPay () {
+	    $.ajax({
+	    	type: "GET",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/localpay/return.json",
             headers: {
 		        'x-access-token': token
 		    },

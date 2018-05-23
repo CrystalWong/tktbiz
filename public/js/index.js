@@ -3,6 +3,7 @@ $(function(){
 	var minus_no='/imgs/minus_no.png';
 	var plus='/imgs/plus.png';
 	var plus_no='/imgs/plus_no.png';
+	var mid = '083c18e8554a88fbf0b3a367e76bb488'
 	init();
 
 	function init() {
@@ -10,7 +11,7 @@ $(function(){
 		  	type: "GET",
 		   	// url: "/data/index.json?number= " + Math.random(),
 		   	// url: "/data/event.json?number= " + Math.random(),
-		   	url: "http://whereq.360.cn:8080/pco/common/api/083c18e8554a88fbf0b3a367e76bb488/ticket/list.json?number= " + Math.random(),
+		   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/list.json?number= " + Math.random(),
 		   	data: {},
 		   	dataType: "json",
 		   	// jsonp: "callback",
@@ -82,16 +83,16 @@ $(function(){
 				},3000)
 			} else {
 				$.ajax({
-			  	type: "POST",
-			   	url: "http://whereq.360.cn:8080/pco/common/api/083c18e8554a88fbf0b3a367e76bb488/ticket/checkout.json?number= " + Math.random(),
-			   	data: JSON.stringify(list),
-			   	dataType: "json",
-			   	contentType:'application/json;charset=utf-8',
-			   	// jsonp: "callback",
-			   	success: function(res){
-			   		console.log(res)
-			   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
-			    }
+				  	type: "POST",
+				   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/checkout.json?number= " + Math.random(),
+				   	data: JSON.stringify(list),
+				   	dataType: "json",
+				   	contentType:'application/json;charset=utf-8',
+				   	// jsonp: "callback",
+				   	success: function(res){
+				   		console.log(res)
+				   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+				    }
 			 	});
 			}
 		});

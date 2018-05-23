@@ -81,20 +81,18 @@ $(function(){
 					$('.dialog').fadeOut(500)
 				},3000)
 			} else {
-				console.log(list)
-				// window.location.href = '/buy.html'
-				// $.ajax({
-			 //  	type: "POST",
-			 //   	url: "http://whereq.360.cn:8080/pco/common/api/083c18e8554a88fbf0b3a367e76bb488/ticket/checkout.json?number= " + Math.random(),
-			 //   	data: JSON.stringify(list),
-			 //   	dataType: "json",
-			 //   	contentType:'application/json;charset=utf-8',
-			 //   	// jsonp: "callback",
-			 //   	success: function(res){
-			 //   		console.log(res)
-			 //   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
-			 //    }
-			 // 	});
+				$.ajax({
+			  	type: "POST",
+			   	url: "http://whereq.360.cn:8080/pco/common/api/083c18e8554a88fbf0b3a367e76bb488/ticket/checkout.json?number= " + Math.random(),
+			   	data: JSON.stringify(list),
+			   	dataType: "json",
+			   	contentType:'application/json;charset=utf-8',
+			   	// jsonp: "callback",
+			   	success: function(res){
+			   		console.log(res)
+			   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+			    }
+			 	});
 			}
 		});
 		//点击关闭弹出框

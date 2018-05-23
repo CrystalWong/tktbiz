@@ -6,6 +6,8 @@ $(function(){
 	var token = tokenStr.split('token=')[1];
 	init();
  	function init () {
+ 		countDown()
+ 		minutes()
  		getData();
  	};
  	/**
@@ -66,14 +68,34 @@ $(function(){
  	};
 
  	$('.pay').on('click', function () {
-		window.location.href = '/payment.html'
+		// window.location.href = '/payment.html'
 	})
+	
+    function minutes () {
+        var m=29;
+	    var s=59;
+	    setInterval(function(){
+	        s--;
+	        if(s<0){
+	            s=59;
+	            m--;
+	        }
+	        if (m == 0) {
+	        	window.location.href = "/index.html"
+	        }
+	    },1000)
+    }
 
-	function countDown(time) {
-		if (time == 0) {
-			time = 0
-		} else {
-			time = time - 1
-		}
+	function countDown(){
+		var num = 201
+		name = setInterval(function() {
+			num--;
+			$('.info-time .red').text(num);// 你倒计时显示的地方元素
+			if(num == 0){
+				clearInterval(name);
+				countDown()
+				getData ();
+			}
+		}, 1000);
 	}
 })

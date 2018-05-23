@@ -39,7 +39,7 @@
                   <script id="attendForms" type="text/x-handlebars-template">
                     {{#each attendForms}}
                       {{#each this.formItemsBox}}
-                      <div class="row floor text-left panel">
+                      <div class="row floor text-left panel" tid="{{{../tid}}}">
                           <div class="col-xs-12 header">
                             <div class="row">
                               <div class="col-xs-12 col-sm-6 header-tit">
@@ -59,24 +59,25 @@
                               {{name}}:
                               </label>
                               <div class="col-xs-10">
-                                {{#if select}}
-                                  <select class="form-control" posi="{{{name}}}" name="{{{code}}}">
+                                {{#if list}}
+                                  <select class="form-control" posi="{{{code}}}" name="{{{code}}}">
                                     <option>请选择</option>
                                     {{#each data}}
                                     <option value="{{{value}}}">{{name}}</option>
                                     {{/each}}                                   
                                   </select>
-                                {{else if file}}
+                                {{else if pic}}
                                   <div class="upload-dec">
                                     <img class="upload-img" src="/imgs/upload.png">
                                     <span class="upload-text">上传您的学生证扫描件</span>
                                   </div>
-                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
+                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="">
                                 {{else}}
-                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
+                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="">
                                 {{/if}}
                                 {{#if required}}
-                                <small class="required hint red">{{name}}&nbsp;不能为空</small>                   {{/if}}
+                                <small class="required hint red">{{name}}&nbsp;不能为空</small>                   
+                                {{/if}}
                               </div>
                             </div>
                             {{/each}}
@@ -117,7 +118,7 @@
                           {{name}}:
                           </label>
                           <div class="col-xs-10">
-                              <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{name}}}" name="{{{code}}}" placeholder="">
+                              <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="">
                               {{#if required}}
                                 <small class="required hint red">{{name}}&nbsp;不能为空</small>                   
                               {{/if}}
@@ -151,83 +152,144 @@
                         <label for="inputName" class="col-xs-2 control-label">发票类型:</label>
                         <div class="col-xs-10">
                           <div class="row mar-l-0">
-                            <div class="col-xs-5 btn invType-active">增值税普通发票</div>
-                            <div class="col-xs-5 col-xs-offset-1 btn">增值税专用发票</div>
+                            <div class="col-xs-5 btn invType invType-active">增值税普通发票</div>
+                            <div class="col-xs-5 col-xs-offset-1 btn invType">增值税专用发票</div>
                           </div>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="inputEmail" class="col-xs-2 control-label">收票人类型:</label>
-                        <div class="col-xs-10">
-                          <div class="row acceptType">
-                            <div class="col-xs-2 green">公司</div>
-                            <div class="col-xs-2">个人</div>
+                      <div class="invType-info invType-info-active">
+                        <div class="form-group">
+                          <label for="inputEmail" class="col-xs-2 control-label">收票人类型:</label>
+                          <div class="col-xs-10">
+                            <div class="row acceptType">
+                              <div class="col-xs-2 acceptType-active">公司</div>
+                              <div class="col-xs-2">个人</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>发票抬头:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control title">
+                            <small class="required hint red">发票抬头&nbsp;不能为空</small>                   
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>服务项目:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control serviceType">
+                            <small class="required hint red">服务项目&nbsp;不能为空</small>                   
+                          </div>
+                        </div>
+                        <div class="form-group taxpayer">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>纳税人识别号:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control taxpayerId">
+                            <small class="required hint red">纳税人识别号&nbsp;不能为空</small>                   
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label remark">备注:</label>
+                          <div class="col-xs-10">
+                            <textarea class="form-control" rows="3"></textarea>
                           </div>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>发票抬头:</label>
-                        <div class="col-xs-10">
-                          <input type="tel" class="form-control" id="inputPhone">
-                          <small class="required hint red">发票抬头&nbsp;不能为空</small>                   
+                      <div class="invType-info">
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>发票抬头:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control title">
+                            <small class="required hint red">发票抬头&nbsp;不能为空</small>                   
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>服务项目:</label>
-                        <div class="col-xs-10">
-                          <input type="tel" class="form-control" id="inputPhone">
-                          <small class="required hint red">服务项目&nbsp;不能为空</small>                   
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>服务项目:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control serviceType">
+                            <small class="required hint red">服务项目&nbsp;不能为空</small>                   
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>纳税人识别号:</label>
-                        <div class="col-xs-10">
-                          <input type="tel" class="form-control" id="inputPhone">
-                          <small class="required hint red">纳税人识别号&nbsp;不能为空</small>                   
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>纳税人识别号:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control taxpayerId">
+                            <small class="required hint red">纳税人识别号&nbsp;不能为空</small>                   
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label">备注:</label>
-                        <div class="col-xs-10">
-                          <textarea class="form-control" rows="3"></textarea>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>公司注册地址:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control companyRegAddress">
+                            <small class="required hint red">公司注册地址&nbsp;不能为空</small>                   
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>公司财务电话:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control companyFinanceTel">
+                            <small class="required hint red">公司财务电话&nbsp;不能为空</small>                   
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>开户银行:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control bank">
+                            <small class="required hint red">开户银行&nbsp;不能为空</small>                   
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>银行账号:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control bankNo">
+                            <small class="required hint red">银行账号&nbsp;不能为空</small>                   
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label remark">备注:</label>
+                          <div class="col-xs-10">
+                            <textarea class="form-control" rows="3"></textarea>
+                          </div>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputEmail" class="col-xs-2 control-label">领取方式:</label>
                         <div class="col-xs-10">
                           <div class="row mar-l-0">
-                            <div class="col-xs-3 btn invType-active">现场领取</div>
-                            <div class="col-xs-3 col-xs-offset-1 btn">快递</div>
+                            <div class="col-xs-3 btn getType getType-active">现场领取</div>
+                            <div class="col-xs-3 col-xs-offset-1 btn getType">快递</div>
                           </div>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>收件人姓名:</label>
-                        <div class="col-xs-10">
-                          <input type="tel" class="form-control" id="inputPhone">
-                          <small class="required hint red">收件人姓名&nbsp;不能为空</small>                   
+                      <div class="recieve">
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>收件人姓名:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control postName">
+                            <small class="required hint red">收件人姓名&nbsp;不能为空</small>                   
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>联系电话:</label>
-                        <div class="col-xs-10">
-                          <input type="tel" class="form-control" id="inputPhone">
-                          <small class="required hint red">联系电话&nbsp;不能为空</small>                   
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>联系电话:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control postTel">
+                            <small class="required hint red">联系电话&nbsp;不能为空</small>                   
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>所在地区:</label>
-                        <div class="col-xs-10">
-                          <input type="tel" class="form-control" id="inputPhone">
-                          <small class="required hint red">所在地区&nbsp;不能为空</small>                   
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>所在地区:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control" id="inputPhone">
+                            <small class="required hint red">所在地区&nbsp;不能为空</small>                   
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>详细地址:</label>
-                        <div class="col-xs-10">
-                          <input type="tel" class="form-control" id="inputPhone">
-                          <small class="required hint red">详细地址&nbsp;不能为空</small>                   
-                        </div>
+                        <div class="form-group">
+                          <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>详细地址:</label>
+                          <div class="col-xs-10">
+                            <input type="tel" class="form-control" id="inputPhone">
+                            <small class="required hint red">详细地址&nbsp;不能为空</small>                   
+                          </div>
+                        </div>                        
                       </div>
                     </form>
                   </div>             

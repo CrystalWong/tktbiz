@@ -1,13 +1,21 @@
 $(function(){
+	var mid = "083c18e8554a88fbf0b3a367e76bb488";
+	var url = location.search;
+	var orderNo = url.split('&orderNo=')[1];
+	var tokenStr = url.split('&orderNo=')[0];
+	var token = tokenStr.split('token=')[1];
+	console.log(orderNo,token, 678)
 
 	init();
 
 	$('#submit').on('click', function(){
-		window.location.href = '/result.html'
+		// window.location.href = '/result.html'
+		pay();
 	});
 
  	function init () {
  		getData();
+ 		invTypeToggle();
  	};
  	/**
  	 * [getData description] 		获取页面初始数据
@@ -15,9 +23,13 @@ $(function(){
  	 */
  	function getData () {
 	    $.ajax({
-	    	type: "GET",
-	     	url: "/data/buy.json",
-	     	data: {},
+	    	type: "POST",
+	     	// url: "/data/buy.json",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/buy.json",
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
 	     		renderOrderInfo(res);
@@ -119,6 +131,7 @@ $(function(){
 			var tarIndex = $('.copySele').index(this);
 			var index = $(this).children('option:selected').val();
 			var doms = $('.panel').eq(index).find(".form-control")
+			// console.log(doms, 99)
 			doms.each(function(){
 				var name = $(this).attr('posi')
 				var value = $(this).val()
@@ -152,6 +165,158 @@ $(function(){
  		$('.upload-dec').on('click', function () {
  			$(this).closest('.col-xs-10').find('.form-control').click();
  		})
+ 	}
+ 	/**
+ 	 * [invTypeToggle description]   发票信息展示切换
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function invTypeToggle () {
+ 		$('.invType').unbind('click');
+ 		$('.invType').on('click', function () {
+ 			var index = $(this).index();
+ 			$('.invType').removeClass('invType-active');
+ 			$('.invType-info').removeClass('invType-info-active');
+ 			$('.invType').eq(index).addClass('invType-active');
+ 			$('.invType-info').eq(index).addClass('invType-info-active');
+ 		})
+ 		$('.acceptType .col-xs-2').unbind('click');
+ 		$('.acceptType .col-xs-2').on('click', function () {
+ 			var index = $(this).index();
+ 			$('.acceptType .col-xs-2').removeClass('acceptType-active');
+ 			$('.acceptType .col-xs-2').eq(index).addClass('acceptType-active');
+ 			if (index) {
+ 				$('.taxpayer').hide();
+ 			} else {
+ 				$('.taxpayer').show();
+ 			}
+ 		})
+ 		$('.getType').unbind('click');
+ 		$('.getType').on('click', function () {
+ 			var index = $(this).index();
+ 			$('.getType').removeClass('getType-active');
+ 			$('.getType').eq(index).addClass('getType-active');
+ 			if (index) {
+ 				$('.recieve').show();
+ 			} else {
+ 				$('.recieve').hide();
+ 			}
+ 		})
+ 	}
+ 	/**
+ 	 * [pay description]             去支付
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function pay () {
+ 		var payMethod = "CodePay";
+ 		var needInvoice = "true";
+ 		var sendAll = "true"
+ 		var buyer = getBuyer();
+ 		var invoice = getInvoice();
+ 		var ticketUsers = getTicketUsers();
+ 		var data = {
+ 			"buyer": buyer,
+ 			"invoice": invoice,
+ 			"needInvoice": needInvoice,
+ 			"orderNo": orderNo,
+ 			"payMethod": payMethod,
+ 			"sendAll": sendAll,
+ 			"ticketUsers": ticketUsers
+ 		}
+ 		// console.log(data, 123456)
+	    $.ajax({
+	    	type: "POST",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/pay.json",
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: JSON.stringify(data),
+	     	contentType: 'application/json',
+	     	success: function(res){
+	     		renderOrderInfo(res);
+	     		renderAttendForms(res);
+	     		renderBuyerForm(res);
+	         	console.log(res)
+	      	}
+	 	})
+ 	}
+ 	/**
+ 	 * [getBuyer description]		获取购票者信息
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function getBuyer () {
+ 		var email = $('#buyerForm-wrap .email').val();
+ 		var mobile = $('#buyerForm-wrap .mobile').val();
+ 		var name = $('#buyerForm-wrap .name').val();
+ 		var buyer = {
+ 			"email": email,
+ 			"mobile": mobile,
+ 			"name": name
+ 		}
+ 		return buyer;
+ 	}
+ 	/**
+ 	 * [getInvoice description]		获取发票信息
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function getInvoice () {
+ 		var type = $('.invType-active').text();
+ 		var takerType = $('.acceptType-active').text();
+ 		var title = $('.invType-info-active .title').val();
+ 		var serviceType = $('.invType-info-active .serviceType').val();
+ 		var taxpayerId = $('.invType-info-active .taxpayerId').val();
+ 		var remark = $('.invType-info-active .remark').val();
+ 		var companyRegAddress = $('.invType-info-active .companyRegAddress').val();
+ 		var companyFinanceTel = $('.invType-info-active .companyFinanceTel').val();
+ 		var bank = $('.invType-info-active .bank').val();
+ 		var bankNo = $('.invType-info-active .bankNo').val();
+ 		var getType = $('.getType-active').text();
+ 		var postName = $('.postName').val();
+ 		var postTel = $('.postTel').val();
+ 		var postProvince = "北京市";
+ 		var postCity = "北京市";
+ 		var postCounty = "朝阳区";
+ 		var postAddress = "博瑞大厦";
+ 		var invoice = {
+ 			"type": type,
+ 			"takerType": takerType,
+ 			"title": title,
+ 			"serviceType": serviceType,
+ 			"taxpayerId": taxpayerId,
+ 			"remark": remark,
+ 			"companyRegAddress": companyRegAddress,
+ 			"companyFinanceTel": companyFinanceTel,
+ 			"bank": bank,
+ 			"bankNo": bankNo,
+ 			"getType": getType,
+ 			"postName": postName,
+ 			"postTel": postTel,
+ 			"postProvince": postProvince,
+ 			"postCity": postCity,
+ 			"postCounty": postCounty,
+ 			"postAddress": postAddress
+ 		}
+ 		return invoice;
+ 	}
+ 	/**
+ 	 * [getTicketUsers description]    获取参会者信息
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function getTicketUsers () {
+ 		var ticketUsers = [];
+ 		var attendants = $('#attendForms-wrap .panel');
+ 		for(var i=0; i<attendants.length; i++) {
+ 			var attendant = {};
+ 			var inputs = attendants.eq(i).find('.form-group input');
+ 			console.log(inputs.length, 897)
+ 			attendant["tid"] = attendants.eq(i).attr('tid');
+ 			for(var k=0; k<inputs.length; k++) {
+ 				var key = inputs.eq(k).attr('name');
+ 				var value = inputs.eq(k).val();
+ 				attendant[key] = value;
+ 			}
+ 			ticketUsers.push(attendant)
+ 		}
+ 		return ticketUsers;
  	}
 })
 

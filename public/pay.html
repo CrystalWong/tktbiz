@@ -18,7 +18,7 @@
     <meta name="abstract" content="360">
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet/less" href="/css/common.less" type="text/css">
-    <link rel="stylesheet/less" href="/css/result.less" type="text/css">
+    <link rel="stylesheet/less" href="/css/pay.less" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js" ></script>
     <!--[if lt IE 9]>
        <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -26,9 +26,32 @@
     <![endif]-->
   </head>
   <body>
-    <div class="pay container-fluid">
+    <div class="wechat">
       <div class="row main">
-        <img class="QRcode" src="" width="30%" alt="支付二维码">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 floor1 text-center">
+          <div class="row">
+            <div class="row floor text-left">
+              <div class="title">微信支付</div>
+              <div class="info">
+                <span>请您及时付款，以便订单尽快处理！点单号：<strong>218052210213625</strong></span>
+                <span class="red">请您在提交订单30分钟内完成支付，否则订单会自动取消。</span>
+              </div>
+              <div class="info-time">距离二维码过期还剩<span class="red">180</span>秒，过期后自动刷新页面。</div>
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-xs-5">
+                    <!-- <img src="/imgs/pay_code.png"> -->
+                    <img class="QRcode" src="" width="30%" alt="支付二维码">
+                    <div class="green pay">选择其他方式付款>></div>
+                  </div>
+                  <div class="col-xs-7">
+                    <img src="/imgs/phone.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script src="/lib/jquery/jquery.js"></script>

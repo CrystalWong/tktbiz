@@ -64,4 +64,16 @@ $(function(){
 	      	}
 	 	})		
  	};
+
+ 	$('.pay').on('click', function () {
+		window.location.href = '/payment.html'
+	})
+
+	function countDown(time) {
+		if (time == 0) {
+			time = 0
+		} else {
+			time = time - 1
+		}
+	}
 })

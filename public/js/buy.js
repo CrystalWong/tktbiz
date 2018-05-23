@@ -207,7 +207,8 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function pay () {
- 		var payMethod = "CodePay";
+ 		// var payMethod = "CodePay";
+ 		var payMethod = "AlipayQuick";
  		var needInvoice = "true";
  		var sendAll = "true"
  		var buyer = getBuyer();
@@ -232,10 +233,35 @@ $(function(){
 	     	data: JSON.stringify(data),
 	     	contentType: 'application/json',
 	     	success: function(res){
-	     		renderOrderInfo(res);
-	     		renderAttendForms(res);
-	     		renderBuyerForm(res);
 	         	console.log(res)
+	         	if(res.code == '0') {
+	         		if (data.payMethod == "CodePay") {
+	         			window.location.href = '/pay.html?token=' + token + "&orderNo=" + orderNo;
+	         		} else if(data.payMethod == "AlipayQuick") {
+	         			window.location.href = '/alipay.html?token=' + token + "&orderNo=" + orderNo;
+	         		} else if(data.payMethod == "PayPal") {
+	         			paypal();
+	         		} else {
+	         			window.location.href = '/result.html?token=' + token + "&orderNo=" + orderNo;
+	         		}
+	         	}
+	      	}
+	 	})
+ 	} 	
+ 	/**
+ 	 * [paypal description]      paypal支付
+ 	 */
+ 	function paypal () {
+	    $.ajax({
+	    	type: "GET",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/paypal.json",
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: {'orderNo': orderNo},
+	     	dataType: "json",
+	     	success: function(res){
+	         	console.log(res,777)
 	      	}
 	 	})
  	}

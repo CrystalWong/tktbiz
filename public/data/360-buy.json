@@ -1,0 +1,364 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "orderNo": "a64cf188-2ad5-44fe-980e-e507fc802bb4",
+    "expire": 1800,
+    "buyerForm": [
+      {
+        "name": "姓名",
+        "code": "name",
+        "type": "text",
+        "required": true,
+        "data": []
+      },
+      {
+        "name": "邮箱",
+        "code": "email",
+        "type": "email",
+        "required": true,
+        "data": []
+      },
+      {
+        "name": "手机",
+        "code": "mobile",
+        "type": "mobile",
+        "required": true,
+        "data": []
+      }
+    ],
+    "orderPrice": "应付\r\n￥19340.00\r\n（或美元 $3030.78）",
+    "attendForms": [
+      {
+        "formItems": [
+          {
+            "name": "email",
+            "code": "email",
+            "type": "email",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "手机号",
+            "code": "mobile",
+            "type": "mobile",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "姓名",
+            "code": "name",
+            "type": "text",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "学生证",
+            "code": "152680750441921",
+            "type": "pic",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "公司名称",
+            "code": "152680761769721",
+            "type": "text",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "备注",
+            "code": "152680807689821",
+            "type": "text",
+            "required": false,
+            "data": []
+          },
+          {
+            "name": "行业",
+            "code": "152688542552521",
+            "type": "list",
+            "required": true,
+            "data": [
+              {
+                "name": "threestar",
+                "value": "3星",
+                "depth": 0,
+                "children": []
+              },
+              {
+                "name": "fourstar",
+                "value": "四星",
+                "depth": 0,
+                "children": []
+              },
+              {
+                "name": "fivestar",
+                "value": "五星",
+                "depth": 0,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "num": 1,
+        "name": "VIP贵宾票",
+        "tid": 700
+      },
+      {
+        "formItems": [
+          {
+            "name": "email",
+            "code": "email",
+            "type": "email",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "手机号",
+            "code": "mobile",
+            "type": "mobile",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "姓名",
+            "code": "name",
+            "type": "text",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "学生证",
+            "code": "152680750441921",
+            "type": "pic",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "公司名称",
+            "code": "152680761769721",
+            "type": "text",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "备注",
+            "code": "152680807689821",
+            "type": "text",
+            "required": false,
+            "data": []
+          },
+          {
+            "name": "行业",
+            "code": "152688542552521",
+            "type": "list",
+            "required": true,
+            "data": [
+              {
+                "name": "threestar",
+                "value": "3星",
+                "depth": 0,
+                "children": []
+              },
+              {
+                "name": "fourstar",
+                "value": "四星",
+                "depth": 0,
+                "children": []
+              },
+              {
+                "name": "fivestar",
+                "value": "五星",
+                "depth": 0,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "num": 1,
+        "name": "三日通票",
+        "tid": 701
+      },
+      {
+        "formItems": [
+          {
+            "name": "email",
+            "code": "email",
+            "type": "email",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "手机号",
+            "code": "mobile",
+            "type": "mobile",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "姓名",
+            "code": "name",
+            "type": "text",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "学生证",
+            "code": "152680750441921",
+            "type": "pic",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "公司名称",
+            "code": "152680761769721",
+            "type": "text",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "备注",
+            "code": "152680807689821",
+            "type": "text",
+            "required": false,
+            "data": []
+          },
+          {
+            "name": "行业",
+            "code": "152688542552521",
+            "type": "list",
+            "required": true,
+            "data": [
+              {
+                "name": "threestar",
+                "value": "3星",
+                "depth": 0,
+                "children": []
+              },
+              {
+                "name": "fourstar",
+                "value": "四星",
+                "depth": 0,
+                "children": []
+              },
+              {
+                "name": "fivestar",
+                "value": "五星",
+                "depth": 0,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "num": 1,
+        "name": "单日票",
+        "tid": 702
+      },
+      {
+        "formItems": [
+          {
+            "name": "email",
+            "code": "email",
+            "type": "email",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "手机号",
+            "code": "mobile",
+            "type": "mobile",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "姓名",
+            "code": "name",
+            "type": "text",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "学生证",
+            "code": "152680750441921",
+            "type": "pic",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "公司名称",
+            "code": "152680761769721",
+            "type": "text",
+            "required": true,
+            "data": []
+          },
+          {
+            "name": "备注",
+            "code": "152680807689821",
+            "type": "text",
+            "required": false,
+            "data": []
+          },
+          {
+            "name": "行业",
+            "code": "152688542552521",
+            "type": "list",
+            "required": true,
+            "data": [
+              {
+                "name": "threestar",
+                "value": "3星",
+                "depth": 0,
+                "children": []
+              },
+              {
+                "name": "fourstar",
+                "value": "四星",
+                "depth": 0,
+                "children": []
+              },
+              {
+                "name": "fivestar",
+                "value": "五星",
+                "depth": 0,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "num": 1,
+        "name": "学生票",
+        "tid": 703
+      }
+    ],
+    "orderItems": [
+      {
+        "name": "VIP贵宾票",
+        "num": 1,
+        "price": "15000.00"
+      },
+      {
+        "name": "三日通票",
+        "num": 1,
+        "price": "1980.00"
+      },
+      {
+        "name": "单日票",
+        "num": 1,
+        "price": "1680.00"
+      },
+      {
+        "name": "学生票",
+        "num": 1,
+        "price": "680.00"
+      }
+    ],
+    "onlinePay": [
+      "alipay",
+      "wechatpay"
+    ],
+    "pays": [
+      "online"
+    ],
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4MjIxIiwiaWF0IjoxNTI2ODg2OTI4LCJleHAiOjE1MjY4ODg3Mjh9.CiYWIFz2vFoFneCTtQiIBoLUk5KOqoZixKfUasDzeNq5s775Dihkf8vzT_ld850ITk-OwsX4dtFgSSiEOes9LA"
+  }
+}

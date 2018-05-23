@@ -331,21 +331,21 @@
                 </div>
                 <div class="col-xs-12 pay pay-active">
                   <div class="pay-type"><img src="/imgs/circle.png" width="12"> 在线支付平台</div>
-                  <div class="pay-list">
-                    <div class="pay-item pull-left text-center active">
+                  <div class="pay-list fold">
+                    <div class="pay-item pull-left text-center active" payType="AlipayQuick">
                       <img src="/imgs/zfb.png" width="80%">
                     </div>
-                    <div class="pay-item pull-left text-center">
+                    <div class="pay-item pull-left text-center" payType="CodePay">
                       <img src="/imgs/wx.png" width="80%">
                     </div>
-                    <div class="pay-item pull-left text-center">
+                    <div class="pay-item pull-left text-center" payType="PayPal">
                       <img src="/imgs/paypal.png" width="80%">
                     </div>                    
                   </div>
                 </div>
-                <div class="col-xs-12 pay">
+                <div class="col-xs-12 pay pay-item" payType="LocalePay">
                   <div class="pay-type"><img src="/imgs/circle.png" width="12"> 现场缴费</div>
-                  <div class="red">现场缴费可能会存在现场等待时间长和票已售罄的情况，请您确认，建议在线支付。</div>
+                  <div class="red fold">现场缴费可能会存在现场等待时间长和票已售罄的情况，请您确认，建议在线支付。</div>
                 </div>
                 <button class="col-xs-12 col-sm-8 col-sm-offset-2 go text-center" id="submit">去付款</button>
               </div>

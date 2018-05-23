@@ -16,6 +16,7 @@ $(function(){
  	function init () {
  		getData();
  		invTypeToggle();
+ 		payTypeToggle();
  	};
  	/**
  	 * [getData description] 		获取页面初始数据
@@ -207,8 +208,7 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function pay () {
- 		// var payMethod = "CodePay";
- 		var payMethod = "AlipayQuick";
+ 		var payMethod = $('.pay-wrap .active').attr('paytype');
  		var needInvoice = "true";
  		var sendAll = "true"
  		var buyer = getBuyer();
@@ -240,31 +240,14 @@ $(function(){
 	         		} else if(data.payMethod == "AlipayQuick") {
 	         			window.location.href = '/alipay.html?token=' + token + "&orderNo=" + orderNo;
 	         		} else if(data.payMethod == "PayPal") {
-	         			paypal();
+	         			window.location.href = '/paypal.html?token=' + token + "&orderNo=" + orderNo;
 	         		} else {
 	         			window.location.href = '/result.html?token=' + token + "&orderNo=" + orderNo;
 	         		}
 	         	}
 	      	}
 	 	})
- 	} 	
- 	/**
- 	 * [paypal description]      paypal支付
- 	 */
- 	function paypal () {
-	    $.ajax({
-	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/paypal.json",
-            headers: {
-		        'x-access-token': token
-		    },
-	     	data: {'orderNo': orderNo},
-	     	dataType: "json",
-	     	success: function(res){
-	         	console.log(res,777)
-	      	}
-	 	})
- 	}
+ 	};
  	/**
  	 * [getBuyer description]		获取购票者信息
  	 * @return {[type]} [description]
@@ -279,7 +262,7 @@ $(function(){
  			"name": name
  		}
  		return buyer;
- 	}
+ 	};
  	/**
  	 * [getInvoice description]		获取发票信息
  	 * @return {[type]} [description]
@@ -322,7 +305,7 @@ $(function(){
  			"postAddress": postAddress
  		}
  		return invoice;
- 	}
+ 	};
  	/**
  	 * [getTicketUsers description]    获取参会者信息
  	 * @return {[type]} [description]
@@ -343,6 +326,21 @@ $(function(){
  			ticketUsers.push(attendant)
  		}
  		return ticketUsers;
- 	}
+ 	};
+ 	/**
+ 	 * [payTypeToggle description]		切换支付方式
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function payTypeToggle () {
+ 		$('.pay').on('click',function(){
+ 			$('.pay').removeClass('pay-active');
+ 			$(this).addClass('pay-active');
+ 		})
+ 		$('.pay-item').on('click',function(){
+ 			$('.pay-item').removeClass('active');
+ 			$(this).addClass('active');
+ 		})
+ 	};
+ 	
 })
 

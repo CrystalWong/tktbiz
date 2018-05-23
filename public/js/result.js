@@ -4,24 +4,41 @@ $(function(){
 	var orderNo = url.split('&orderNo=')[1];
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
-	var bodyStr = location.href.split('?');
+	var bodyStr = location.href.split('?')[1];
 	init();
  	function init () {
- 		if (bodyStr) {
-
+ 		if (bodyStr && bodyStr.indexOf("out_trade_no") >= 0) {
+ 			checkAliSignStr(bodyStr);
+ 		} else if (bodyStr && bodyStr.indexOf("item_number") >= 0) {
+ 			checkPaypalSignStr(bodyStr);
  		} else {
  			getData();
  		}
  	};
  	/**
- 	 * [checkSignStr description]     验证支付宝签名
+ 	 * [checkAliSignStr description]     验证支付宝签名
  	 * @return {[type]} [description]
  	 */
- 	function checkSignStr () {
+ 	function checkAliSignStr (bodyStr) {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/payResult.json",
-	     	data: {'orderNo': orderNo},
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/alipay/return.json?" + bodyStr,
+	     	data: {},
+	     	dataType: "json",
+	     	success: function(res){
+	     		renderResultInfo(res);
+	      	}
+	 	})
+ 	}; 	
+ 	/**
+ 	 * [checkPaypalSignStr description]     验证paypal签名
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function checkPaypalSignStr (bodyStr) {
+	    $.ajax({
+	    	type: "GET",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/paypal/return.json?" + bodyStr,
+	     	data: {},
 	     	dataType: "json",
 	     	success: function(res){
 	     		renderResultInfo(res);
@@ -35,7 +52,7 @@ $(function(){
  	function getData () {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/payResult.json",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/codepay/return.json",
             headers: {
 		        'x-access-token': token
 		    },

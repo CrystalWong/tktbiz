@@ -98,12 +98,16 @@
                         <span>&#9670;</span>
                         <div>
                           <item class="active discounts">团</item>
-                          <item>{{discountsInfo}}</item>
+                          <p class="txt">{{discountsInfo}}</p>
                         </div>
                         {{#if info}}
                         <div>
-                          <img src="/imgs/remarks.png">
-                          <item>{{info}}</item>
+                          <p class="img"><img src="/imgs/remarks.png"></p>
+                          <p class="txt distance">
+                            {{#each info}}
+                            <b>{{this}}</b>
+                            {{/each}}
+                          </p>
                         </div>
                         {{/if}}
                       </div>
@@ -119,12 +123,16 @@
                         {{#if discountsInfo}}
                         <div>
                           <item class="active discounts">团</item>
-                          <item>{{discountsInfo}}</item>
+                          <p class="txt">{{discountsInfo}}</p>
                         </div>
                         {{/if}}
                         <div>
-                          <img src="/imgs/remarks.png">
-                          <item>{{info}}</item>
+                          <p class="img"><img src="/imgs/remarks.png"></p>
+                          <p class="txt distance">
+                            {{#each info}}
+                            <b>{{this}}</b>
+                            {{/each}}
+                          </p>
                         </div>
                       </div>
                       {{#if discountsInfo}}
@@ -179,18 +187,19 @@
                 <td colspan="3" class="tips">
                   <div class="wrap">退款说明：不支持退票，票务一旦售出，概不退票</div>
                 </td>
-                <td colspan="2">
+                <td colspan="2" class="message">
                   <ul class="list-inline wrap">
                     <li class="money-wrap wrap text-left">
                       <div class="money">实付：<span class="green">¥&nbsp;</span><span class="green payment">0</span></div>
                       <div class="money discountMoney">优惠：<span>¥&nbsp;</span><span class="discount">0</span></div>
-                    </li>                  
-                    <!-- <li class="clip wrap">
-                      <div class="clip-line"></div>
-                    </li> -->
-                    <!-- <li class="num wrap text-right">已选择<span class="green">0</span>张票</li> -->
+                    </li>
                   </ul>
                   <div class="use-coupon">使用优惠或优惠码</div>
+                  <div class="coupon">
+                    <input type="text" class="input" id="coupon"></input>
+                    <a href="javascript:void(0)" class="sure">确定</a>
+                    <a href="javascript:void(0)" class="cancel">取消</a>
+                  </div>
                   <button id="submit" class="submit">立即报名</button>
                 </td>
               </tr>             
@@ -226,7 +235,7 @@
       <div class="dialog">
         <button type="button" class="close subclose">&times;</button>
         <img src="/imgs/dialog.png">
-        <p>至少选择一张票</p>
+        <p></p>
       </div>
     </div>
     

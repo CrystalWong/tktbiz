@@ -87,7 +87,7 @@
 				background: #fff;
 				width: 300px;
 				height: auto;
-				border:1px solid green;
+				border:1px solid #5cc330;
 				z-index: 1;
 				text-align: left;
 				padding:5px 10px;
@@ -103,16 +103,37 @@
 				}
 				em{
 					margin-top:-21px;
-					color:green;
+					color:#5cc330;
 					font-style:normal;
 				}
 				span{
 					margin-top:-14px;
 					color:white;
 				}
-				p{
+				div{
 					margin:0;
-					line-height: 27px;
+					line-height: 23px;
+					position: relative;
+					p{
+						margin: 5px 0 0;
+					}
+					.img{
+						position: absolute;
+						left: 0;
+						top: 0;
+					}
+					.txt{
+						display: inline-block;
+						width: 240px;
+						margin-left: 5px;
+					}
+					.distance{
+						margin-left: 31px;
+						b{
+							font-weight: normal;
+							display: block;
+						}
+					}
 				}
 			}
 			.btn {
@@ -169,8 +190,8 @@
 					width: 55%;
 				}
 				.money-wrap {
-					width: 100%;
-					text-align: center;
+					width: auto;
+					text-align: left;
 				}
 				.money {
 					height: 30px;
@@ -202,8 +223,32 @@
 	#list-wrap .table {
 		margin-bottom: 0;
 	}
+	.list .message{
+		text-align: right;
+	}
 	.use-coupon {
 		color: #ff0000;
+		cursor: pointer;
+	}
+	.coupon{
+		width: 100%;
+		margin-bottom: 10px;
+		display: none;
+		.input{
+			width: auto;
+			border: 1px solid #ccc;
+			display: inline-block;
+			padding:0 5px;
+		}
+		a{
+			margin-left:3px;
+		}
+		.cancel{
+			color:#555;
+		}
+		.sure{
+			color: red;
+		}
 	}
 	.settlement {
 		margin-top: 0 !important;

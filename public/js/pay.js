@@ -7,7 +7,6 @@ $(function(){
 	init();
  	function init () {
  		countDown()
- 		minutes()
  		getData();
  	};
  	/**
@@ -70,21 +69,6 @@ $(function(){
  	$('.pay').on('click', function () {
 		// window.location.href = '/payment.html'
 	})
-	
-    function minutes () {
-        var m=29;
-	    var s=59;
-	    setInterval(function(){
-	        s--;
-	        if(s<0){
-	            s=59;
-	            m--;
-	        }
-	        if (m == 0) {
-	        	window.location.href = "/index.html"
-	        }
-	    },1000)
-    }
 
 	function countDown(){
 		var num = 201

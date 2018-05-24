@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="row main">
-        <img src="/imgs/banner.png" width="100%">
+        <img src="/imgs/banner.png" width="100%" class="home">
         <div id="introduction" class="col-xs-12 col-sm-10 floor-box col-sm-offset-1 floor2 floor1 text-center">
           <div class="floor">
             <img src="/imgs/info.png" width="35%">
@@ -85,7 +85,7 @@
                   {{#if open}}
                   <tr class="tickets" data-id={{{ticketId}}}>
                   {{else}}
-                  <tr class="disable"  data-id={{{ticketId}}}>
+                  <tr class="tickets disable"  data-id={{{ticketId}}}>
                   {{/if}}
                     {{#if open}}
                     <td class="bg-coupon">
@@ -157,9 +157,9 @@
                     </td>
                     {{/if}}
                     {{#each prices}}
-                    <td class="price prices1">{{ this }}</td>
+                    <td class="price">￥<span class="prices prices1">{{ this }}</span><span class="preferential"> 原价:<label>￥<item>{{ this }}</item></label></span></td>
                     {{/each}}
-                    <td class="price prices2">{{ price }}</td>
+                    <td class="price">￥<span class="prices prices2">{{ price }}</span><span class="preferential"> 原价:<label>￥<item>{{ price }}</item></label></span></td>
                     {{#if tieredPricing}}
                     {{else}}
                     <td>{{ endTime }}</td>
@@ -214,7 +214,7 @@
           <div class="contact">
             <img src="/imgs/callus_bg.png" width="100%">
             <div class="contact-main">
-              <img src="/imgs/callus_img.png" width="30%">
+              <img src="/imgs/callus_img.png" width="30%" class="home">
               <button type="button" class="active" data-toggle="modal" data-target="#myModal">联系我们</button>
             </div>
           </div>

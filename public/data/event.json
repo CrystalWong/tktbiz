@@ -15,8 +15,8 @@
       "price" : 15000.0,
       "tieredPricing" : true,
       "prices" : [ 15000.0, 15000.0, 15000.0 ],
-      "open" : true,
-      "openDesc" : "",
+      "open" : false,
+      "openDesc" : "未开始",
       "invite" : false,
       "minNum" : 1,
       "maxNum" : 20,
@@ -27,7 +27,9 @@
       "freeNum" : 0,
       "discountsInfo" : "",
       "info" : "",
-      "endTime" : ""
+      "endTime" : "",
+      "promType": 1,
+      "promValue": "5"
     }, {
       "name" : "三日通票",
       "ticketId" : "002",
@@ -37,8 +39,8 @@
       "open" : true,
       "openDesc" : "",
       "invite" : false,
-      "minNum" : 2,
-      "maxNum" : 10,
+      "minNum" : 1,
+      "maxNum" : 1,
       "discounts" : true,
       "discountsNum" : 2,
       "discountsType" : 2,
@@ -46,7 +48,9 @@
       "freeNum" : 2,
       "discountsInfo" : "买2张赠2张",
       "info" : ["买2张赠2张"],
-      "endTime" : "20180906 17:30"
+      "endTime" : "20180906 17:30",
+      "promType": 1,
+      "promValue": "5"
     }, {
       "name" : "单日票",
       "ticketId" : "003",
@@ -65,7 +69,9 @@
       "freeNum" : 0,
       "discountsInfo" : "",
       "info" : ["9月4日单日票，2张以上购买9折。" ,"9月5日单日票，2张以上购买8折。" ,"9月6日单日票，2张以上购买7折。"],
-      "endTime" : "20180906 17:30"
+      "endTime" : "20180906 17:30",
+      "promType": 1,
+      "promValue": "5"
     }, {
       "name" : "学生票",
       "ticketId" : "004",
@@ -84,7 +90,9 @@
       "freeNum" : 0,
       "discountsInfo" : "买3张单张减60元",
       "info" : ["1、学生票3张购买，套票1500元。", "2、学生票一次性买4张及以上每张5折购票。 "],
-      "endTime" : "20180906 17:30"
+      "endTime" : "20180906 17:30",
+      "promType": 1,
+      "promValue": "5"
     }, {
       "name" : "三日通票-特惠",
       "ticketId" : "005",
@@ -103,7 +111,9 @@
       "freeNum" : 0,
       "discountsInfo" : "",
       "info" : ["五一特惠门票，优惠截止日期2018年5月11日18点"],
-      "endTime" : "20180906 17:30"
+      "endTime" : "20180906 17:30",
+      "promType": 1,
+      "promValue": "5"
     } ]
   }
 }

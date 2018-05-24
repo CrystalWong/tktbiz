@@ -25,14 +25,16 @@
       "discountsAmount" : 20.0,
       "freeNum" : 0,
       "discountsInfo" : "买三张立减20",
-      "info" : "这是备注",
-      "endTime" : "2018.09.06 17:30"
+      "info" : ["这是备注"],
+      "endTime" : "2018-09-06 17:30",
+      "promType": 1,
+      "promValue": "5"
     }, {
       "name" : "单日票",
       "id" : "003",
       "price" : 210.0,
       "tieredPricing" : false,
-      "prices" : [ ],
+      "prices" : [],
       "open" : true,
       "openDesc" : "",
       "minNum" : 2,
@@ -43,12 +45,14 @@
       "discountsAmount" : 0.0,
       "freeNum" : 1,
       "discountsInfo" : "买5张赠1张",
-      "info" : "这是备注",
-      "endTime" : "2018.09.06 17:30"
+      "info" : ["这是备注"],
+      "endTime" : "2018-09-06 17:30",
+      "promType": 4,
+      "free": "0"
     }, {
       "name" : "免费票",
       "id" : "006",
-      "price" : 0.0,
+      "price" : 10.0,
       "tieredPricing" : false,
       "prices" : [ ],
       "open" : false,
@@ -61,8 +65,10 @@
       "discountsAmount" : 20.0,
       "freeNum" : 0,
       "discountsInfo" : "买三张立减20",
-      "info" : "免费",
-      "endTime" : "2018.09.06 17:30"
+      "info" : ["免费"],
+      "endTime" : "2018-09-06 17:30",
+      "promType": 2,
+      "discount": "0.2"
     }, {
       "name" : "免费票",
       "id" : "006",
@@ -79,8 +85,10 @@
       "discountsAmount" : 20.0,
       "freeNum" : 0,
       "discountsInfo" : "买三张立减20",
-      "info" : "免费",
-      "endTime" : "2018.09.06 17:30"
+      "info" : ["免费"],
+      "endTime" : "2018-09-06 17:30",
+      "promType": 3,
+      "toprice": "20"
     } ]
   }
 }

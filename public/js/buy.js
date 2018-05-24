@@ -15,9 +15,45 @@ $(function(){
 
  	function init () {
  		getData();
- 		invTypeToggle();
  		payTypeToggle();
+ 		invoiceToggle();
+ 		invTypeToggle();
+	 	$('#toggle-event').on('change', function() {
+	 		invoiceToggle();
+    	})
  	};
+ 	/**
+ 	 * [invoiceToggle description]		控制发票面板展示
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function invoiceToggle () {
+ 		if($('#toggle-event').prop('checked')) {
+ 			$('#invoice').show();	
+ 		} else {
+ 			$('#invoice').hide();	
+ 		}
+ 	}
+ 	/**
+ 	 * [bindSendToggle description]		绑定电子票是否发送给每个参会者监听
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function bindSendToggle () {
+ 		$('.sendTkt').off();
+    	$('.sendTkt').on('click', function() {
+ 			sendToggle();
+		}) 		
+ 	}
+ 	/**
+ 	 * [sendToggle description]		电子票是否发送给每个参会者展示控制
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function sendToggle () {
+ 		if($('.sendTkt input').prop('checked')) {
+ 			$('.img-inner').show();
+ 		} else {
+ 			$('.img-inner').hide();
+ 		}
+ 	}
  	/**
  	 * [getData description] 		获取页面初始数据
  	 * @return {[type]} [description]
@@ -58,25 +94,14 @@ $(function(){
  	 * @return {[type]}     [description]
  	 */
  	function renderAttendForms (res) {
- 		var attendForms = res.data.attendForms
- 		for (i in attendForms) {
- 			attendForms[i].formItemsBox = [];
- 			// console.log(attendForms[i])
- 			for (var k=0; k < attendForms[i].num; k++) {
- 				var formItems = attendForms[i].formItems;
- 				for (var j=0; j < formItems.length; j++) {
- 					var typeFlag = formItems[j].type;
- 					formItems[j][typeFlag] = true;
- 				}
- 				attendForms[i].formItemsBox.push({"formItems":attendForms[i].formItems})
+ 		var attendForms = res.data.attendForms;
+ 		for(var i=0; i<attendForms.length; i++) {
+ 			var formItems = attendForms[i].formItems;
+ 			for(var k=0; k<formItems.length; k++) {
+ 				var typeFlag = formItems[k].type;
+				formItems[k][typeFlag] = true;
  			}
  		}
-		// console.log(attendForms, 111)
- 		var handleHelper_1 = Handlebars.registerHelper("addOne",function(index){
-	        //返回+1之后的结果
-	        return index+1;
-		 }); 		
-		
  		bindHtml("#attendForms", {"attendForms": attendForms});
  	};
  	/**
@@ -104,6 +129,7 @@ $(function(){
 		//输入模板
 		$(domId + "-wrap").html(html);
 		creatCopySele();
+		bindSendToggle();
  	}
  	/**
  	 * [creatCopySele description]     创建复制信息下拉框
@@ -209,8 +235,8 @@ $(function(){
  	 */
  	function pay () {
  		var payMethod = $('.pay-wrap .active').attr('paytype');
- 		var needInvoice = "true";
- 		var sendAll = "true"
+ 		var needInvoice = $('#toggle-event').prop('checked').toString();
+ 		var sendAll = $('.sendTkt input').prop('checked').toString();
  		var buyer = getBuyer();
  		var invoice = getInvoice();
  		var ticketUsers = getTicketUsers();
@@ -223,7 +249,7 @@ $(function(){
  			"sendAll": sendAll,
  			"ticketUsers": ticketUsers
  		}
- 		// console.log(data, 123456)
+ 		console.log(sendAll, 123456)
 	    $.ajax({
 	    	type: "POST",
 	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/pay.json",
@@ -316,7 +342,7 @@ $(function(){
  		for(var i=0; i<attendants.length; i++) {
  			var attendant = {};
  			var inputs = attendants.eq(i).find('.form-group input');
- 			console.log(inputs.length, 897)
+ 			// console.log(inputs.length, 897)
  			attendant["tid"] = attendants.eq(i).attr('tid');
  			for(var k=0; k<inputs.length; k++) {
  				var key = inputs.eq(k).attr('name');
@@ -335,12 +361,11 @@ $(function(){
  		$('.pay').on('click',function(){
  			$('.pay').removeClass('pay-active');
  			$(this).addClass('pay-active');
- 		})
+ 		}) 
  		$('.pay-item').on('click',function(){
  			$('.pay-item').removeClass('active');
  			$(this).addClass('active');
  		})
  	};
- 	
 })
 

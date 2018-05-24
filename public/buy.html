@@ -38,13 +38,12 @@
                 <div class="col-xs-12 infoInput" id="attendForms-wrap">
                   <script id="attendForms" type="text/x-handlebars-template">
                     {{#each attendForms}}
-                      {{#each this.formItemsBox}}
-                      <div class="row floor text-left panel" tid="{{{../tid}}}">
+                      <div class="row floor text-left panel" tid="{{{tid}}}">
                           <div class="col-xs-12 header">
                             <div class="row">
                               <div class="col-xs-12 col-sm-6 header-tit">
-                                <span>{{../name}}</span>
-                                <span>第{{addOne @index}}张参会信息</span>
+                                <span>{{name}}</span>
+                                <span>第{{num}}张参会信息</span>
                               </div>
                               <div class="col-xs-6 copySele-wrap"></div>                           
                             </div>
@@ -60,10 +59,10 @@
                               </label>
                               <div class="col-xs-10">
                                 {{#if list}}
-                                  <select class="form-control" posi="{{{code}}}" name="{{{code}}}">
+                                  <select class="form-control" posi="{{{code}}}" name="{{{code}}}" value="{{{value}}}">
                                     <option>请选择</option>
                                     {{#each data}}
-                                    <option value="{{{value}}}">{{name}}</option>
+                                    <option value="{{{value}}}">{{value}}</option>
                                     {{/each}}                                   
                                   </select>
                                 {{else if pic}}
@@ -73,7 +72,7 @@
                                   </div>
                                   <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="">
                                 {{else}}
-                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="">
+                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="" value="{{{value}}}">
                                 {{/if}}
                                 {{#if required}}
                                 <small class="required hint red">{{name}}&nbsp;不能为空</small>                   
@@ -83,7 +82,6 @@
                             {{/each}}
                           </form>
                       </div>
-                      {{/each}}
                     {{/each}}
                   </script>
                 </div>
@@ -118,7 +116,7 @@
                           {{name}}:
                           </label>
                           <div class="col-xs-10">
-                              <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="">
+                              <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="" value="{{{value}}}">
                               {{#if required}}
                                 <small class="required hint red">{{name}}&nbsp;不能为空</small>                   
                               {{/if}}
@@ -126,7 +124,9 @@
                         </div>
                         {{/each}}
                         <div class="checkbox">
-                          <label>
+                          <label class="sendTkt">
+                            <img class="img-outer" src="/imgs/empt-circle.jpg">
+                            <img class="img-inner" src="/imgs/point.png">
                             <input type="checkbox" value="" checked>
                             电子票发送给每个参会者
                           </label>
@@ -143,11 +143,11 @@
                           <span>发票：</span>
                         </div>
                         <div class="col-xs-10">
-                          <input type="checkbox" checked data-toggle="toggle">
+                          <input id="toggle-event" type="checkbox" data-toggle="toggle" data-size="small" data-on="需要" data-off="不需要">
                         </div>
                       </div>
                     </div>
-                    <form class="form-horizontal">
+                    <form id="invoice" class="form-horizontal">
                       <div class="form-group">
                         <label for="inputName" class="col-xs-2 control-label">发票类型:</label>
                         <div class="col-xs-10">

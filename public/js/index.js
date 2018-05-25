@@ -5,6 +5,7 @@ $(function(){
 	var plus_no='/imgs/plus_no.png';
 	var mid = '083c18e8554a88fbf0b3a367e76bb488';
 	var couponCode = false;
+	var promType = 0;
 	var coupon;
 	init();
 
@@ -69,9 +70,11 @@ $(function(){
 		//点击提交
 		$('#submit').on('click', function(){
 			var list = [];
+			var quantum = 0;
 			var currPriceIndex = $('.tickets').parents('.table').attr('data-currPriceIndex');
 			var prices = 0;
 			for( j in res.data.tickets) {
+				quantum +=  Number($('.tickets').eq(j).find('.num').text())
 				if($('.tickets').eq(j).find('.num').text() != 0){
 					list.push({
 						'ticketId': $('.tickets').eq(j).attr('data-id'),
@@ -79,7 +82,7 @@ $(function(){
 					})
 				}
 			}
-			if ($('.payment').text() == 0) {
+			if (quantum == 0) {
 				$('.dialog').find('p').text('至少选择一张票').parent().fadeIn(500)
 				setTimeout(function(){
 					$('.dialog').fadeOut(500)
@@ -87,13 +90,13 @@ $(function(){
 			} else {
 				$.ajax({
 				  type: "POST",
-				  url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/checkout.json?number= " + Math.random(),
+				  url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/checkout.json?code=" + coupon + "&number= " + Math.random(),
 				  data: JSON.stringify(list),
 				  dataType: "json",
 				  contentType:'application/json;charset=utf-8',
 				  // jsonp: "callback",
 				  success: function(res){
-				   	console.log(res)
+				   	// console.log(res)
 				   	window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
 				  }
 			 	});
@@ -212,20 +215,23 @@ $(function(){
 			$('.introduction').addClass('active')
 		}
 	};
-
+	
 	function ares (res, p) {
 		couponCode = true;
-		if (res.data.tickets[p].promType == 0 || !res.data.tickets[p].promType) {
+		promType += Number(res.data.tickets[p].promType)
+		if (promType == 0) {
 			couponCode = false;
+		}
+		if (res.data.tickets[p].promType == 0 || !res.data.tickets[p].promType) {
 			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text())).next().hide()
 		} else if (res.data.tickets[p].promType == 1) {
 			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text()) - Number(res.data.tickets[p].promValue)).next().show()
 		} else if (res.data.tickets[p].promType == 2) {
-			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text()) * res.data.tickets[p].discount).next().show()
+			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text()) * Number(1 - res.data.tickets[p].promValue)).next().show()
 		} else if (res.data.tickets[p].promType == 3) {
-			$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].toprice).next().show()
+			$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].promValue).next().show()
 		} else if (res.data.tickets[p].promType == 4) {
-			$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].free).next().show()
+			$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].promValue).next().show()
 		}
 	};
 

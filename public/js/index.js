@@ -87,7 +87,7 @@ $(function(){
 			} else {
 				$.ajax({
 				  type: "POST",
-				  url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/checkout.json?number= " + Math.random(),
+				  url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/checkout.json?code=" + coupon + "&number= " + Math.random(),
 				  data: JSON.stringify(list),
 				  dataType: "json",
 				  contentType:'application/json;charset=utf-8',

@@ -176,21 +176,21 @@ $(function(){
 	   	dataType: "json",
 	   	// jsonp: "callback",
 	   	success: function(res){
-	   		if (res.code == 0) {
-	   			$('.coupon').hide().siblings('.use-coupon').show()
+	   		if (res.bmsg) {
+	   			$('.dialog').find('p').text('优惠码或邀请码不存在').parent().fadeIn(500)
+	   			setTimeout(function(){
+						$('.dialog').fadeOut(500)
+					},3000)
+	   		} else {
+					$('.coupon').hide().siblings('.use-coupon').show()
 	   			$('.dialog').find('p').text('优惠码已生效').parent().fadeIn(500)
 	   			setTimeout(function(){
 						$('.dialog').fadeOut(500)
 					},3000)
 	   			for ( p in res.data.tickets) {
-					ares (res, p)
-				}
+						ares (res, p)
+					}
 	   			calculation (res)
-	   		} else if (res.code == 1000) {
-	   			$('.dialog').find('p').text('优惠码或邀请码不存在').parent().fadeIn(500)
-	   			setTimeout(function(){
-						$('.dialog').fadeOut(500)
-					},3000)
 	   		}
 	   	}
  		});
@@ -198,11 +198,18 @@ $(function(){
 
 	function scrollTop () {
 		if($(window).scrollTop() >= 200){
-			$("#return-top").fadeIn(500); // 开始淡入
-			$('.buy').fadeIn(500).siblings('.none').hide();
+			$("#return-top").show(); // 开始淡入
+			$('.buy').show().siblings('.none').hide();
 		} else{
-			$("#return-top").stop(true,true).fadeOut(500); // 如果小于等于 200 淡出
-			$('.buy').stop(true,true).fadeOut(500).siblings('.none').show(); // 如果小于等于 200 淡出
+			$("#return-top").stop(true,true).hide(); // 如果小于等于 200 淡出
+			$('.buy').stop(true,true).hide().siblings('.none').show(); // 如果小于等于 200 淡出
+		}
+		if($('#address').offset().top - $(window).scrollTop() <= 100) {
+			$('.col-xs-3').removeClass('active')
+			$('.address').addClass('active')
+		} else {
+			$('.col-xs-3').removeClass('active')
+			$('.introduction').addClass('active')
 		}
 	};
 

@@ -11,9 +11,9 @@ $(function(){
 	$(window).scroll(function(){
 		// 滚动条距离顶部的距离 大于 200px时
 		if($(window).scrollTop() >= 200){
-			$("#return-top").fadeIn(500); // 开始淡入
+			$("#return-top").show(); // 开始淡入
 		} else{
-			$("#return-top").stop(true,true).fadeOut(500); // 如果小于等于 200 淡出
+			$("#return-top").stop(true,true).hide(); // 如果小于等于 200 淡出
 		}
 		if($(window).scrollTop() >= $('.banner').height() + 30){
 			$('#orderInfo-wrap').addClass('fixed')
@@ -27,7 +27,7 @@ $(function(){
 		$('html,body').animate({scrollTop:0}, 500);
 	});
 
-	$('.btn-primary').on('click', function(){
+	$('#myModal .btn-primary').on('click', function(){
 		window.location.href = '/index.html#enroll';
 	});
 

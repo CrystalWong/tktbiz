@@ -82,11 +82,7 @@ $(function(){
  	 * @return {[type]}     [description]
  	 */
  	function renderOrderInfo (res) {
- 		var data = {
-			"orderPrice": res.data.orderPrice,
-			"orderItems": res.data.orderItems
-		}
- 		bindHtml("#orderInfo", data)
+ 		bindHtml("#orderInfo", res.data.order)
  	};
  	/**
  	 * [renderAttendForms description]	渲染参会者信息
@@ -130,6 +126,8 @@ $(function(){
 		$(domId + "-wrap").html(html);
 		creatCopySele();
 		bindSendToggle();
+		bindUpload();
+		mailAutoComplete();
  	}
  	/**
  	 * [creatCopySele description]     创建复制信息下拉框
@@ -147,7 +145,6 @@ $(function(){
 		$('.copySele-wrap').eq(0).html('')
 		copyInfo();
 		bindVld();
-		upload();
  	}
  	/**
  	 * [copyInfo description]			实现信息复制功能
@@ -167,31 +164,114 @@ $(function(){
 		})
  	}
  	/**
- 	 * [bindVld description]		绑定数据校验
+ 	 * [bindVld description]		blur绑定数据校验
  	 * @return {[type]} [description]
  	 */
  	function bindVld () {
 		var inputs = $('.form-control:input');
 		inputs.each(function(){
+			$(this).off('blur');
 			$(this).on('blur', function() {
-				var val = $(this).val();
-				if(!val) {
-					$(this).closest('.form-group').find('.hint').show();
-				} else {
-					$(this).closest('.form-group').find('.hint').hide();
-				}
+				checkAll($(this));
 			})
 		})
  	}
  	/**
- 	 * [upload description]			模拟图片上传点击事件
+ 	 * [checkAll description]          全局校验
+ 	 * @param  {[type]} dom [description]
+ 	 * @return {[type]}     [description]
+ 	 */
+ 	function checkAll(dom){
+ 		var val = dom.val();
+		if(!val) {
+			dom.closest('.form-group').find('.hint').show();
+		} else {
+			dom.closest('.form-group').find('.hint').hide();
+		}
+
+		var name = dom.attr('name');
+		if(name === 'name') {
+			checkName(dom, val);
+		}
+		if(name === 'mobile') {
+			checkMobile(dom, val);
+		}
+		if(name === 'email') {
+			checkEmail(dom, val);
+		}
+ 	}
+ 	/**
+ 	 * [checkEmail description]          校验邮箱
+ 	 * @param  {[type]} dom [description]
+ 	 * @param  {[type]} val [description]
+ 	 * @return {[type]}     [description]
+ 	 */
+ 	function checkEmail (dom, val) {
+ 		var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+		if (val && !reg.test(val)){
+		    dom.closest('.form-group').find('.hint').text('请输入正确格式的 邮箱');
+		    dom.closest('.form-group').find('.hint').show();
+		}
+ 	} 
+ 	/**
+ 	 * [checkName description]          校验姓名
+ 	 * @param  {[type]} dom [description]
+ 	 * @param  {[type]} val [description]
+ 	 * @return {[type]}     [description]
+ 	 */
+ 	function checkName (dom, val) {
+ 		var reg = /^[a-zA-Z\u4e00-\u9fa5]+$/;  //只包括英文字母与汉字
+		if (val && !reg.test(val)){
+		    dom.closest('.form-group').find('.hint').text('请输入正确格式的 姓名 只限英文和汉字');
+		    dom.closest('.form-group').find('.hint').show();
+		}
+ 	}
+ 	/**
+ 	 * [checkMobile description]         校验手机号
+ 	 * @param  {[type]} dom [description]
+ 	 * @param  {[type]} val [description]
+ 	 * @return {[type]}     [description]
+ 	 */
+ 	function checkMobile (dom, val) {
+ 		var reg = /^1[345678]{1}\d{9}$/
+      	if (val && !reg.test(val)) {
+        	dom.closest('.form-group').find('.hint').text('请输入正确的手机号');
+		    dom.closest('.form-group').find('.hint').show();
+      	}
+ 	}
+ 	/**
+ 	 * [bindUpload description]        绑定文件上传
  	 * @return {[type]} [description]
  	 */
- 	function upload () {
- 		$('.upload-dec').unbind('click');
- 		$('.upload-dec').on('click', function () {
- 			$(this).closest('.col-xs-10').find('.form-control').click();
- 		})
+ 	function bindUpload () {
+ 		$(".upload-wrap").off();
+		$(".upload-wrap").on("change", "input[type=file]", function(e) {
+			var imgObj = e.target.files[0];
+			var name = imgObj.name;
+			var domWrap = e.target.closest('.upload-wrap');
+			$(domWrap).find('.upload-text').text(name);
+			// console.log(e.target, imgObj, 777)
+			var formData = new FormData();
+			formData.append('file', imgObj);
+			$.ajax({
+				headers: {
+			        'x-access-token': token
+			    },
+			    url: 'http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/upload.json',
+			    type: 'POST',
+			    cache: false,
+			    data: formData,
+			    processData: false,
+			    contentType: false
+			}).done(function(res) {
+				// console.log(res);
+				$(e.target).attr('picName', name);
+				$(e.target).attr('path', res.path);
+				alert('上传成功')
+			}).fail(function(res) {
+				alert(res.msg);
+			});               
+	    });
  	}
  	/**
  	 * [invTypeToggle description]   发票信息展示切换
@@ -367,5 +447,16 @@ $(function(){
  			$(this).addClass('active');
  		})
  	};
+ 	/**
+ 	 * [mailAutoComplete description]   邮箱自动补全
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function mailAutoComplete () {
+ 		var emailDoms = $('input[type=email]');
+ 		emailDoms.each(function(){
+			var mail = new hcMailCompletion($(this));
+			mail.run();
+ 		})
+ 	}
 })
 

@@ -27,6 +27,8 @@
     <![endif]-->
   </head>
   <body>
+                <input type="email" name="" id="mail" style="width: 100%;">
+
     <div class="buy container-fluid">
       <div class="row main">
         <a class="back" href="/index.html">< 返回首页</a>
@@ -66,13 +68,15 @@
                                     {{/each}}                                   
                                   </select>
                                 {{else if pic}}
-                                  <div class="upload-dec">
-                                    <img class="upload-img" src="/imgs/upload.png">
-                                    <span class="upload-text">上传您的学生证扫描件</span>
+                                  <div class="upload-wrap">
+                                    <div class="upload-dec">
+                                      <img class="upload-img" src="/imgs/upload.png">
+                                      <span class="upload-text">上传您的学生证扫描件</span>
+                                    </div>
+                                    <input type="file" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" accept="image/*"/>
                                   </div>
-                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="">
                                 {{else}}
-                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="" value="{{{value}}}">
+                                  <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="" value="{{{value}}}" maxlength="25">
                                 {{/if}}
                                 {{#if required}}
                                 <small class="required hint red">{{name}}&nbsp;不能为空</small>                   
@@ -304,7 +308,7 @@
                     <a class="pull-right info-con" href="/index.html">重新选票></a>
                   </div>
                   <ul class="list text-left">
-                      {{#each orderItems}}
+                      {{#each items}}
                       <li class="row list-item">
                         <div class="col-xs-12 col-sm-4">{{name}}</div>
                         <div class="col-xs-12 col-sm-4">{{num}}张</div>
@@ -315,9 +319,19 @@
                   <div class="text-left padd">
                     已选择<span class="green">3</span>张
                   </div>
+                  {{#if available}}
                   <div class="text-left padd count">
-                    <div class="pull-left">总付：</div>
-                    <div class="pull-right green"><span>{{orderPrice}}</span></div>
+                    <div class="pull-left">总价：</div>
+                    <div class="pull-right green"><span>{{origAmt}}</span></div>
+                  </div>                  
+                  <div class="text-left padd count">
+                    <div class="pull-left">优惠：</div>
+                    <div class="pull-right green"><span>{{promAmt}}</span></div>
+                  </div> 
+                  {{/if}}                 
+                  <div class="text-left padd count">
+                    <div class="pull-left">应付：</div>
+                    <div class="pull-right green"><span>{{orderAmt}}</span></div>
                   </div>
                 </div>
               </script>
@@ -359,6 +373,7 @@
     <script src="/lib/bootstrap/js/bootstrap.js"></script>
     <script src="/lib/bootstrap/js/bootstrap-toggle.min.js"></script>
     <script src="/lib/handlebars.js"></script>
+    <script src="/lib/mailCompletion.js"></script>
     <script src="/js/buy.js"></script>
   </body>
 </html>

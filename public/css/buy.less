@@ -1,5 +1,28 @@
 .buy {
 	font-size: 14px;
+	.fixed{
+		position: fixed;
+		top: 0;
+		right: 8.33333333%;
+		width: 27.7777764%;
+		.info{
+			margin-top: 0;
+		}
+	}
+	#return-top {
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+		background: #919191;
+		position: fixed;
+		top: 65%;
+		right: 20px;
+		cursor: pointer;
+		display: none;
+	}
+	#return-top:hover {
+		background: #5cc330;
+	}
 	.header {
 		border-bottom: 2px solid #5cc330; 
 		text-align: left;
@@ -98,8 +121,9 @@
 		background-color: #5cc330;
 		color: #ffffff;
 		height: 40px;
-		padding: 10px 0;
+		line-height: 40px;
 		border-radius: 5px;
+		font-size: 16px;
 	}
 	.copy-wrap {
 		padding-left: 0;
@@ -110,7 +134,11 @@
 	}
 	.btn-primary {
 		background-color: #5cc330;
-    	border-color: #5cc330;
+    border-color: #5cc330;
+	}
+	.btn-primary:hover{
+		background-color: #5cc330;
+		border-color: #5cc330;
 	}
 	.header-tit, .copySele-tit {
 		height: 34px;
@@ -183,3 +211,25 @@
 		}
 	}
 }
+@media (min-width: 768px){
+	.modal-dialog{
+		width: 500px;
+		margin: 0 auto;
+	}
+}
+.modal-header,.modal-footer{
+	border: none;
+}
+.modal-body{
+	padding: 0 15px 15px;
+}
+.btn-group-sm>.btn, .btn-sm{
+	border-radius: 25px;
+}
+.toggle-handle{
+	padding: 2px 28px;
+}
+.toggle-off,.toggle-on{
+	padding: 5px 0;
+}
+

@@ -4,50 +4,46 @@ $(function(){
 	var plus='/imgs/plus.png';
 	var plus_no='/imgs/plus_no.png';
 	var mid = '083c18e8554a88fbf0b3a367e76bb488';
+	var couponCode = false;
+	var coupon;
 	init();
 
 	function init() {
-		var coupon;
-		sessionStorage.clear();
 		$.ajax({
-		  	type: "GET",
-		   	// url: "/data/index.json?number= " + Math.random(),
-		   	// url: "/data/event.json?number= " + Math.random(),
-		   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/list.json?number= " + Math.random(),
-		   	data: {
-		   		code:coupon
-		   	},
-		   	dataType: "json",
-		   	// jsonp: "callback",
-		   	success: function(res){
-		   		// console.log(res)
-		   		var tpl =  $("#list").html();
-					//预编译模板
-					var template = Handlebars.compile(tpl);
-					//模拟json数据
-					var context = res;
-					//匹配json内容
-					var html = template(context);
-					//输入模板
-					$('#list-wrap').html(html);
-		 			$("[data-toggle='popover']").popover();
-		 			//特殊样式
-		 			specialStyle(res)
-		 			//各点击事件
-		 			click(res)
-		    }
+	  	type: "GET",
+	   	// url: "/data/index.json?number= " + Math.random(),
+	   	// url: "/data/event.json?number= " + Math.random(),
+	   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/list.json?number= " + Math.random(),
+	   	data: {
+	   		code:coupon
+	   	},
+	   	dataType: "json",
+	   	// jsonp: "callback",
+	   	success: function(res){
+	   		// console.log(res)
+	   		var tpl =  $("#list").html();
+				//预编译模板
+				var template = Handlebars.compile(tpl);
+				//模拟json数据
+				var context = res;
+				//匹配json内容
+				var html = template(context);
+				//输入模板
+				$('#list-wrap').html(html);
+	 			$("[data-toggle='popover']").popover();
+	 			//特殊样式
+	 			specialStyle(res)
+	 			//各点击事件
+	 			click(res)
+	    }
 	 	});
 	};
- 
+
 	function specialStyle (res) {
+		scrollTop()
 		// 滑动滚动条
 		$(window).scroll(function(){
-			// 滚动条距离顶部的距离 大于 200px时
-			if($(window).scrollTop() >= 200){
-				$("#return-top").fadeIn(1000); // 开始淡入
-			} else{
-				$("#return-top").stop(true,true).fadeOut(1000); // 如果小于等于 200 淡出
-			}
+			scrollTop()
 		});
 		//单价样式
 		if (res.data.tieredPricing) {
@@ -64,79 +60,10 @@ $(function(){
 		}).mouseout( function () {
 			$(this).find('.pover').hide()
 		});
-	};
-
-	function ares (res) {
-		for( p in res.data.tickets) {
-			if (res.data.tickets[p].promType == 0) {
-				$('.tickets').eq(p).find('.green .prices').next().hide()
-			} else if (res.data.tickets[p].promType == 1) {
-				$('.tickets').eq(p).find('.green .prices').text(Number(units (res, p)) - Number(res.data.tickets[p].promValue)).next().show()
-			} else if (res.data.tickets[p].promType == 2) {
-				$('.tickets').eq(p).find('.green .prices').text(Number(units (res, p)) * res.data.tickets[p].discount).next().show()
-			} else if (res.data.tickets[p].promType == 3) {
-				$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].toprice).next().show()
-			} else if (res.data.tickets[p].promType == 4) {
-				$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].free).next().show()
-			}
+		for( k in res.data.tickets) {
+			ares (res, k)
 		}
-	}
-
-	//点击刷新首页
-	$('.home').on('click', function () {
-		window.location.href = '/index.html';
-	});
-	//点击关闭弹出框
-	$('.subclose').on('click', function(){
-		$('.dialog').fadeOut(500)
-	});
-	//点击 up
-	$('#return-top .up').on('click', function(){
-		$('html,body').animate({scrollTop:0}, 500);
-	});
-	//点击导航栏
-	$('.tab').on('click', function () {
- 		$(this).addClass('active').siblings('.tab').removeClass('active');
- 	});
- 	//点击使用优惠
- 	$('.use-coupon').on('click', function () {
- 		$(this).hide().siblings().show()
- 	})
- 	$('.cancel').on('click', function () {
- 		$(this).parent('.coupon').hide().siblings().show()
- 	})
- 	//点击确定使用优惠
- 	$('.sure').on('click', function () {
- 		var coupon = $('#coupon').val()
- 		$.ajax({
-	  	type: "GET",
-	   	// url: "/data/index.json?number= " + Math.random(),
-	   	// url: "/data/event.json?number= " + Math.random(),
-	   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/list.json?number= " + Math.random(),
-	   	data: {
-	   		code:coupon
-	   	},
-	   	dataType: "json",
-	   	// jsonp: "callback",
-	   	success: function(res){
-	   		if (res.code == 0) {
-	   			$('.coupon').hide().siblings('.use-coupon').show()
-	   			$('.dialog').find('p').text('优惠码已生效').parent().fadeIn(500)
-	   			setTimeout(function(){
-						$('.dialog').fadeOut(500)
-					},3000)
-					
-	   			ares (res)
-	   			calculation (res)
-	   		} else if (res.code == 1000) {
-	   			$('.dialog').find('p').text('优惠码或邀请码不存在').parent().fadeIn(500)
-	   			setTimeout(function(){
-						$('.dialog').fadeOut(500)
-					},3000)
-	   		}
-	   	}
- 		});
- 	});
+	};
 
 	function click (res) {
 		//点击提交
@@ -159,20 +86,19 @@ $(function(){
 				},3000)
 			} else {
 				$.ajax({
-				  	type: "POST",
-				   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/checkout.json?number= " + Math.random(),
-				   	data: JSON.stringify(list),
-				   	dataType: "json",
-				   	contentType:'application/json;charset=utf-8',
-				   	// jsonp: "callback",
-				   	success: function(res){
-				   		console.log(res)
-				   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
-				    }
+				  type: "POST",
+				  url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/checkout.json?number= " + Math.random(),
+				  data: JSON.stringify(list),
+				  dataType: "json",
+				  contentType:'application/json;charset=utf-8',
+				  // jsonp: "callback",
+				  success: function(res){
+				   	console.log(res)
+				   	window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+				  }
 			 	});
 			}
 		});
-	
 	 	//增加门票
 		$('.add').on('click', function () {
  			var num = Number($(this).prev().text());
@@ -213,14 +139,104 @@ $(function(){
  		});
 	};
 
+	//点击刷新首页
+	$('.home').on('click', function () {
+		window.location.href = '/index.html';
+	});
+	//点击关闭弹出框
+	$('.subclose').on('click', function(){
+		$('.dialog').fadeOut(500)
+	});
+	//点击 up
+	$('#return-top').on('click', function(){
+		$('html,body').animate({scrollTop:0}, 500);
+	});
+	//点击导航栏
+	$('.tab').on('click', function () {
+ 		$(this).addClass('active').siblings('.tab').removeClass('active');
+ 	});
+ 	//点击使用优惠
+ 	$('.use-coupon').on('click', function () {
+ 		$(this).hide().siblings().show()
+ 	})
+ 	$('.cancel').on('click', function () {
+ 		$(this).parent('.coupon').hide().siblings().show()
+ 	})
+ 	//点击确定使用优惠
+ 	$('.sure').on('click', function () {
+ 		coupon = $('#coupon').val()
+ 		$.ajax({
+	  	type: "GET",
+	   	// url: "/data/index.json?number= " + Math.random(),
+	   	// url: "/data/event.json?number= " + Math.random(),
+	   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/list.json?number= " + Math.random(),
+	   	data: {
+	   		code:coupon
+	   	},
+	   	dataType: "json",
+	   	// jsonp: "callback",
+	   	success: function(res){
+	   		if (res.bmsg) {
+	   			$('.dialog').find('p').text('优惠码或邀请码不存在').parent().fadeIn(500)
+	   			setTimeout(function(){
+						$('.dialog').fadeOut(500)
+					},3000)
+	   		} else {
+					$('.coupon').hide().siblings('.use-coupon').show()
+	   			$('.dialog').find('p').text('优惠码已生效').parent().fadeIn(500)
+	   			setTimeout(function(){
+						$('.dialog').fadeOut(500)
+					},3000)
+	   			for ( p in res.data.tickets) {
+						ares (res, p)
+					}
+	   			calculation (res)
+	   		}
+	   	}
+ 		});
+ 	});
+
+	function scrollTop () {
+		if($(window).scrollTop() >= 200){
+			$("#return-top").show(); // 开始淡入
+			$('.buy').show().siblings('.none').hide();
+		} else{
+			$("#return-top").stop(true,true).hide(); // 如果小于等于 200 淡出
+			$('.buy').stop(true,true).hide().siblings('.none').show(); // 如果小于等于 200 淡出
+		}
+		if($('#address').offset().top - $(window).scrollTop() <= 100) {
+			$('.col-xs-3').removeClass('active')
+			$('.address').addClass('active')
+		} else {
+			$('.col-xs-3').removeClass('active')
+			$('.introduction').addClass('active')
+		}
+	};
+
+	function ares (res, p) {
+		couponCode = true;
+		if (res.data.tickets[p].promType == 0 || !res.data.tickets[p].promType) {
+			couponCode = false;
+			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text())).next().hide()
+		} else if (res.data.tickets[p].promType == 1) {
+			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text()) - Number(res.data.tickets[p].promValue)).next().show()
+		} else if (res.data.tickets[p].promType == 2) {
+			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text()) * res.data.tickets[p].discount).next().show()
+		} else if (res.data.tickets[p].promType == 3) {
+			$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].toprice).next().show()
+		} else if (res.data.tickets[p].promType == 4) {
+			$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].free).next().show()
+		}
+	};
+
  	function units (res, i) {
  		var prices;
  		if(res.data.tieredPricing){
  			//阶梯价格计算
- 			prices = Number($('.tickets').eq(i).find('.prices1').eq(res.data.currPriceIndex).text())
+ 			prices = Number(res.data.tickets[i].prices[res.data.currPriceIndex]);
  		} else {
  			//固定价格计算
- 			prices = Number($('.tickets').eq(i).find('.prices2').text())
+ 			prices = Number(res.data.tickets[i].price);
  		}
  		return prices;
  	};
@@ -228,55 +244,34 @@ $(function(){
  	function calculation (res) {
  		var payment = 0;//实付金额
  		var discount = 0;//优惠金额
+ 		var amount;
+ 		var reduce = 0;
  		//计算已选票数
  		for( i in res.data.tickets) {
-	 		//计算优惠
-	 		var amount;
 	 		if (res.data.tickets[i].open) {
 	 			var number = Number($('.tickets').eq(i).find('.num').text())
-		 		if (res.data.tickets[i].discounts) {
-		 			// console.log(units (res, i))
-		 			if(res.data.tickets[i].discountsType == 1) {
-		 				//每张优惠金额
-		 				if(number >= res.data.tickets[i].discountsNum) {
-		 					if (!sessionStorage.getItem("user_name")){
-					 			sessionStorage.setItem("user_name",units(res, i))
-					 		}
-		 					amount = units (res, i)
-		 					if (sessionStorage.getItem("user_name") == amount) {
-		 						amount = units (res, i) - Number(res.data.tickets[i].discountsAmount)
-		 					} else {
-		 						amount = units (res, i)
-		 					}
-		 					$('.tickets').eq(i).find('.green .prices').text(amount)
-		 					var reduce = Number($('.tickets').eq(i).find('.green .preferential item').text()) - Number($('.tickets').eq(i).find('.green .prices').text())
-	 						discount += Number(reduce * number)
-		 					payment += units (res, i) * number
-		 				} else {
-		 					if (sessionStorage.getItem("user_name")) {
-		 						amount = sessionStorage.getItem("user_name")
-		 						$('.tickets').eq(i).find('.green .prices').text(amount)
-		 					}
-		 					var reduce = Number($('.tickets').eq(i).find('.green .preferential item').text()) - Number($('.tickets').eq(i).find('.green .prices').text())
-	 						discount += Number(reduce * number)
-		 					payment += units (res, i) * number
-		 				}
-			 		} else {
-						//没有优惠
-						var reduce = Number($('.tickets').eq(i).find('.green .preferential item').text()) - Number($('.tickets').eq(i).find('.green .prices').text())
-	 					discount += Number(reduce * number)
-				 		payment += units (res, i) * number
-					}
-		 		} else {
-		 			//没有优惠
-		 			var reduce = Number($('.tickets').eq(i).find('.green .preferential item').text()) - Number($('.tickets').eq(i).find('.green .prices').text())
-	 				discount += Number(reduce * number)
-			 		payment += units (res, i) * number
-		 		}
+	 			if (couponCode) {
+	 				reduce = Number($('.tickets').eq(i).find('.green .preferential item').text()) - Number($('.tickets').eq(i).find('.green .prices').text())
+	 			} else {
+			 		if (res.data.tickets[i].discounts) {
+			 			if(res.data.tickets[i].discountsType == 1) {
+			 				//每张优惠金额
+			 				amount = units (res, i)
+			 				if(number >= res.data.tickets[i].discountsNum) {
+			 					reduce = Number(res.data.tickets[i].discountsAmount)
+			 					amount = units (res, i) - Number(res.data.tickets[i].discountsAmount)
+			 				}
+			 				$('.tickets').eq(i).find('.green .prices').text(amount)
+				 		}
+			 		}
+	 			}
+		 		var price = Number($('.tickets').eq(i).find('.green .prices').text())
+				discount += Number(reduce * number)
+				payment += price * number
 	 		}
  		}
  		//优惠特殊样式
-		if (discount == 0) {
+		if (discount <= 0) {
 			$('.discountMoney').hide().prev('.money').css('line-height','60px')
 		} else {
 			$('.discountMoney').show().css('line-height','30px').prev('.money').css('line-height','30px')

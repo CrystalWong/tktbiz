@@ -1,7 +1,7 @@
 /*
  * 邮箱地址补全插件
  */
-function hcMailCompletion(targetDom){
+function hcMailCompletion(targetDom, callback){
 	//常用属性设置
 	this.hcMailList = new Array('qq.com','163.com','sina.com','126.com','sohu.com','139.com','gmail.com','hotmail.com','21cn.com');
 	this.padding             = 2;
@@ -52,6 +52,7 @@ function hcMailCompletion(targetDom){
 		this.obj.val($('#hcShowMailList').find('div').eq(sedIndex).text());
 		$('#hcShowMailList').remove();
 		$('#hcMailCompletionCss').remove();
+		callback && callback();
 		return null;
 	}
 	
@@ -118,6 +119,7 @@ function hcMailCompletion(targetDom){
 			$('#hcShowMailList div').hover(function(){$(this).addClass('hcShowMailListHv');},function(){$(this).removeClass('hcShowMailListHv');});
 			$('#hcShowMailList div').click(function(){
 				sObj.obj.val($(this).text());
+				callback && callback();
 			});
 		}
 	}

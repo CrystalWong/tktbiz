@@ -191,7 +191,7 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function bindVld () {
-		var inputs = $('.form-control:input');
+		var inputs = $('.form-group .form-control:input');
 		inputs.each(function(){
 			$(this).off('blur');
 			$(this).on('blur', function() {
@@ -229,10 +229,15 @@ $(function(){
  	 * @param  {[type]} val [description]
  	 * @return {[type]}     [description]
  	 */
- 	function checkEmail (dom, val) {
+ 	function checkEmail (dom) {
+ 		var val = dom.val();
+ 		console.log(val,88)
  		var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-		if (val && !reg.test(val)){
-		    dom.closest('.form-group').find('.hint').text('请输入正确格式的 邮箱');
+		if (reg.test(val)){
+		    dom.closest('.form-group').find('.hint').text('');
+		    dom.closest('.form-group').find('.hint').hide();
+		} else {
+			dom.closest('.form-group').find('.hint').text('请输入正确格式的 邮箱');
 		    dom.closest('.form-group').find('.hint').show();
 		}
  	} 
@@ -477,7 +482,10 @@ $(function(){
  	function mailAutoComplete () {
  		var emailDoms = $('input[type=email]');
  		emailDoms.each(function(){
-			var mail = new hcMailCompletion($(this));
+ 			var dom = $(this);
+			var mail = new hcMailCompletion(dom,function(){
+				checkEmail(dom);
+			});
 			mail.run();
  		})
  	}

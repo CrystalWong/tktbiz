@@ -343,11 +343,17 @@ $(function(){
  	 */
  	function pay () {
  		var payMethod = $('.pay-wrap .active').attr('paytype');
- 		var needInvoice = $('#toggle-event').prop('checked').toString();
- 		var sendAll = $('.sendTkt input').prop('checked').toString();
+ 		// var needInvoice = $('#toggle-event').prop('checked').toString();
+ 		var needInvoice = $('#toggle-event').prop('checked');
+ 		// var sendAll = $('.sendTkt input').prop('checked').toString();
+ 		var sendAll = $('.sendTkt input').prop('checked');
  		var buyer = getBuyer();
- 		var invoice = getInvoice();
+ 		var invoice = '';
  		var ticketUsers = getTicketUsers();
+ 		console.log(needInvoice,  5566)
+ 		if(needInvoice == true) {
+ 			invoice = getInvoice();
+ 		}
  		var data = {
  			"buyer": buyer,
  			"invoice": invoice,
@@ -357,7 +363,18 @@ $(function(){
  			"sendAll": sendAll,
  			"ticketUsers": ticketUsers
  		}
- 		console.log(sendAll, 123456)
+ 		console.log(data, 123456)
+ 		if(buyer && ticketUsers){
+ 			console.log("有效的购票者信息！");
+ 			// submit();
+ 		}
+ 	};
+ 	/**
+ 	 * [submit description]              提交购票信息
+ 	 * @param  {[type]} data [description]
+ 	 * @return {[type]}      [description]
+ 	 */
+ 	function submit (data) {
 	    $.ajax({
 	    	type: "POST",
 	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/pay.json",
@@ -381,12 +398,20 @@ $(function(){
 	         	}
 	      	}
 	 	})
- 	};
+ 	}
  	/**
  	 * [getBuyer description]		获取购票者信息
  	 * @return {[type]} [description]
  	 */
  	function getBuyer () {
+ 		var doms = $('#buyerForm-wrap .required').closest('.form-group').find('.form-control');
+ 		doms.each(function(){
+ 			checkAll($(this));
+ 		});
+ 		var showFlag = $('#buyerForm-wrap .required').is(':visible');
+ 		if(showFlag) {
+ 			return false;
+ 		}
  		var email = $('#buyerForm-wrap .email').val();
  		var mobile = $('#buyerForm-wrap .mobile').val();
  		var name = $('#buyerForm-wrap .name').val();
@@ -402,6 +427,31 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function getInvoice () {
+ 		var doms = $('.invType-info-active .required').closest('.form-group').find('.form-control');
+ 		doms.each(function(){
+ 			var dom = $(this);
+ 			if (dom.hasClass('.taxpayerId') && dom.is(':hidden')) {
+ 				return true;
+ 			} else {
+ 				checkAll(dom);
+ 			}
+ 		});
+ 		var showFlag = $('.invType-info-active .required').is(':visible');
+ 		if(showFlag) {
+ 			return false;
+ 		}
+ 		var showFlagRecieve = $('.recieve').is(':visible');
+ 		if(showFlagRecieve) {
+ 			var domsRecieve = $('.recieve .required').closest('.form-group').find('.form-control');
+ 			domsRecieve.each(function(){
+ 				var domRecieve = $(this);
+ 				checkAll(domRecieve);
+ 			})
+	 		var showFlag2 = $('.recieve .required').is(':visible');
+	 		if(showFlag2) {
+	 			return false;
+	 		}
+ 		}
  		var type = $('.invType-active').text();
  		var takerType = $('.acceptType-active').text();
  		var title = $('.invType-info-active .title').val();
@@ -418,7 +468,7 @@ $(function(){
  		var postProvince = "北京市";
  		var postCity = "北京市";
  		var postCounty = "朝阳区";
- 		var postAddress = "博瑞大厦";
+ 		var postAddress = $('.postAddress').text();
  		var invoice = {
  			"type": type,
  			"takerType": takerType,
@@ -445,6 +495,14 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function getTicketUsers () {
+ 		var doms = $('#attendForms-wrap .required').closest('.form-group').find('.form-control');
+ 		doms.each(function(){
+ 			checkAll($(this));
+ 		});
+ 		var showFlag = $('#attendForms-wrap .required').is(':visible');
+ 		if(showFlag) {
+ 			return false;
+ 		}
  		var ticketUsers = [];
  		var attendants = $('#attendForms-wrap .panel');
  		for(var i=0; i<attendants.length; i++) {

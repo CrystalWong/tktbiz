@@ -83,7 +83,7 @@
 		}
 		.bg-coupon {
 			background-image: url(/imgs/coupon.png);
-	    	background-repeat: no-repeat;
+	    background-repeat: no-repeat;
 			background-size: 85% 40px;
 			background-position:center;
 			position: relative;
@@ -301,21 +301,57 @@
 		padding: 10px 20px;
 		border-radius: 5px;
 	}
+	#wechat-code{
+		width: 168px;
+		height: auto;
+		position: fixed;
+		top: 60%;
+		right: 100px;
+		background: #fff;
+		padding-top: 18px;
+		text-align: center;
+		-moz-box-shadow: 3px 3px 10px #999999;
+		box-shadow: 3px 3px 10px #999999;
+		display: none;
+		p{
+			color: #666;
+			margin: 12px 0 6px;
+		}
+	}
 	#return-top {
 		width: 50px;
-		height: 50px;
-		line-height: 50px;
-		background: #919191;
+		height: auto;
 		position: fixed;
 		top: 65%;
-		right: 20px;
-		cursor: pointer;
-		display: none;
-		/*.return-con {
+		right: 30px;
+		.up{
+			display: none;
+		}
+		.return-con {
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			background: #919191;
 			margin-bottom: 10px;
-		}*/
+			cursor: pointer;
+			/*img{
+				display: none;
+			}*/
+			p{
+				color: #fff;
+				width: 100%;
+				height: 100%;
+				font-size: 13px;
+				line-height: 18px;
+				padding: 7px 11px;
+				display: none;
+				a{
+					color: #fff;
+				}
+			}
+		}
 	}
-	#return-top:hover {
+	#return-top .return-con:hover {
 		background: #5cc330;
 	}
 	.disable {

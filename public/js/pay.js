@@ -6,6 +6,7 @@ $(function(){
 	var token = tokenStr.split('token=')[1];
 	init();
  	function init () {
+ 		$('.info strong').text(orderNo)
  		countDown()
  		getData();
  	};
@@ -25,7 +26,9 @@ $(function(){
 	     	success: function(res){
 	         	console.log(res, 33)
 	         	if(res.code == '0'){
-	         		var QRcode = $('.QRcode').attr('src', 'http://whereq.360.cn:8080/pco/common/api/' + mid + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL)
+	         		var QRcode = '<img class="QRcode" src="http://whereq.360.cn:8080/pco/common/api/' + mid + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL + '" width="30%" alt="支付二维码">'
+	         		// var QRcode = $('.QRcode').attr('src', 'http://whereq.360.cn:8080/pco/common/api/' + mid + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL)
+	         		$(".pay").before(QRcode);
 	         		var prepayId = res.prepayId;
          			setInterval(function(){
          				checkStatus(prepayId);

@@ -61,6 +61,20 @@ $(function(){
 		}).mouseout( function () {
 			$(this).find('.pover').hide()
 		});
+		//微信微博分享
+		$('.weibo').mouseover( function () {
+			$(this).find('p').show().siblings().hide()
+		}).mouseout( function () {
+			$(this).find('p').hide().siblings().show()
+		});
+		//微信微博分享
+		$('.weixin').mouseover( function () {
+			$(this).find('p').show().siblings().hide()
+			$('#wechat-code').show()
+		}).mouseout( function () {
+			$(this).find('p').hide().siblings().show()
+			$('#wechat-code').hide()
+		});
 		for( k in res.data.tickets) {
 			ares (res, k)
 		}
@@ -97,7 +111,14 @@ $(function(){
 				  // jsonp: "callback",
 				  success: function(res){
 				   	// console.log(res)
-				   	window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+				   	if (res.bcode == '1004') {
+				   		$('.dialog').find('p').text('优惠码使用次数超过限制').parent().fadeIn(500)
+			   			setTimeout(function(){
+								$('.dialog').fadeOut(500)
+							},3000)
+				   	} else {
+				   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+				   	}
 				  }
 			 	});
 			}
@@ -151,7 +172,7 @@ $(function(){
 		$('.dialog').fadeOut(500)
 	});
 	//点击 up
-	$('#return-top').on('click', function(){
+	$('#return-top .up').on('click', function(){
 		$('html,body').animate({scrollTop:0}, 500);
 	});
 	//点击导航栏
@@ -179,14 +200,19 @@ $(function(){
 	   	dataType: "json",
 	   	// jsonp: "callback",
 	   	success: function(res){
-	   		if (res.bmsg) {
+	   		if (res.bcode == '1001') {
 	   			$('.dialog').find('p').text('优惠码或邀请码不存在').parent().fadeIn(500)
+	   			setTimeout(function(){
+						$('.dialog').fadeOut(500)
+					},3000)
+	   		} else if (res.bcode == '1002' || res.bcode == '1003') {
+	   			$('.dialog').find('p').text('优惠码或邀请码已超过使用期限或次数').parent().fadeIn(500)
 	   			setTimeout(function(){
 						$('.dialog').fadeOut(500)
 					},3000)
 	   		} else {
 					$('.coupon').hide().siblings('.use-coupon').show()
-	   			$('.dialog').find('p').text('优惠码已生效').parent().fadeIn(500)
+	   			$('.dialog').find('p').text('优惠码已生效，请选择相应优惠的门票').parent().fadeIn(500)
 	   			setTimeout(function(){
 						$('.dialog').fadeOut(500)
 					},3000)
@@ -201,10 +227,10 @@ $(function(){
 
 	function scrollTop () {
 		if($(window).scrollTop() >= 200){
-			$("#return-top").show(); // 开始淡入
+			$("#return-top .up").show(); // 开始淡入
 			$('.buy').show().siblings('.none').hide();
 		} else{
-			$("#return-top").stop(true,true).hide(); // 如果小于等于 200 淡出
+			$("#return-top .up").stop(true,true).hide(); // 如果小于等于 200 淡出
 			$('.buy').stop(true,true).hide().siblings('.none').show(); // 如果小于等于 200 淡出
 		}
 		if($('#address').offset().top - $(window).scrollTop() <= 100) {

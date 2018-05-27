@@ -343,14 +343,11 @@ $(function(){
  	 */
  	function pay () {
  		var payMethod = $('.pay-wrap .active').attr('paytype');
- 		// var needInvoice = $('#toggle-event').prop('checked').toString();
  		var needInvoice = $('#toggle-event').prop('checked');
- 		// var sendAll = $('.sendTkt input').prop('checked').toString();
  		var sendAll = $('.sendTkt input').prop('checked');
  		var buyer = getBuyer();
- 		var invoice = '';
+ 		var invoice = {};
  		var ticketUsers = getTicketUsers();
- 		console.log(needInvoice,  5566)
  		if(needInvoice == true) {
  			invoice = getInvoice();
  		}
@@ -364,9 +361,9 @@ $(function(){
  			"ticketUsers": ticketUsers
  		}
  		console.log(data, 123456)
- 		if(buyer && ticketUsers){
+ 		if(buyer && ticketUsers && invoice){
  			console.log("有效的购票者信息！");
- 			// submit();
+ 			submit(data);
  		}
  	};
  	/**
@@ -470,23 +467,23 @@ $(function(){
  		var postCounty = "朝阳区";
  		var postAddress = $('.postAddress').text();
  		var invoice = {
- 			"type": type,
- 			"takerType": takerType,
- 			"title": title,
- 			"serviceType": serviceType,
- 			"taxpayerId": taxpayerId,
- 			"remark": remark,
- 			"companyRegAddress": companyRegAddress,
- 			"companyFinanceTel": companyFinanceTel,
- 			"bank": bank,
- 			"bankNo": bankNo,
- 			"getType": getType,
- 			"postName": postName,
- 			"postTel": postTel,
- 			"postProvince": postProvince,
- 			"postCity": postCity,
- 			"postCounty": postCounty,
- 			"postAddress": postAddress
+ 			"type": type || '',
+ 			"takerType": takerType || '',
+ 			"title": title || '',
+ 			"serviceType": serviceType || '',
+ 			"taxpayerId": taxpayerId || '',
+ 			"remark": remark || '',
+ 			"companyRegAddress": companyRegAddress || '',
+ 			"companyFinanceTel": companyFinanceTel || '',
+ 			"bank": bank || '',
+ 			"bankNo": bankNo || '',
+ 			"getType": getType || '',
+ 			"postName": postName || '',
+ 			"postTel": postTel || '',
+ 			"postProvince": postProvince || '',
+ 			"postCity": postCity || '',
+ 			"postCounty": postCounty || '',
+ 			"postAddress": postAddress || ''
  		}
  		return invoice;
  	};
@@ -507,12 +504,17 @@ $(function(){
  		var attendants = $('#attendForms-wrap .panel');
  		for(var i=0; i<attendants.length; i++) {
  			var attendant = {};
- 			var inputs = attendants.eq(i).find('.form-group input');
+ 			var inputs = attendants.eq(i).find('.form-group .form-control');
  			// console.log(inputs.length, 897)
  			attendant["tid"] = attendants.eq(i).attr('tid');
  			for(var k=0; k<inputs.length; k++) {
  				var key = inputs.eq(k).attr('name');
- 				var value = inputs.eq(k).val();
+ 				var type = inputs.eq(k).attr('type');
+ 				if(type == "file") {
+ 					var value = inputs.eq(k).attr("path");
+ 				} else {
+ 					var value = inputs.eq(k).val();
+ 				}
  				attendant[key] = value;
  			}
  			ticketUsers.push(attendant)
@@ -527,6 +529,7 @@ $(function(){
  		$('.pay').on('click',function(){
  			$('.pay').removeClass('pay-active');
  			$(this).addClass('pay-active');
+ 			console.log($(this).index());
  		}) 
  		$('.pay-item').on('click',function(){
  			$('.pay-item').removeClass('active');

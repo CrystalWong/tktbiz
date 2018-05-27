@@ -73,7 +73,7 @@
                                       <img class="upload-img" src="/imgs/upload.png">
                                       <span class="upload-text">上传您的学生证扫描件</span>
                                     </div>
-                                    <input type="file" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" accept="image/*"/>
+                                    <input type="file" class="form-control {{{code}}} cousor" posi="{{{code}}}" name="{{{code}}}" accept="image/*"/>
                                   </div>
                                 {{else}}
                                   <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="" value="{{{value}}}" maxlength="32">
@@ -331,7 +331,11 @@
                   {{/if}}                 
                   <div class="text-left padd count">
                     <div class="pull-left">应付：</div>
-                    <div class="pull-right green"><span>{{orderAmt}}</span></div>
+                    <div class="pull-right green">
+                      <span>¥{{orderAmt}}</span>
+                      <br>
+                      <span>或美元（${{orderDollarAmt}}）</span>
+                    </div>
                   </div>
                 </div>
               </script>
@@ -344,7 +348,11 @@
                   <span>选择支付方式：</span>
                 </div>
                 <div class="col-xs-12 pay pay-active">
-                  <div class="pay-type"><img src="/imgs/circle.png" width="12"> 在线支付平台</div>
+                  <div class="pay-type">
+                    <img class="img-outer img-active" src="/imgs/circle.png" width="12"> 
+                    <img class="img-outer empt" src="/imgs/empt-circle.jpg" width="12">
+                    在线支付平台
+                  </div>
                   <div class="pay-list fold">
                     <div class="pay-item pull-left text-center active" payType="AlipayQuick">
                       <img src="/imgs/zfb.png" width="80%">
@@ -358,7 +366,11 @@
                   </div>
                 </div>
                 <div class="col-xs-12 pay pay-item" payType="LocalePay">
-                  <div class="pay-type"><img src="/imgs/circle.png" width="12"> 现场缴费</div>
+                  <div class="pay-type">
+                    <img class="img-outer img-active" src="/imgs/circle.png" width="12"> 
+                    <img class="img-outer empt" src="/imgs/empt-circle.jpg" width="12"> 
+                    现场缴费
+                  </div>
                   <div class="red fold">现场缴费可能会存在现场等待时间长和票已售罄的情况，请您确认，建议在线支付。</div>
                 </div>
                 <button class="col-xs-12 col-sm-8 col-sm-offset-2 go text-center" id="submit">去付款</button>

@@ -37,13 +37,41 @@ $(function(){
 	});
 
  	function init () {
- 		getData();
- 		payTypeToggle();
- 		invoiceToggle();
- 		invTypeToggle();
-	 	$('#toggle-event').on('change', function() {
-	 		invoiceToggle();
-    	})
+ 		// getData();
+ 		// payTypeToggle();
+ 		// invoiceToggle();
+ 		// invTypeToggle();
+	 	// $('#toggle-event').on('change', function() {
+	 	// 	invoiceToggle();
+   //  	})
+   		orderStatus ()
+ 	};
+ 	function orderStatus () {
+	    $.ajax({
+	    	type: "POST",
+	     	// url: "/data/buy.json",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/order/query.json",
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: {'orderNo': orderNo},
+	     	dataType: "json",
+	     	success: function(res){
+	     		if (res.data.state == 'payed') {
+	     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
+		 		} else if (res.data.state == 'cancel') {
+		 			window.location.href="/index.html";
+		 		} else {
+		 			getData();
+			 		payTypeToggle();
+			 		invoiceToggle();
+			 		invTypeToggle();
+				 	$('#toggle-event').on('change', function() {
+				 		invoiceToggle();
+			    	})
+		 		}
+	      	}
+	 	})		
  	};
  	/**
  	 * [invoiceToggle description]		控制发票面板展示

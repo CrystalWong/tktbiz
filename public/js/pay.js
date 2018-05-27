@@ -6,9 +6,30 @@ $(function(){
 	var token = tokenStr.split('token=')[1];
 	init();
  	function init () {
- 		$('.info strong').text(orderNo)
- 		countDown()
- 		getData();
+ 		orderStatus ()
+ 	};
+ 	function orderStatus () {
+	    $.ajax({
+	    	type: "POST",
+	     	// url: "/data/buy.json",
+	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/order/query.json",
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: {'orderNo': orderNo},
+	     	dataType: "json",
+	     	success: function(res){
+	     		if (res.data.state == 'payed') {
+	     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
+		 		} else if (res.data.state == 'cancel') {
+		 			window.location.href="/index.html";
+		 		} else {
+		 			$('.info strong').text(orderNo)
+			 		countDown()
+			 		getData();
+		 		}
+	      	}
+	 	})		
  	};
  	/**
  	 * [getData description] 		预下单，获取付款二维码

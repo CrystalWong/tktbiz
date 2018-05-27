@@ -27,10 +27,29 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		bindHtml("#order", res.data.order)
+				console.log(res)
+	     		renderResultInfo (res)
 	      	}
 	 	})		
  	};
+ 	/**
+ 	 * [renderBuyerForm description]    渲染结果信息
+ 	 * @param  {[type]} res [description]
+ 	 * @return {[type]}     [description]
+ 	 */
+ 	function renderResultInfo (res) {
+ 		if (res.data.state == 'ordered') {
+ 			res.data.state = '待支付'
+ 		} else if (res.data.state == 'confirm') {
+ 			res.data.state = '待确认'
+ 		} else if (res.data.state == 'payed') {
+ 			res.data.state = '已支付'
+ 		} else if (res.data.state == 'cancel') {
+ 			res.data.state = '已取消'
+ 			// $('.cancel').hide()
+ 		} 
+ 		bindHtml("#order", res.data)
+ 	};	
  	/**
  	 * [bindHtml description]			数据注入html模版
  	 * @param  {[type]} domId [description]

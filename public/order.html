@@ -37,17 +37,21 @@
               <div class="order-wrap">
                 <img class="img" src="/imgs/cancel.png">
                 <div class="info">
-                  <div class="title">订单已过期</div>
-                  <ul>
-                    <li>订 单 号：218052310226364</li>
-                    <li>购 票 人：guos</li>
-                    <li>邮 &#12288; 箱：11@163.com</li>
-                    <li>手 机 号：+86-18612362614</li>
-                    <li>购票数量：2</li>
-                  </ul>
+                  <div id="order-wrap">
+                    <script id="order" type="text/x-handlebars-template">
+                    <div class="title">订单{{state}}</div>
+                    <ul>
+                      <li>订 单 号：{{orderNo}}</li>
+                      <li>购 票 人：{{buyer}}</li>
+                      <li>邮 &#12288; 箱：{{eamil}}</li>
+                      <li>手 机 号：{{mobile}}</li>
+                      <li>购票数量：{{num}}</li>
+                    </ul>
+                    </script>
+                  </div>
                   <div class="button">
-                    <span class="again">重新提交</span>
-                    <span class="cancel">取消订单</span>
+                    <a href="/index.html" class="again">重新下单</a>
+                   <!--  <span class="cancel">取消订单</span> -->
                   </div>
                 </div>
               </div>

@@ -4,6 +4,7 @@ $(function(){
 	var orderNo = url.split('&orderNo=')[1];
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
+	var baseUrl = "http://whereq.360.cn:8080/pco/common/api/" + mid;
 	console.log(orderNo,token, 678)
 
 	init();
@@ -37,20 +38,12 @@ $(function(){
 	});
 
  	function init () {
- 		// getData();
- 		// payTypeToggle();
- 		// invoiceToggle();
- 		// invTypeToggle();
-	 	// $('#toggle-event').on('change', function() {
-	 	// 	invoiceToggle();
-   //  	})
    		orderStatus ()
  	};
  	function orderStatus () {
 	    $.ajax({
 	    	type: "POST",
-	     	// url: "/data/buy.json",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/order/query.json",
+	     	url: baseUrl + "/ticket/order/query.json",
             headers: {
 		        'x-access-token': token
 		    },
@@ -112,8 +105,7 @@ $(function(){
  	function getData () {
 	    $.ajax({
 	    	type: "POST",
-	     	// url: "/data/buy.json",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/buy.json",
+	     	url: baseUrl + "/ticket/buy.json",
             headers: {
 		        'x-access-token': token
 		    },
@@ -313,7 +305,7 @@ $(function(){
 				headers: {
 			        'x-access-token': token
 			    },
-			    url: 'http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/upload.json',
+			    url: baseUrl + "/ticket/upload.json",
 			    type: 'POST',
 			    cache: false,
 			    data: formData,
@@ -402,7 +394,7 @@ $(function(){
  	function submit (data) {
 	    $.ajax({
 	    	type: "POST",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/pay.json",
+	     	url: baseUrl + "/ticket/pay.json",
             headers: {
 		        'x-access-token': token
 		    },

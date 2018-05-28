@@ -174,14 +174,17 @@
                         <div class="form-group">
                           <label for="title" class="col-xs-2 control-label"><span class="red">*</span>发票抬头:</label>
                           <div class="col-xs-10">
-                            <input type="text" class="form-control title">
+                            <input type="text" class="form-control title" maxlength="32">
                             <small class="required hint red">发票抬头&nbsp;不能为空</small>                   
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="serviceType" class="col-xs-2 control-label"><span class="red">*</span>服务项目:</label>
                           <div class="col-xs-10">
-                            <input type="text" class="form-control serviceType">
+                            <select class="form-control serviceType">
+                              <option  value="1">会议费</option>
+                              <option value="2">服务费</option>
+                            </select>
                             <small class="required hint red">服务项目&nbsp;不能为空</small>                   
                           </div>
                         </div>
@@ -210,7 +213,10 @@
                         <div class="form-group">
                           <label for="serviceType" class="col-xs-2 control-label"><span class="red">*</span>服务项目:</label>
                           <div class="col-xs-10">
-                            <input type="text" class="form-control serviceType">
+                            <select class="form-control serviceType">
+                              <option  value="1">会议费</option>
+                              <option value="2">服务费</option>
+                            </select>
                             <small class="required hint red">服务项目&nbsp;不能为空</small>                   
                           </div>
                         </div>
@@ -269,14 +275,14 @@
                         <div class="form-group">
                           <label for="postName" class="col-xs-2 control-label"><span class="red">*</span>收件人姓名:</label>
                           <div class="col-xs-10">
-                            <input type="tel" class="form-control postName">
+                            <input type="tel" class="form-control postName" maxlength="32">
                             <small class="required hint red">收件人姓名&nbsp;不能为空</small>                   
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>联系电话:</label>
                           <div class="col-xs-10">
-                            <input type="mobile" class="form-control postTel">
+                            <input type="mobile" class="form-control postTel" maxlength="32">
                             <small class="required hint red">联系电话&nbsp;不能为空</small>                   
                           </div>
                         </div>
@@ -331,7 +337,7 @@
                   {{/if}}                 
                   <div class="text-left padd count">
                     <div class="pull-left">应付：</div>
-                    <div class="pull-right green">
+                    <div class="pull-right text-right green">
                       <span>¥{{orderAmt}}</span>
                       <br>
                       <span>或美元（${{orderDollarAmt}}）</span>

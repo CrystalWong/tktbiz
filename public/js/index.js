@@ -7,6 +7,7 @@ $(function(){
 	var couponCode = false;
 	var promType = 0;
 	var coupon;
+	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
 	init();
 
 	function init() {
@@ -14,7 +15,7 @@ $(function(){
 	  	type: "GET",
 	   	// url: "/data/index.json?number= " + Math.random(),
 	   	// url: "/data/event.json?number= " + Math.random(),
-	   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/list.json?number= " + Math.random(),
+	   	url: baseUrl + "/ticket/list.json?number= " + Math.random(),
 	   	data: {
 	   		code:coupon
 	   	},
@@ -104,7 +105,7 @@ $(function(){
 			} else {
 				$.ajax({
 				  type: "POST",
-				  url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/checkout.json?code=" + coupon + "&number= " + Math.random(),
+				  url: baseUrl + "/ticket/checkout.json?code=" + coupon + "&number= " + Math.random(),
 				  data: JSON.stringify(list),
 				  dataType: "json",
 				  contentType:'application/json;charset=utf-8',
@@ -200,7 +201,7 @@ $(function(){
 	  	type: "GET",
 	   	// url: "/data/index.json?number= " + Math.random(),
 	   	// url: "/data/event.json?number= " + Math.random(),
-	   	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/list.json?number= " + Math.random(),
+	   	url: baseUrl + "/ticket/list.json?number= " + Math.random(),
 	   	data: {
 	   		code:coupon
 	   	},

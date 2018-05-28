@@ -4,6 +4,7 @@ $(function(){
 	var orderNo = url.split('&orderNo=')[1];
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
+	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
 	init();
  	function init () {
  		orderStatus ()
@@ -12,7 +13,7 @@ $(function(){
  		$('.info strong').text(orderNo)
 	    $.ajax({
 	    	type: "POST",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/order/query.json",
+	     	url: baseUrl + "/ticket/order/query.json",
             headers: {
 		        'x-access-token': token
 		    },
@@ -37,7 +38,7 @@ $(function(){
  	function getData () {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/codepay/preorder.json",
+	     	url: baseUrl + "/ticket/codepay/preorder.json",
             headers: {
 		        'x-access-token': token
 		    },
@@ -46,7 +47,7 @@ $(function(){
 	     	success: function(res){
 	         	console.log(res, 33)
 	         	if(res.code == '0'){
-	         		var QRcode = '<img class="QRcode" src="http://whereq.360.cn:8080/pco/common/api/' + mid + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL + '" width="30%" alt="支付二维码">'
+	         		var QRcode = '<img class="QRcode" src="' + baseUrl + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL + '" width="30%" alt="支付二维码">'
 	         		// var QRcode = $('.QRcode').attr('src', 'http://whereq.360.cn:8080/pco/common/api/' + mid + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL)
 	         		$(".pay").before(QRcode);
 	         		var prepayId = res.prepayId;
@@ -70,7 +71,7 @@ $(function(){
  		}
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/codepay/status.json",
+	     	url: baseUrl + "/ticket/codepay/status.json",
             headers: {
 		        'x-access-token': token
 		    },

@@ -5,7 +5,7 @@ $(function(){
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
 	var bodyStr = location.href.split('?')[1];
-	var baseUrl = "http://whereq.360.cn:8080/pco/common/api/" + mid;
+	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
 	init();
  	function init () {
  		if (bodyStr && bodyStr.indexOf("out_trade_no") >= 0) {

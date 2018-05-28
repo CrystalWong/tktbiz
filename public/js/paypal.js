@@ -4,6 +4,7 @@ $(function(){
 	var orderNo = url.split('&orderNo=')[1];
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
+	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
 	init();
  	function init () {
  		AlipayQuick();
@@ -14,7 +15,7 @@ $(function(){
  	function AlipayQuick () {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/paypal/pay.json",
+	     	url: baseUrl + "/ticket/paypal/pay.json",
             headers: {
 		        'x-access-token': token
 		    },

@@ -25,20 +25,44 @@
 		font-size: 18px;
 	}
 	.pay {
+		border: 1px solid #ccc;
+		padding: 12px 26px;
+		margin-bottom: 30px;
+		.fold {
+			display: none;
+		}
+		.img-active {
+			display: none;
+		}
+		.empt {
+			display: inline-block;
+		}
+	}
+	.pay-active {
 		border: 1px solid #5cc330;
-		padding: 12px 26px 30px 26px;
-		margin-bottom: 30px;
+		.fold {
+			margin: 30px 0 18px 0;
+			display: block !important;
+			overflow: hidden;
+		}
+		.img-active {
+			display: inline-block;
+		}
+		.empt {
+			display: none;
+		}
 	}
-	.pay-type {
-		margin-bottom: 30px;
-	}
-	.pay-item {
-		width: 150px;
-		border: 1px solid #ddd;
-		margin-right: 20px;
-		padding: 12px;
-		img {
-			height: 25px;
+	.pay-list {
+		.pay-item {
+			width: 150px;
+		    height: 60px;
+			border: 1px solid #ddd;
+			margin-right: 20px;
+			padding: 12px;
+		}
+		.active {
+			border-color: #5cc330 !important;
+			border-width: 2px;
 		}
 	}
 	.go {

@@ -5,6 +5,7 @@ $(function(){
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
 	var bodyStr = location.href.split('?')[1];
+	var baseUrl = "http://whereq.360.cn:8080/pco/common/api/" + mid;
 	init();
  	function init () {
  		if (bodyStr && bodyStr.indexOf("out_trade_no") >= 0) {
@@ -24,7 +25,7 @@ $(function(){
  	function checkAliSignStr (bodyStr) {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/alipay/return.json?" + bodyStr,
+	     	url: baseUrl + "/ticket/alipay/return.json?" + bodyStr,
 	     	data: {},
 	     	dataType: "json",
 	     	success: function(res){
@@ -39,7 +40,7 @@ $(function(){
  	function checkPaypalSignStr (bodyStr) {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/paypal/return.json?" + bodyStr,
+	     	url: baseUrl + "/ticket/paypal/return.json?" + bodyStr,
 	     	data: {},
 	     	dataType: "json",
 	     	success: function(res){
@@ -54,7 +55,7 @@ $(function(){
  	function wechat () {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/codepay/return.json",
+	     	url: baseUrl + "/ticket/codepay/return.json",
             headers: {
 		        'x-access-token': token
 		    },
@@ -72,7 +73,7 @@ $(function(){
  	function localPay () {
 	    $.ajax({
 	    	type: "GET",
-	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/localpay/return.json",
+	     	url: baseUrl + "/ticket/localpay/return.json",
             headers: {
 		        'x-access-token': token
 		    },

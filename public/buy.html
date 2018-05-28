@@ -305,7 +305,24 @@
                         <div class="form-group">
                           <label for="aera" class="col-xs-2 control-label"><span class="red">*</span>所在地区:</label>
                           <div class="col-xs-10">
-                            <input type="text" class="form-control">
+                            <!-- <input type="text" class="form-control"> -->
+                            <div class="form-group">
+                              <div class="col-sm-4">
+                                <select name="input_province" id="input_province" class="form-control">
+                                  <option value="">--请选择--</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-4">
+                                <select name="input_city" id="input_city" class="form-control">
+                                  <option value=""></option>
+                                </select>
+                              </div>
+                              <div class="col-sm-4">
+                                <select name="input_area" id="input_area" class="form-control">
+                                  <option value=""></option>
+                                </select>
+                              </div>
+                            </div>
                             <small class="required hint red">所在地区&nbsp;不能为空</small>                   
                           </div>
                         </div>
@@ -406,6 +423,15 @@
           <img src="/imgs/top.png" width="100%">
         </div>
       </div>
+      <div class="dialog">
+        <button type="button" class="close subclose">&times;</button>
+        <img src="/imgs/dialog.png">
+        <p>普通增值税电子发票可快速自助开票，确定需要纸质发票吗？</p>
+        <div class="button">
+          <a href="javascript:void(0)" class="sure">确定</a>
+          <a href="javascript:void(0)" class="subclose">取消</a>
+        </div>
+      </div>
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -428,6 +454,7 @@
     <script src="/lib/bootstrap/js/bootstrap-toggle.min.js"></script>
     <script src="/lib/handlebars.js"></script>
     <script src="/lib/mailCompletion.js"></script>
+    <script src="/lib/address.js"></script>
     <script src="/js/buy.js"></script>
   </body>
 </html>

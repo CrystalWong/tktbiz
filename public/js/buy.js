@@ -40,6 +40,15 @@ $(function(){
 		window.location.href = '/index.html#enroll';
 	});
 
+	$('.dialog .sure').on('click', function(){
+		$('.invType').removeClass('invType-active');
+		$('.invType-info').removeClass('invType-info-active');
+		$('.invType-info').eq(0).addClass('invType-info-active');
+		$('.invType').eq(0).addClass('invType-active');
+		$('#invEleMobile').hide();
+		$('.dialog').hide()
+	});
+
 	$('#submit').on('click', function(){
 		// window.location.href = '/result.html'
 		pay();
@@ -349,15 +358,20 @@ $(function(){
  		$('.invType').unbind('click');
  		$('.invType').on('click', function () {
  			var index = $(this).index();
- 			$('.invType').removeClass('invType-active');
- 			$('.invType-info').removeClass('invType-info-active');
- 			$('.invType').eq(index).addClass('invType-active');
  			if(index == 2) {
+ 				$('.invType').removeClass('invType-active');
+ 				$('.invType-info').removeClass('invType-info-active');
  				$('.invType-info').eq(0).addClass('invType-info-active');
+ 				$('.invType').eq(index).addClass('invType-active');
  				$('#invEleMobile').show();
+ 			} else if(index == 0 && $('#invEleMobile').is(':visible')){
+ 				$('.dialog').show();
  			} else {
- 				$('.invType-info').eq(index).addClass('invType-info-active');
  				$('#invEleMobile').hide();
+ 				$('.invType').removeClass('invType-active');
+ 				$('.invType-info').removeClass('invType-info-active');
+ 				$('.invType').eq(index).addClass('invType-active');
+ 				$('.invType-info').eq(index).addClass('invType-info-active');
  			}
  		})
  		$('.acceptType .col-xs-2').unbind('click');
@@ -407,9 +421,10 @@ $(function(){
  			"sendAll": sendAll,
  			"ticketUsers": ticketUsers
  		}
+ 		console.log(data, 23456)
  		if(buyer && ticketUsers && invoice){
  			console.log("有效的购票者信息！");
- 			submit(data);
+ 			// submit(data);
  		} else {
  			arr[0].focus()
  		}
@@ -510,10 +525,10 @@ $(function(){
  		var getType = $('.getType-active').text();
  		var postName = $('.postName').val();
  		var postTel = $('.postTel').val();
- 		var postProvince = "北京市";
- 		var postCity = "北京市";
- 		var postCounty = "朝阳区";
- 		var postAddress = $('.postAddress').text();
+ 		var postProvince = $('#input_province').val();
+ 		var postCity = $('#input_city').val();
+ 		var postCounty = $('#input_area').val();
+ 		var postAddress = $('.postAddress').val();
  		var invoice = {
  			"type": type || '',
  			"takerType": takerType || '',

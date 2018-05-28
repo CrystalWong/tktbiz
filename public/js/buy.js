@@ -28,6 +28,13 @@ $(function(){
 	$('#return-top').on('click', function(){
 		$('html,body').animate({scrollTop:0}, 500);
 	});
+	/**
+ 	 * [invoiceToggle description]		关闭弹框
+ 	 * @return {[type]} [description]
+ 	 */
+	$('.subclose').on('click', function(){
+		$('.dialog').hide()
+	});
 
 	$('#myModal .btn-primary').on('click', function(){
 		window.location.href = '/index.html#enroll';

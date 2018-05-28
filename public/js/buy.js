@@ -76,6 +76,26 @@ $(function(){
 	 	})		
  	};
  	/**
+ 	 * [invoiceToggle description]		查询订单状态
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function orderEach () {
+ 		$.ajax({
+	    	type: "POST",
+	     	url: baseUrl + "/ticket/order/query.json",
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: {'orderNo': orderNo},
+	     	dataType: "json",
+	     	success: function(res){
+	     		if (res.data.state == 'cancel') {
+		 			window.location.href="/index.html";
+		 		}
+	      	}
+	 	})
+ 	};
+ 	/**
  	 * [invoiceToggle description]		控制发票面板展示
  	 * @return {[type]} [description]
  	 */
@@ -124,6 +144,9 @@ $(function(){
 	     		renderOrderInfo(res);
 	     		renderAttendForms(res);
 	     		renderBuyerForm(res);
+	     		setInterval(function(){
+     				orderEach();
+     			}, 3000)
 	         	console.log(res)
 	      	}
 	 	})		

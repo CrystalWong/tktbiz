@@ -9,6 +9,7 @@ $(function(){
  	function init () {
  		orderStatus ()
  	};
+
  	function orderStatus () {
  		$('.info strong').text(orderNo)
 	    $.ajax({
@@ -31,11 +32,30 @@ $(function(){
 	      	}
 	 	})		
  	};
+
+ 	function orderEach () {
+ 		$.ajax({
+	    	type: "POST",
+	     	url: baseUrl + "/ticket/order/query.json",
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: {'orderNo': orderNo},
+	     	dataType: "json",
+	     	success: function(res){
+	     		if (res.data.state == 'cancel') {
+		 			window.location.href="/order.html?token=" + token + "&orderNo=" + orderNo;
+		 		}
+	      	}
+	 	})
+ 	};
+
  	/**
  	 * [getData description] 		预下单，获取付款二维码
  	 * @return {[type]} [description]
  	 */
  	function getData () {
+ 		$('.QRcode').remove();
 	    $.ajax({
 	    	type: "GET",
 	     	url: baseUrl + "/ticket/codepay/preorder.json",
@@ -53,6 +73,7 @@ $(function(){
 	         		var prepayId = res.prepayId;
          			setInterval(function(){
          				checkStatus(prepayId);
+         				orderEach();
          			}, 3000)
 	         	}
 	      	}
@@ -91,7 +112,7 @@ $(function(){
  	};
 
  	$('.pay').on('click', function () {
-		// window.location.href = '/payment.html'
+		window.location.href = '/payment.html?token=' + token + "&orderNo=" + orderNo;
 	})
 
 	function countDown(){

@@ -410,7 +410,7 @@ $(function(){
 	         		} else if(data.payMethod == "PayPal") {
 	         			window.location.href = '/paypal.html?token=' + token + "&orderNo=" + orderNo;
 	         		} else {
-	         			window.location.href = '/result.html?token=' + token + "&orderNo=" + orderNo;
+	         			window.location.href = '/scene.html?token=' + token + "&orderNo=" + orderNo;
 	         		}
 	         	}
 	      	}

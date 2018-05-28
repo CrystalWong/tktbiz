@@ -166,8 +166,16 @@
                           <label for="acceptType" class="col-xs-2 control-label">收票人类型:</label>
                           <div class="col-xs-10">
                             <div class="row acceptType">
-                              <div class="col-xs-2 acceptType-active">公司</div>
-                              <div class="col-xs-2">个人</div>
+                              <div class="col-xs-2 accept acceptType-active">
+                                <img class="img-outer img-active" src="/imgs/circle.png" width="12"> 
+                                <img class="img-outer empt" src="/imgs/empt-circle.jpg" width="12">
+                                <span>公司</span>
+                              </div>
+                              <div class="col-xs-2 accept">
+                                <img class="img-outer img-active" src="/imgs/circle.png" width="12"> 
+                                <img class="img-outer empt" src="/imgs/empt-circle.jpg" width="12">
+                                <span>个人</span>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -275,14 +283,14 @@
                         <div class="form-group">
                           <label for="postName" class="col-xs-2 control-label"><span class="red">*</span>收件人姓名:</label>
                           <div class="col-xs-10">
-                            <input type="tel" class="form-control postName" maxlength="32">
+                            <input type="text" class="form-control postName" name="name" maxlength="32">
                             <small class="required hint red">收件人姓名&nbsp;不能为空</small>                   
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="inputPhone" class="col-xs-2 control-label"><span class="red">*</span>联系电话:</label>
                           <div class="col-xs-10">
-                            <input type="mobile" class="form-control postTel" maxlength="32">
+                            <input type="tel" class="form-control postTel" name="mobile" maxlength="32">
                             <small class="required hint red">联系电话&nbsp;不能为空</small>                   
                           </div>
                         </div>

@@ -128,12 +128,10 @@
 	.pay-list {
 		.pay-item {
 			width: 150px;
+		    height: 60px;
 			border: 1px solid #ddd;
 			margin-right: 20px;
 			padding: 12px;
-			img {
-				height: 25px;
-			}
 		}
 		.active {
 			border-color: #5cc330 !important;
@@ -187,9 +185,6 @@
 		padding-top: 6px;
 		cursor: pointer;
 	}
-	.acceptType-active {
-		color: #5cc330;
-	}
 	.invType-info {
 		display: none;
 	}
@@ -236,6 +231,22 @@
 	}
 	.panel {
 		margin-bottom: 0 !important;
+	}
+	.accept {
+		.img-active {
+			display: none;
+		}
+		.empt {
+			display: inline-block;
+		}
+	}
+	.acceptType-active {
+		.img-active {
+			display: inline-block;
+		}
+		.empt {
+			display: none;
+		}		
 	}
 }
 @media (min-width: 768px){

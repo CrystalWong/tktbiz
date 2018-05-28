@@ -204,7 +204,14 @@ $(function(){
 			doms.each(function(){
 				var name = $(this).attr('posi')
 				var value = $(this).val()
-				$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
+				var headerTit = $('.panel').eq(tarIndex+1).find('.header-tit').text();
+				if(headerTit == '购票者信息') {
+					$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
+				} else {
+					if(name !== "name") {
+						$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
+					}
+				}
 			})
 		})
  	}
@@ -478,7 +485,7 @@ $(function(){
 	 		}
  		}
  		var type = $('.invType-active').text();
- 		var takerType = $('.acceptType-active').text();
+ 		var takerType = $('.acceptType-active span').text();
  		var title = $('.invType-info-active .title').val();
  		var serviceType = $('.invType-info-active .serviceType').val();
  		var taxpayerId = $('.invType-info-active .taxpayerId').val();

@@ -5,6 +5,7 @@ $(function(){
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
 	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
+	var arr = [];
 	console.log(orderNo,token, 678)
 
 	init();
@@ -235,6 +236,7 @@ $(function(){
  		var val = dom.val();
 		if(!val) {
 			dom.closest('.form-group').find('.hint').show();
+			arr.push(dom)
 		} else {
 			dom.closest('.form-group').find('.hint').hide();
 		}
@@ -266,6 +268,7 @@ $(function(){
 		} else {
 			dom.closest('.form-group').find('.hint').text('请输入正确格式的 邮箱');
 		    dom.closest('.form-group').find('.hint').show();
+		    arr.push(dom)
 		}
  	} 
  	/**
@@ -279,6 +282,7 @@ $(function(){
 		if (val && !reg.test(val)){
 		    dom.closest('.form-group').find('.hint').text('请输入正确格式的 姓名 只限英文和汉字');
 		    dom.closest('.form-group').find('.hint').show();
+		    arr.push(dom)
 		}
  	}
  	/**
@@ -292,6 +296,7 @@ $(function(){
       	if (val && !reg.test(val)) {
         	dom.closest('.form-group').find('.hint').text('请输入正确的手机号');
 		    dom.closest('.form-group').find('.hint').show();
+		    arr.push(dom)
       	}
  	}
  	/**
@@ -369,12 +374,13 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function pay () {
+ 		arr = []
  		var payMethod = $('.pay-wrap .active').attr('paytype');
  		var needInvoice = $('#toggle-event').prop('checked');
  		var sendAll = $('.sendTkt input').prop('checked');
+ 		var ticketUsers = getTicketUsers();
  		var buyer = getBuyer();
  		var invoice = {};
- 		var ticketUsers = getTicketUsers();
  		if(needInvoice == true) {
  			invoice = getInvoice();
  		}
@@ -387,10 +393,11 @@ $(function(){
  			"sendAll": sendAll,
  			"ticketUsers": ticketUsers
  		}
- 		console.log(data, 123456)
  		if(buyer && ticketUsers && invoice){
  			console.log("有效的购票者信息！");
  			submit(data);
+ 		} else {
+ 			arr[0].focus()
  		}
  	};
  	/**

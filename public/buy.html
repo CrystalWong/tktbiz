@@ -156,8 +156,9 @@
                         <label for="invType" class="col-xs-2 control-label">发票类型:</label>
                         <div class="col-xs-10">
                           <div class="row mar-l-0">
-                            <div class="col-xs-5 btn invType invType-active">增值税普通发票</div>
-                            <div class="col-xs-5 col-xs-offset-1 btn invType">增值税专用发票</div>
+                            <div class="btn invType invType-active">增值税普通发票</div>
+                            <div class="btn invType">增值税专用发票</div>
+                            <div class="btn invType mar-t-15">增值税普通电子发票</div>
                           </div>
                         </div>
                       </div>
@@ -184,6 +185,13 @@
                           <div class="col-xs-10">
                             <input type="text" class="form-control title" maxlength="32">
                             <small class="required hint red">发票抬头&nbsp;不能为空</small>                   
+                          </div>
+                        </div>
+                        <div class="form-group" id="invEleMobile">
+                          <label for="mobile" class="col-xs-2 control-label"><span class="red">*</span>手机号:</label>
+                          <div class="col-xs-10">
+                            <input type="text" class="form-control mobile" name="mobile" maxlength="32">
+                            <small class="required hint red">手机号&nbsp;不能为空</small>                   
                           </div>
                         </div>
                         <div class="form-group">

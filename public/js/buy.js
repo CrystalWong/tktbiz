@@ -375,7 +375,13 @@ $(function(){
  			$('.invType').removeClass('invType-active');
  			$('.invType-info').removeClass('invType-info-active');
  			$('.invType').eq(index).addClass('invType-active');
- 			$('.invType-info').eq(index).addClass('invType-info-active');
+ 			if(index == 2) {
+ 				$('.invType-info').eq(0).addClass('invType-info-active');
+ 				$('#invEleMobile').show();
+ 			} else {
+ 				$('.invType-info').eq(index).addClass('invType-info-active');
+ 				$('#invEleMobile').hide();
+ 			}
  		})
  		$('.acceptType .col-xs-2').unbind('click');
  		$('.acceptType .col-xs-2').on('click', function () {

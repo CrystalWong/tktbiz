@@ -48,13 +48,13 @@
       "info" : ["这是备注"],
       "endTime" : "2018-09-06 17:30",
       "promType": 4,
-      "free": "0"
+      "promValue": "0"
     }, {
       "name" : "免费票",
       "id" : "006",
       "price" : 10.0,
       "tieredPricing" : false,
-      "prices" : [ ],
+      "prices" : [],
       "open" : false,
       "openDesc" : "已结束",
       "minNum" : 1,
@@ -68,7 +68,7 @@
       "info" : ["免费"],
       "endTime" : "2018-09-06 17:30",
       "promType": 2,
-      "discount": "0.2"
+      "promValue": "0.2"
     }, {
       "name" : "免费票",
       "id" : "006",
@@ -88,7 +88,7 @@
       "info" : ["免费"],
       "endTime" : "2018-09-06 17:30",
       "promType": 3,
-      "toprice": "20"
+      "promValue": "20"
     } ]
   }
 }

@@ -50,10 +50,10 @@ $(function(){
 		if (res.data.tieredPricing) {
 			$('.tieredPricingTitles').eq(res.data.currPriceIndex).addClass('green').siblings('.tieredPricingTitles, .priceTitle').addClass('decoration-color')
 			for( q in res.data.tickets) {
-				$('.tickets').eq(q).find('.price').eq(res.data.currPriceIndex).addClass('green').siblings('.price').addClass('decoration')
+				$('.tickets').eq(q).find('.price').eq(res.data.currPriceIndex).css('font-weight','600').addClass('green').siblings('.price').addClass('decoration')
 			}
 		} else {
-			$('.priceTitle').addClass('green').parents('thead').siblings('tbody').find('.price').addClass('green')
+			$('.priceTitle').addClass('green').parents('thead').siblings('tbody').find('.price').css('font-weight','600').addClass('green')
 		}
 		//滑过整行显示备注
 		$('.tickets').mouseover( function () {
@@ -111,13 +111,20 @@ $(function(){
 				  // jsonp: "callback",
 				  success: function(res){
 				   	// console.log(res)
-				   	if (res.bcode == '1004') {
-				   		$('.dialog').find('p').text('优惠码使用次数超过限制').parent().fadeIn(500)
-			   			setTimeout(function(){
+				   	if (res.code == 0) {
+				   		if (res.bcode == '1004') {
+					   		$('.dialog').find('p').text('优惠码使用次数超过限制').parent().fadeIn(500)
+				   			setTimeout(function(){
 								$('.dialog').fadeOut(500)
 							},3000)
-				   	} else {
-				   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+					   	} else {
+					   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+					   	}
+				   	} else if (res.code == '900') {
+				   		$('.dialog').find('p').text('库存不足').parent().fadeIn(500)
+			   			setTimeout(function(){
+							$('.dialog').fadeOut(500)
+						},3000)
 				   	}
 				  }
 			 	});

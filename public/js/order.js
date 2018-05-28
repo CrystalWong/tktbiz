@@ -15,8 +15,8 @@ $(function(){
 		getData();
 	}
 	function getData () {
-		console.log(token)
-		console.log(orderNo)
+		// console.log(token)
+		// console.log(orderNo)
 	    $.ajax({
 	    	type: "POST",
 	     	// url: "/data/buy.json",

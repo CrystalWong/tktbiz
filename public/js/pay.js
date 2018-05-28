@@ -9,9 +9,9 @@ $(function(){
  		orderStatus ()
  	};
  	function orderStatus () {
+ 		$('.info strong').text(orderNo)
 	    $.ajax({
 	    	type: "POST",
-	     	// url: "/data/buy.json",
 	     	url: "http://whereq.360.cn:8080/pco/common/api/" + mid + "/ticket/order/query.json",
             headers: {
 		        'x-access-token': token
@@ -24,7 +24,6 @@ $(function(){
 		 		} else if (res.data.state == 'cancel') {
 		 			window.location.href="/index.html";
 		 		} else {
-		 			$('.info strong').text(orderNo)
 			 		countDown()
 			 		getData();
 		 		}

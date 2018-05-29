@@ -26,7 +26,6 @@ $(function(){
 		 		} else if (res.data.state == 'cancel') {
 		 			window.location.href="/index.html";
 		 		} else {
-			 		countDown()
 			 		getData();
 		 		}
 	      	}
@@ -55,7 +54,6 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function getData () {
- 		$('.QRcode').remove();
 	    $.ajax({
 	    	type: "GET",
 	     	url: baseUrl + "/ticket/codepay/preorder.json",
@@ -65,12 +63,13 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	         	console.log(res, 33)
+	         	// console.log(res, 33)
+	         	$('.QRcode').remove();
 	         	if(res.code == '0'){
 	         		var QRcode = '<img class="QRcode" src="' + baseUrl + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL + '" width="30%" alt="支付二维码">'
-	         		// var QRcode = $('.QRcode').attr('src', 'http://whereq.360.cn:8080/pco/common/api/' + mid + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL)
 	         		$(".pay").before(QRcode);
 	         		var prepayId = res.prepayId;
+	         		countDown();
          			setInterval(function(){
          				checkStatus(prepayId);
          				orderEach();
@@ -99,7 +98,7 @@ $(function(){
 	     	data: data,
 	     	dataType: "json",
 	     	success: function(res){
-	         	console.log(res, 55)
+	         	// console.log(res, 55)
 	         	if(res.code == '0'){
 	         		if (res.state === "NOTPAY" || res.state === "USERPAYING") {
 	         			return;

@@ -12,32 +12,36 @@ $(function(){
 
 	function init() {
 		$.ajax({
-	  	type: "GET",
-	   	// url: "/data/index.json?number= " + Math.random(),
-	   	// url: "/data/event.json?number= " + Math.random(),
-	   	url: baseUrl + "/ticket/list.json?number= " + Math.random(),
-	   	data: {
-	   		code:coupon
-	   	},
-	   	dataType: "json",
-	   	// jsonp: "callback",
-	   	success: function(res){
-	   		// console.log(res)
-	   		var tpl =  $("#list").html();
-				//预编译模板
-				var template = Handlebars.compile(tpl);
-				//模拟json数据
-				var context = res;
-				//匹配json内容
-				var html = template(context);
-				//输入模板
-				$('#list-wrap').html(html);
-	 			$("[data-toggle='popover']").popover();
-	 			//特殊样式
-	 			specialStyle(res)
-	 			//各点击事件
-	 			click(res)
-	    }
+		  	type: "GET",
+		   	// url: "/data/index.json?number= " + Math.random(),
+		   	// url: "/data/event.json?number= " + Math.random(),
+		   	url: baseUrl + "/ticket/list.json?number= " + Math.random(),
+		   	data: {
+		   		code:coupon
+		   	},
+		   	dataType: "json",
+		   	// jsonp: "callback",
+		   	success: function(res){
+		   		if (res.code == 0) {
+		   			// console.log(res)
+			   		var tpl =  $("#list").html();
+					//预编译模板
+					var template = Handlebars.compile(tpl);
+					//模拟json数据
+					var context = res;
+					//匹配json内容
+					var html = template(context);
+					//输入模板
+					$('#list-wrap').html(html);
+		 			$("[data-toggle='popover']").popover();
+		 			//特殊样式
+		 			specialStyle(res)
+		 			//各点击事件
+		 			click(res)
+		   		} else {
+		   			dialog (res.msg, 'dialog')
+		   		}
+		   	}
 	 	});
 	};
 
@@ -76,9 +80,7 @@ $(function(){
 			$(this).find('p').hide().siblings().show()
 			$('#wechat-code').hide()
 		});
-		for( k in res.data.tickets) {
-			ares (res, k)
-		}
+		ares (res)
 	};
 
 	function click (res) {
@@ -98,10 +100,7 @@ $(function(){
 				}
 			}
 			if (quantum == 0) {
-				$('.dialog').find('p').text('至少选择一张票').parent().fadeIn(500)
-				setTimeout(function(){
-					$('.dialog').fadeOut(500)
-				},3000)
+				dialog ('至少选择一张票', 'dialog')
 			} else {
 				$.ajax({
 				  type: "POST",
@@ -114,18 +113,14 @@ $(function(){
 				   	// console.log(res)
 				   	if (res.code == 0) {
 				   		if (res.bcode == '1004') {
-					   		$('.dialog').find('p').text('优惠码使用次数超过限制').parent().fadeIn(500)
-				   			setTimeout(function(){
-								$('.dialog').fadeOut(500)
-							},3000)
+				   			dialog ('优惠码使用次数超过限制', 'dialog')
 					   	} else {
-					   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.orderNo
+					   		window.location.href = '/buy.html?token=' + res.data.token + '&orderNo=' + res.data.order.orderNo
 					   	}
 				   	} else if (res.code == '900') {
-				   		$('.dialog').find('p').text('库存不足').parent().fadeIn(500)
-			   			setTimeout(function(){
-							$('.dialog').fadeOut(500)
-						},3000)
+				   		dialog ('库存不足', 'dialog')
+				   	} else {
+				   		dialog (res.msg, 'dialog')
 				   	}
 				  }
 			 	});
@@ -198,41 +193,41 @@ $(function(){
  	$('.sure').on('click', function () {
  		coupon = $('#coupon').val()
  		$.ajax({
-	  	type: "GET",
-	   	// url: "/data/index.json?number= " + Math.random(),
-	   	// url: "/data/event.json?number= " + Math.random(),
-	   	url: baseUrl + "/ticket/list.json?number= " + Math.random(),
-	   	data: {
-	   		code:coupon
-	   	},
-	   	dataType: "json",
-	   	// jsonp: "callback",
-	   	success: function(res){
-	   		if (res.bcode == '1001') {
-	   			$('.dialog').find('p').text('优惠码或邀请码不存在').parent().fadeIn(500)
-	   			setTimeout(function(){
-						$('.dialog').fadeOut(500)
-					},3000)
-	   		} else if (res.bcode == '1002' || res.bcode == '1003') {
-	   			$('.dialog').find('p').text('优惠码或邀请码已超过使用期限或次数').parent().fadeIn(500)
-	   			setTimeout(function(){
-						$('.dialog').fadeOut(500)
-					},3000)
-	   		} else {
-					$('.coupon').hide().siblings('.use-coupon').show()
-	   			$('.dialog').find('p').text('优惠码已生效，请选择相应优惠的门票').parent().fadeIn(500)
-	   			setTimeout(function(){
-						$('.dialog').fadeOut(500)
-					},3000)
-	   			for ( p in res.data.tickets) {
-						ares (res, p)
-					}
-	   			calculation (res)
-	   		}
-	   	}
+		  	type: "GET",
+		   	// url: "/data/index.json?number= " + Math.random(),
+		   	// url: "/data/event.json?number= " + Math.random(),
+		   	url: baseUrl + "/ticket/list.json?number= " + Math.random(),
+		   	data: {
+		   		code:coupon
+		   	},
+		   	dataType: "json",
+		   	// jsonp: "callback",
+		   	success: function(res){
+		   		if (res.code == 0) {
+		   			if (res.bcode) {
+		   				if (res.bcode == '1001') {
+				   			dialog ('优惠码或邀请码不存在', 'dialog')
+				   		} else {
+				   			dialog (res.bmsg, 'dialog')
+				   		}
+		   			} else {
+						$('.coupon').hide().siblings('.use-coupon').show()
+						dialog ('优惠码已生效，请选择相应优惠的门票', 'success_d')
+			   			ares (res)
+			   			calculation (res)
+			   		}
+		   		}else {
+		   			dialog (res.msg, 'dialog')
+		   		}
+		   	}
  		});
  	});
-
+ 	function dialog (text,src) {
+ 		$('.dialog').find('p').text(text).prev('img').attr('src','/imgs/' + src + '.png').parent().fadeIn(500)
+		setTimeout(function(){
+			$('.dialog').fadeOut(500)
+		},3000)
+ 	}
 	function scrollTop () {
 		if($(window).scrollTop() >= 200){
 			$("#return-top .up").show(); // 开始淡入
@@ -250,22 +245,28 @@ $(function(){
 		}
 	};
 	
-	function ares (res, p) {
-		couponCode = true;
-		promType += Number(res.data.tickets[p].promType)
-		if (promType == 0) {
-			couponCode = false;
-		}
-		if (res.data.tickets[p].promType == 0 || !res.data.tickets[p].promType) {
-			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text())).next().hide()
-		} else if (res.data.tickets[p].promType == 1) {
-			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text()) - Number(res.data.tickets[p].promValue)).next().show()
-		} else if (res.data.tickets[p].promType == 2) {
-			$('.tickets').eq(p).find('.green .prices').text(Number($('.tickets').eq(p).find('.green .preferential item').text()) * Number(1 - res.data.tickets[p].promValue)).next().show()
-		} else if (res.data.tickets[p].promType == 3) {
-			$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].promValue).next().show()
-		} else if (res.data.tickets[p].promType == 4) {
-			$('.tickets').eq(p).find('.green .prices').text(res.data.tickets[p].promValue).next().show()
+	function ares (res) {
+		for ( p in res.data.tickets) {
+			var priceNow = $('.tickets').eq(p).find('.green .prices');
+			var item = Number($('.tickets').eq(p).find('.green .preferential item').text());
+			var promValue = Number(res.data.tickets[p].promValue);
+			var type = res.data.tickets[p].promType;
+			couponCode = true;
+			promType += Number(res.data.tickets[p].promType)
+			if (promType == 0) {
+				couponCode = false;
+			}
+			if (type == 0 || !type) {
+				priceNow.text(item).next().hide()
+			} else if (type == 1) {
+				priceNow.text(item - promValue).next().show()
+			} else if (type == 2) {
+				priceNow.text(item * Number(1 - promValue)).next().show()
+			} else if (type == 3) {
+				priceNow.text(promValue).next().show()
+			} else if (type == 4) {
+				priceNow.text(promValue).next().show()
+			}
 		}
 	};
 

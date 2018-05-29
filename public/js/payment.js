@@ -157,10 +157,11 @@ $(function(){
  	function pay () {
 	 	$('#submit').on('click',function () {
 	 		var payMethod = $('.pay-wrap .active').attr('paytype');
-	 		submit (payMethod)
+	 		submit (payMethod, $(this))
 	 	});
  	}
- 	function submit (payMethod) {
+ 	function submit (payMethod, _t) {
+		_t.attr('disabled',true).addClass('subDisabled')
 	    $.ajax({
 	    	type: "POST",
 	     	url: baseUrl + "/ticket/repay.json?number= " + Math.random() + '&orderNo=' + orderNo + '&payMethod=' +payMethod,
@@ -170,12 +171,13 @@ $(function(){
 	     	data: {},
 	     	dataType: "json",
 	     	success: function(res){
+	     		_t.removeAttr('disabled').removeClass('subDisabled')
 	     		if (res.code == 0) {
 	     			if (payMethod == "CodePay") {
 	         			window.location.href = '/pay.html?token=' + token + "&orderNo=" + orderNo;
-	         		} else if(payMethod == "AlipayQuick") {
+	         		} else if (payMethod == "AlipayQuick") {
 	         			window.location.href = '/alipay.html?token=' + token + "&orderNo=" + orderNo;
-	         		} else if(payMethod == "PayPal") {
+	         		} else if (payMethod == "PayPal") {
 	         			window.location.href = '/paypal.html?token=' + token + "&orderNo=" + orderNo;
 	         		} else {
 	         			window.location.href = '/scene.html?token=' + token + "&orderNo=" + orderNo;

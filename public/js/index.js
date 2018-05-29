@@ -102,6 +102,8 @@ $(function(){
 			if (quantum == 0) {
 				dialog ('至少选择一张票', 'dialog')
 			} else {
+				var _t = $(this);
+				_t.attr('disabled',true).addClass('subDisabled')
 				$.ajax({
 				  type: "POST",
 				  url: baseUrl + "/ticket/checkout.json?code=" + coupon + "&number= " + Math.random(),
@@ -110,7 +112,7 @@ $(function(){
 				  contentType:'application/json;charset=utf-8',
 				  // jsonp: "callback",
 				  success: function(res){
-				   	// console.log(res)
+				   	_t.removeAttr('disabled').removeClass('subDisabled')
 				   	if (res.code == 0) {
 				   		if (res.bcode == '1004') {
 				   			dialog ('优惠码使用次数超过限制', 'dialog')

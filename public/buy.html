@@ -69,9 +69,13 @@
                                   <div class="upload-wrap">
                                     <div class="upload-dec">
                                       <img class="upload-img" src="/imgs/upload.png">
-                                      <span class="upload-text">上传您的学生证扫描件</span>
+                                      {{#if value}}
+                                        <span class="upload-text">{{value}}</span>
+                                      {{else}}
+                                        <span class="upload-text">上传您的学生证扫描件</span>
+                                      {{/if}}
                                     </div>
-                                    <input type="file" class="form-control {{{code}}} cousor" posi="{{{code}}}" name="{{{code}}}" accept="image/*"/>
+                                    <input type="file" class="form-control {{{code}}} cousor" posi="{{{code}}}" name="{{{code}}}" path="{{{value}}}" accept="image/*"/>
                                   </div>
                                 {{else}}
                                   <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="" value="{{{value}}}" maxlength="32">

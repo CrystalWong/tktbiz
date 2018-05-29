@@ -6,10 +6,14 @@ $(function(){
 	var token = tokenStr.split('token=')[1];
 	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
 	var arr = [];
-	console.log(orderNo,token, 678)
-
+	// console.log(orderNo,token, 678)
+	// invoiceToggle();
+	// invTypeToggle();
+ // 	$('#toggle-event').on('change', function() {
+ // 		invoiceToggle();
+	// })
+	// rewriteInvoice();
 	init();
-
 	$(window).scroll(function(){
 		// 滚动条距离顶部的距离 大于 200px时
 		if($(window).scrollTop() >= 200){
@@ -164,6 +168,9 @@ $(function(){
 	     		renderAttendForms(res);
 	     		renderBuyerForm(res);
 	     		renderPayMethods(res);
+	     		if(res.data.invoiceForm) {
+	     			rewriteInvoice(res.data.invoiceForm);
+	     		}
 	     		setInterval(function(){
      				orderEach();
      			}, 3000)
@@ -180,7 +187,7 @@ $(function(){
  			payMethod[key] = true;
  			payMethodList.push(payMethod);
  		}
- 		bindHtml("#payForm", {"payMethodList": payMethodList});
+ 		bindHtml("#payForm", {"payMethodList": payMethodList}, '', res);
  	};
  	/**
  	 * [renderOrderInfo description]	渲染订单信息
@@ -188,7 +195,7 @@ $(function(){
  	 * @return {[type]}     [description]
  	 */
  	function renderOrderInfo (res) {
- 		bindHtml("#orderInfo", res.data.order)
+ 		bindHtml("#orderInfo", res.data.order, '', res)
  	};
  	/**
  	 * [renderAttendForms description]	渲染参会者信息
@@ -204,7 +211,7 @@ $(function(){
 				formItems[k][typeFlag] = true;
  			}
  		}
- 		bindHtml("#attendForms", {"attendForms": attendForms});
+ 		bindHtml("#attendForms", {"attendForms": attendForms}, '', res);
  	};
  	/**
  	 * [renderBuyerForm description]    渲染购票者信息
@@ -212,7 +219,7 @@ $(function(){
  	 * @return {[type]}     [description]
  	 */
  	function renderBuyerForm (res) {
- 		bindHtml("#buyerForm", {"buyerForm": res.data.buyerForm});
+ 		bindHtml("#buyerForm", {"buyerForm": res.data.buyerForm}, '', res);
  	};
  	/**
  	 * [bindHtml description]			数据注入html模版
@@ -220,7 +227,7 @@ $(function(){
  	 * @param  {[type]} data  [description]
  	 * @return {[type]}       [description]
  	 */
- 	function bindHtml (domId, data, helper) {
+ 	function bindHtml (domId, data, helper, res) {
  		var tpl =  $(domId).html();
 		//预编译模板
 		var template = Handlebars.compile(tpl);
@@ -236,6 +243,52 @@ $(function(){
 		mailAutoComplete();
  		payTypeToggle();
  		bindPay();
+ 		rewriteAll(res);
+ 	}
+ 	/**
+ 	 * [rewriteAll description]      全局数据回写
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function rewriteAll (res) {
+ 		rewriteSelect();
+ 		if(res.data.currPayMethod){
+ 			rewritePay(res.data.currPayMethod);
+ 		}
+ 	};
+ 	/**
+ 	 * [rewriteSelect description]  select数据回写
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function rewriteSelect () {
+ 		var selects = $('select');
+ 		selects.each(function(){
+ 			var value = $(this).attr('rewrite');
+ 			if (value) {
+ 				$(this).val(value);
+ 			}
+ 		})
+ 	};
+ 	/**
+ 	 * [rewriteInvoice description]  发票信息回写
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function rewriteInvoice (info) {
+ 		$('#toggle-event').bootstrapToggle('on');
+ 		var type = info.type;
+ 		$(".invType[invtype='"+ type +"']").click();
+ 		if(type !== '2') {
+ 			
+ 		}
+ 	};
+ 	/**
+ 	 * [rewritePay description]     支付方式回写
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function rewritePay (payMethod) {
+ 		var target = $(".pay-item[paytype='"+ payMethod +"']");
+ 		$('.pay-item').removeClass('active');
+ 		target.addClass('active');
+ 		// console.log(target, 666)
  	}
  	/**
  	 * [creatCopySele description]     创建复制信息下拉框
@@ -305,7 +358,13 @@ $(function(){
  	 * @return {[type]}     [description]
  	 */
  	function checkAll(dom){
- 		var val = dom.val();
+ 		var val = '';
+ 		var type = dom.attr('type');
+ 		if(type == 'file') {
+ 			val = dom.attr('path');
+ 		} else {
+ 			val = dom.val();
+ 		}
 		if(!val || val == '请选择') {
 			dom.closest('.form-group').find('.hint').show();
 			arr.push(dom)

@@ -74,19 +74,23 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		if (res.data.state == 'payed') {
-	     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
-		 		} else if (res.data.state == 'cancel') {
-		 			window.location.href="/index.html";
-		 		} else {
-		 			getData();
-			 		payTypeToggle();
-			 		invoiceToggle();
-			 		invTypeToggle();
-				 	$('#toggle-event').on('change', function() {
+	     		if (res.data.payMethod == 'LocalePay') {
+     				window.location.href = '/scene.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
+     			} else {
+     				if (res.data.state == 'payed') {
+		     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
+			 		} else if (res.data.state == 'cancel') {
+			 			window.location.href="/index.html";
+			 		} else {
+			 			getData();
+				 		payTypeToggle();
 				 		invoiceToggle();
-			    	})
-		 		}
+				 		invTypeToggle();
+					 	$('#toggle-event').on('change', function() {
+					 		invoiceToggle();
+				    	})
+			 		}
+     			}
 	      	}
 	 	})		
  	};
@@ -302,7 +306,7 @@ $(function(){
  	 */
  	function checkAll(dom){
  		var val = dom.val();
-		if(!val) {
+		if(!val || val == '请选择') {
 			dom.closest('.form-group').find('.hint').show();
 			arr.push(dom)
 		} else {
@@ -479,6 +483,7 @@ $(function(){
  			console.log("有效的购票者信息！");
  			submit(data);
  		} else {
+ 			console.log(arr)
  			arr[0].focus()
  		}
  	};

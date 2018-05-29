@@ -6,6 +6,7 @@ $(function(){
 	var token = tokenStr.split('token=')[1];
 	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
 	init()
+
 	function init() {
 		orderStatus ()
 	}
@@ -24,15 +25,47 @@ $(function(){
 		 		} else if (res.data.state == 'cancel') {
 		 			window.location.href="/index.html";
 		 		} else {
-		 			payTypeToggle ()
-		 			bindHtml("#register", res.data)
-		 			setInterval(function(){
-         				orderEach();
-         			}, 3000)
+		 			orderInfo ()
 		 		}
 	      	}
 	 	})		
  	};
+ 	function orderInfo () {
+ 		$.ajax({
+		  	type: "GET",
+		   	url: baseUrl + "/ticket/repay.json?number= " + Math.random(),
+		   	headers: {
+		        'x-access-token': token
+		    },
+		   	data: {'orderNo': orderNo},
+		   	dataType: "json",
+		   	// jsonp: "callback",
+		   	success: function(res){
+		   		if (res.code == 0) {
+		 			renderOrderInfo (res)
+		 			payTypeToggle ()
+		 			modify ()
+		 			setInterval(function(){
+         				orderEach();
+         			}, 3000)
+		   		}
+		   	}
+	 	});
+ 	}
+ 	/**
+ 	 * [renderOrderInfo description]	渲染订单信息
+ 	 * @param  {[type]} res [description]
+ 	 * @return {[type]}     [description]
+ 	 */
+ 	function renderOrderInfo (res) {
+ 		bindHtml("#register", res.data.order)
+ 	};
+ 	/**
+ 	 * [bindHtml description]			查询订单状态
+ 	 * @param  {[type]} domId [description]
+ 	 * @param  {[type]} data  [description]
+ 	 * @return {[type]}       [description]
+ 	 */
 	function orderEach () {
  		$.ajax({
 	    	type: "POST",
@@ -90,7 +123,10 @@ $(function(){
  	 * [payTypeToggle description]		修改参会者信息
  	 * @return {[type]} [description]
  	 */
- 	$('.modify').on('click',function () {
- 		window.location.href="/buy.html?token=" + token + "&orderNo=" + orderNo;
- 	});
+ 	function modify () {
+	 	$('.modify').on('click',function () {
+	 		window.location.href="/buy.html?token=" + token + "&orderNo=" + orderNo;
+	 	});
+ 	}
+
 });

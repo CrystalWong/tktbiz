@@ -41,17 +41,17 @@
               <div class="register_info" id="register-wrap">
                 <script id="register" type="text/x-handlebars-template">
                   <div class="price">
-                    应付金额：<strong class="green">￥0.06(目前写死) </strong>
+                    应付金额：<strong class="green">￥{{orderAmt}}</strong>
                   </div>
                   <ul>
                     <li>&#12288;订单号：{{orderNo}}</li>
                     <li>&#12288;购票人：{{buyer}}</li>
-                    <li>&#12288;邮&#12288;箱：{{eamil}}</li>
+                    <li>&#12288;邮&#12288;箱：{{email}}</li>
                     <li>&#12288;手机号：{{mobile}}</li>
                     <li>购买数量：{{num}}</li>
                   </ul>
-                  <div>
-                    <a href="javascript:void(0)" class="green modify">修改参会者信息</a>
+                  <div class="modify">
+                    <a href="javascript:void(0)" class="green">修改参会者信息</a>
                   </div>
                 </script>
               </div>

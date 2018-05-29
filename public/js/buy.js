@@ -172,7 +172,6 @@ $(function(){
 	     		renderOrderInfo(res);
 	     		renderAttendForms(res);
 	     		renderBuyerForm(res);
-	     		renderPayMethods(res);
 	     		if(res.data.invoiceForm) {
 	     			rewriteInvoice(res.data.invoiceForm);
 	     		}

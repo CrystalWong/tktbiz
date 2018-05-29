@@ -5,12 +5,6 @@ $(function(){
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
 	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
-	$('.again').on('click', function () {
-		window.location.href = '/payment.html'
-	})
-	$('.cancel').on('click', function () {
-		window.location.href = '/index.html'
-	})
 	init()
 	function init () {
 		getData();

@@ -164,6 +164,11 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
+	     		if (Number(res.data.order.orderAmt) !== 0){
+	     			$('#submit').text('去付款')
+	     			renderPayMethods(res);
+	     			$('.invoice').show()
+	     		}
 	     		renderOrderInfo(res);
 	     		renderAttendForms(res);
 	     		renderBuyerForm(res);
@@ -560,7 +565,7 @@ $(function(){
 	     	data: JSON.stringify(data),
 	     	contentType: 'application/json',
 	     	success: function(res){
-	         	console.log(res)
+	         	console.log(data.payMethod)
 	         	if(res.code == '0') {
 	         		if (data.payMethod == "CodePay") {
 	         			window.location.href = '/pay.html?token=' + token + "&orderNo=" + orderNo;
@@ -568,8 +573,10 @@ $(function(){
 	         			window.location.href = '/alipay.html?token=' + token + "&orderNo=" + orderNo;
 	         		} else if(data.payMethod == "PayPal") {
 	         			window.location.href = '/paypal.html?token=' + token + "&orderNo=" + orderNo;
-	         		} else {
+	         		} else if(data.payMethod == "LocalePay") {
 	         			window.location.href = '/scene.html?token=' + token + "&orderNo=" + orderNo;
+	         		} else {
+	         			window.location.href = '/result.html?token=' + token + "&orderNo=" + orderNo;
 	         		}
 	         	}
 	      	}

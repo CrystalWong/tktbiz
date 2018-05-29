@@ -141,7 +141,7 @@
                     </div>
                   </script>
                 </div>
-                <div class="col-xs-12">
+                <div class="col-xs-12 invoice">
                   <div class="row floor text-left">
                     <div class="col-xs-12 header">
                       <div class="row">
@@ -386,51 +386,53 @@
           </div>
           <div class="row">
             <div class="col-xs-12 col-sm-8">
-              <div class="row floor pay-wrap text-left" id="payForm-wrap">
-                <script id="payForm" type="text/x-handlebars-template">
-                  <div class="col-xs-12 header">
-                    <span>选择支付方式：</span>
-                  </div>
-                  <div class="col-xs-12 pay pay-active">
-                    <div class="pay-type">
-                      <img class="img-outer img-active" src="/imgs/circle.png" width="12"> 
-                      <img class="img-outer empt" src="/imgs/empt-circle.jpg" width="12">
-                      在线支付平台
+              <div class="row floor pay-wrap text-left">
+                <div id="payForm-wrap">
+                  <script id="payForm" type="text/x-handlebars-template">
+                    <div class="col-xs-12 header">
+                      <span>选择支付方式：</span>
                     </div>
-                    <div class="pay-list fold">
-                      {{#each payMethodList}}
-                        {{#if AlipayQuick}}
-                        <div class="pay-item pull-left text-center" payType="AlipayQuick">
-                          <img src="/imgs/AlipayQuick.png" width="80%">
-                        </div>
-                        {{/if}}
-                        {{#if CodePay}}
-                        <div class="pay-item pull-left text-center" payType="CodePay">
-                          <img src="/imgs/CodePay.png" width="80%">
-                        </div>
-                        {{/if}}
-                        {{#if PayPal}}
-                        <div class="pay-item pull-left text-center" payType="PayPal">
-                          <img src="/imgs/PayPal.png" width="80%">
-                        </div> 
-                        {{/if}}
-                      {{/each}}
-                    </div>
-                  </div>
-                  {{#each payMethodList}}
-                    {{#if LocalePay}}
-                      <div class="col-xs-12 pay pay-item" payType="LocalePay">
-                        <div class="pay-type">
-                          <img class="img-outer img-active" src="/imgs/circle.png" width="12"> 
-                          <img class="img-outer empt" src="/imgs/empt-circle.jpg" width="12"> 
-                          现场缴费
-                        </div>
-                        <div class="red fold">现场缴费可能会存在现场等待时间长和票已售罄的情况，请您确认，建议在线支付。</div>
+                    <div class="col-xs-12 pay pay-active">
+                      <div class="pay-type">
+                        <img class="img-outer img-active" src="/imgs/circle.png" width="12"> 
+                        <img class="img-outer empt" src="/imgs/empt-circle.jpg" width="12">
+                        在线支付平台
                       </div>
-                    {{/if}}
-                  {{/each}}
-                  <button class="col-xs-12 col-sm-8 col-sm-offset-2 go text-center" id="submit">去付款</button>
-                </script>
+                      <div class="pay-list fold">
+                        {{#each payMethodList}}
+                          {{#if AlipayQuick}}
+                          <div class="pay-item pull-left text-center" payType="AlipayQuick">
+                            <img src="/imgs/AlipayQuick.png" width="80%">
+                          </div>
+                          {{/if}}
+                          {{#if CodePay}}
+                          <div class="pay-item pull-left text-center" payType="CodePay">
+                            <img src="/imgs/CodePay.png" width="80%">
+                          </div>
+                          {{/if}}
+                          {{#if PayPal}}
+                          <div class="pay-item pull-left text-center" payType="PayPal">
+                            <img src="/imgs/PayPal.png" width="80%">
+                          </div> 
+                          {{/if}}
+                        {{/each}}
+                      </div>
+                    </div>
+                    {{#each payMethodList}}
+                      {{#if LocalePay}}
+                        <div class="col-xs-12 pay pay-item" payType="LocalePay">
+                          <div class="pay-type">
+                            <img class="img-outer img-active" src="/imgs/circle.png" width="12"> 
+                            <img class="img-outer empt" src="/imgs/empt-circle.jpg" width="12"> 
+                            现场缴费
+                          </div>
+                          <div class="red fold">现场缴费可能会存在现场等待时间长和票已售罄的情况，请您确认，建议在线支付。</div>
+                        </div>
+                      {{/if}}
+                    {{/each}}
+                  </script>
+                </div>
+                <button class="col-xs-12 col-sm-8 col-sm-offset-2 go text-center" id="submit">提交</button>
               </div>
             </div>
           </div>

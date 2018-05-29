@@ -5,6 +5,7 @@ $(function(){
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
 	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
+	var check;
 	init();
  	function init () {
  		orderStatus ()
@@ -64,13 +65,16 @@ $(function(){
 	     	dataType: "json",
 	     	success: function(res){
 	         	// console.log(res, 33)
+	         	if (check) {
+	         		clearInterval(check);
+	         	}
 	         	$('.QRcode').remove();
 	         	if(res.code == '0'){
 	         		var QRcode = '<img class="QRcode" src="' + baseUrl + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL + '" width="30%" alt="支付二维码">'
 	         		$(".pay").before(QRcode);
 	         		var prepayId = res.prepayId;
 	         		countDown();
-         			setInterval(function(){
+         			check = setInterval(function(){
          				checkStatus(prepayId);
          				orderEach();
          			}, 3000)

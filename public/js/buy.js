@@ -46,13 +46,19 @@ $(function(){
 		$('.invType-info').eq(0).addClass('invType-info-active');
 		$('.invType').eq(0).addClass('invType-active');
 		$('#invEleMobile').hide();
+		$('#gettype-wrap').show();
 		$('.dialog').hide()
 	});
+	/**
+	 * [bindPay description]         绑定去付款
+	 * @return {[type]} [description]
+	 */
+	function bindPay () {
+		$('#submit').on('click', function(){
+			pay();
+		});	
+	}
 
-	$('#submit').on('click', function(){
-		// window.location.href = '/result.html'
-		pay();
-	});
 
  	function init () {
    		orderStatus ()
@@ -153,12 +159,24 @@ $(function(){
 	     		renderOrderInfo(res);
 	     		renderAttendForms(res);
 	     		renderBuyerForm(res);
+	     		renderPayMethods(res);
 	     		setInterval(function(){
      				orderEach();
      			}, 3000)
 	         	console.log(res)
 	      	}
 	 	})		
+ 	};
+ 	function renderPayMethods (res) {
+ 		var payMethods = res.data.payMethods;
+ 		var payMethodList = [];
+ 		for(i in payMethods){
+ 			var payMethod = {};
+ 			var key = payMethods[i];
+ 			payMethod[key] = true;
+ 			payMethodList.push(payMethod);
+ 		}
+ 		bindHtml("#payForm", {"payMethodList": payMethodList});
  	};
  	/**
  	 * [renderOrderInfo description]	渲染订单信息
@@ -212,6 +230,8 @@ $(function(){
 		bindSendToggle();
 		bindUpload();
 		mailAutoComplete();
+ 		payTypeToggle();
+ 		bindPay();
  	}
  	/**
  	 * [creatCopySele description]     创建复制信息下拉框
@@ -241,14 +261,22 @@ $(function(){
 			var doms = $('.panel').eq(index).find(".form-control")
 			// console.log(doms, 99)
 			doms.each(function(){
-				var name = $(this).attr('posi')
-				var value = $(this).val()
+				var name = $(this).attr('posi');
+				var type = $(this).attr('type');
+				var value = $(this).val();
 				var headerTit = $('.panel').eq(tarIndex+1).find('.header-tit').text();
 				if(headerTit == '购票者信息') {
 					$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
 				} else {
 					if(name !== "name") {
-						$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
+						if(type == "file") {
+							var path = $(this).attr('path');
+							var target = $('.panel').eq(tarIndex+1).find("[posi='" + name + "']");
+							target.attr('path',path);
+							target.closest('.upload-wrap').find('.upload-text').text(path);
+						} else {
+							$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
+						}
 					}
 				}
 			})
@@ -387,10 +415,12 @@ $(function(){
  				$('.invType-info').eq(0).addClass('invType-info-active');
  				$('.invType').eq(index).addClass('invType-active');
  				$('#invEleMobile').show();
+ 				$('#gettype-wrap').hide();
  			} else if(index == 0 && $('#invEleMobile').is(':visible')){
  				$('.dialog').show();
  			} else {
  				$('#invEleMobile').hide();
+ 				$('#gettype-wrap').show();
  				$('.invType').removeClass('invType-active');
  				$('.invType-info').removeClass('invType-info-active');
  				$('.invType').eq(index).addClass('invType-active');
@@ -447,7 +477,7 @@ $(function(){
  		console.log(data, 23456)
  		if(buyer && ticketUsers && invoice){
  			console.log("有效的购票者信息！");
- 			// submit(data);
+ 			submit(data);
  		} else {
  			arr[0].focus()
  		}
@@ -552,6 +582,7 @@ $(function(){
  		var postCity = $('#input_city').val();
  		var postCounty = $('#input_area').val();
  		var postAddress = $('.postAddress').val();
+ 		var mobile = $('#invEleMobile input').val();
  		var invoice = {
  			"type": type || '',
  			"takerType": takerType || '',
@@ -569,7 +600,8 @@ $(function(){
  			"postProvince": postProvince || '',
  			"postCity": postCity || '',
  			"postCounty": postCounty || '',
- 			"postAddress": postAddress || ''
+ 			"postAddress": postAddress || '',
+ 			"mobile": mobile || ''
  		}
  		return invoice;
  	};
@@ -612,14 +644,18 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function payTypeToggle () {
+ 		$('.pay-item').eq(0).addClass('active');
+ 		$('.pay').off();
  		$('.pay').on('click',function(){
  			$('.pay').removeClass('pay-active');
  			$(this).addClass('pay-active');
- 		}) 
+ 		})
+ 		$('.pay-item').off();
  		$('.pay-item').on('click',function(){
  			$('.pay-item').removeClass('active');
  			$(this).addClass('active');
  		})
+ 		$('.pay-wrap .pay-type').off();
  		$('.pay-wrap .pay-type').on('click', function(){
  			if($(this).text().replace(/(^\s+)|(\s+$)/g,"") == "在线支付平台"){
  				console.log($(this).closest('.pay'))

@@ -43,8 +43,10 @@ $(function(){
 		   	success: function(res){
 		   		if (res.code == 0) {
 		 			renderOrderInfo (res)
+		 			renderPayMethods (res)
 		 			payTypeToggle ()
 		 			modify ()
+		 			pay ()
 		 			setInterval(function(){
          				orderEach();
          			}, 3000)
@@ -59,6 +61,22 @@ $(function(){
  	 */
  	function renderOrderInfo (res) {
  		bindHtml("#register", res.data.order)
+ 	};
+ 	/**
+ 	 * [renderOrderInfo description]	渲染支付方式
+ 	 * @param  {[type]} res [description]
+ 	 * @return {[type]}     [description]
+ 	 */
+ 	function renderPayMethods (res) {
+ 		var payMethods = res.data.payMethods;
+ 		var payMethodList = [];
+ 		for(i in payMethods){
+ 			var payMethod = {};
+ 			var key = payMethods[i];
+ 			payMethod[key] = true;
+ 			payMethodList.push(payMethod);
+ 		}
+ 		bindHtml("#payForm", {"payMethodList": payMethodList});
  	};
  	/**
  	 * [bindHtml description]			查询订单状态
@@ -104,14 +122,18 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function payTypeToggle () {
+ 		$('.pay-item').eq(0).addClass('active');
+ 		$('.pay').off();
  		$('.pay').on('click',function(){
  			$('.pay').removeClass('pay-active');
  			$(this).addClass('pay-active');
- 		}) 
+ 		})
+ 		$('.pay-item').off();
  		$('.pay-item').on('click',function(){
  			$('.pay-item').removeClass('active');
  			$(this).addClass('active');
  		})
+ 		$('.pay-wrap .pay-type').off();
  		$('.pay-wrap .pay-type').on('click', function(){
  			if($(this).text().replace(/(^\s+)|(\s+$)/g,"") == "在线支付平台"){
  				console.log($(this).closest('.pay'))
@@ -128,5 +150,38 @@ $(function(){
 	 		window.location.href="/buy.html?token=" + token + "&orderNo=" + orderNo;
 	 	});
  	}
-
+ 	/**
+ 	 * [payTypeToggle description]		去支付
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function pay () {
+	 	$('#submit').on('click',function () {
+	 		var payMethod = $('.pay-wrap .active').attr('paytype');
+	 		submit (payMethod)
+	 	});
+ 	}
+ 	function submit (payMethod) {
+	    $.ajax({
+	    	type: "POST",
+	     	url: baseUrl + "/ticket/repay.json?number= " + Math.random() + '&orderNo=' + orderNo + '&payMethod=' +payMethod,
+            headers: {
+		        'x-access-token': token
+		    },
+	     	data: {},
+	     	dataType: "json",
+	     	success: function(res){
+	     		if (res.code == 0) {
+	     			if (payMethod == "CodePay") {
+	         			window.location.href = '/pay.html?token=' + token + "&orderNo=" + orderNo;
+	         		} else if(payMethod == "AlipayQuick") {
+	         			window.location.href = '/alipay.html?token=' + token + "&orderNo=" + orderNo;
+	         		} else if(payMethod == "PayPal") {
+	         			window.location.href = '/paypal.html?token=' + token + "&orderNo=" + orderNo;
+	         		} else {
+	         			window.location.href = '/scene.html?token=' + token + "&orderNo=" + orderNo;
+	         		}
+	     		}
+	      	}
+	 	})		
+ 	};
 });

@@ -483,7 +483,6 @@ $(function(){
  			console.log("有效的购票者信息！");
  			submit(data);
  		} else {
- 			console.log(arr)
  			arr[0].focus()
  		}
  	};

@@ -281,9 +281,7 @@ $(function(){
  		$('#toggle-event').bootstrapToggle('on');
  		var type = info.type;
  		$(".invType[invtype='"+ type +"']").click();
- 		if(type !== '2') {
- 			
- 		}
+ 		// if(type !== '2') {}
  	};
  	/**
  	 * [rewritePay description]     支付方式回写

@@ -575,8 +575,8 @@ $(function(){
 	 			return false;
 	 		}
  		}
- 		var type = $('.invType-active').text();
- 		var takerType = $('.acceptType-active span').text();
+ 		var type = $('.invType-active').attr('invType');
+ 		var takerType = $('.acceptType-active').attr('acceptType');
  		var title = $('.invType-info-active .title').val();
  		var serviceType = $('.invType-info-active .serviceType').val();
  		var taxpayerId = $('.invType-info-active .taxpayerId').val();
@@ -585,7 +585,7 @@ $(function(){
  		var companyFinanceTel = $('.invType-info-active .companyFinanceTel').val();
  		var bank = $('.invType-info-active .bank').val();
  		var bankNo = $('.invType-info-active .bankNo').val();
- 		var getType = $('.getType-active').text();
+ 		var getType = $('.getType-active').attr('getType');
  		var postName = $('.postName').val();
  		var postTel = $('.postTel').val();
  		var postProvince = $('#input_province').val();

@@ -77,6 +77,14 @@
                                     </div>
                                     <input type="file" class="form-control {{{code}}} cousor" posi="{{{code}}}" name="{{{code}}}" path="{{{value}}}" accept="image/*"/>
                                   </div>
+                                {{else if radio}}
+                                  <div class="dateRadio" rewrite="{{{value}}}">
+                                    {{#each data}}
+                                    <div>
+                                      <input class="form-control" type="radio" name="{{{../code}}}" value="{{{value}}}"/>{{name}}
+                                    </div>
+                                    {{/each}}
+                                  </div>
                                 {{else}}
                                   <input type="{{{type}}}" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" placeholder="" value="{{{value}}}" maxlength="32">
                                 {{/if}}

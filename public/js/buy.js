@@ -58,6 +58,7 @@ $(function(){
 	 * @return {[type]} [description]
 	 */
 	function bindPay () {
+		$('#submit').off();
 		$('#submit').on('click', function(){
 			pay();
 		});	
@@ -255,6 +256,7 @@ $(function(){
  	 */
  	function rewriteAll (res) {
  		rewriteSelect();
+ 		rewriteRadio();
  		if(res.data.currPayMethod){
  			rewritePay(res.data.currPayMethod);
  		}
@@ -269,6 +271,21 @@ $(function(){
  			var value = $(this).attr('rewrite');
  			if (value) {
  				$(this).val(value);
+ 			}
+ 		})
+ 	};
+ 	/**
+ 	 * [rewriteRadio description]  radio数据回写
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function rewriteRadio () {
+ 		var targets = $('.dateRadio');
+ 		targets.each(function(){
+ 			var value = $(this).attr('rewrite');
+ 			if(value) {
+ 				// $("input[name='radio']:checked").val()
+ 				var name = $(this).find('.form-control').eq(0).attr('name');
+ 				$(":radio[name='" + name + "'][value='" + value + "']").prop("checked", "checked");
  			}
  		})
  	};
@@ -728,10 +745,14 @@ $(function(){
  				var type = inputs.eq(k).attr('type');
  				if(type == "file") {
  					var value = inputs.eq(k).attr("path");
+ 				} else if(type == "radio"){
+ 					var value = $("input[name='" + key + "']:checked").val();
  				} else {
  					var value = inputs.eq(k).val();
  				}
- 				attendant[key] = value;
+ 				if(!attendant[key]) {
+ 					attendant[key] = value;
+ 				}
  			}
  			ticketUsers.push(attendant)
  		}
@@ -816,7 +837,7 @@ $(function(){
 	                html +="<option value="+item.code+" >"+ item.names +"</option> ";
 	            }
 	        });
-	        $("#input_area ").append(html);
+	        $("#input_area").append(html);
 	    });
  	}
 	 	

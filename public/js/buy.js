@@ -279,8 +279,39 @@ $(function(){
  	function rewriteInvoice (info) {
  		$('#toggle-event').bootstrapToggle('on');
  		var type = info.type;
+ 		var takerType = info.takerType;
+ 		var getType = info.getType;
  		$(".invType[invtype='"+ type +"']").click();
- 		// if(type !== '2') {}
+ 		if(type !== '2') {
+ 			$(".invType-info-active .accept[accepttype='"+ takerType +"']").click();
+ 			if(type == '3') {
+ 				$(".invType-info-active .mobile").val(info.mobile);
+ 			}
+ 		} else {
+ 			$(".invType-info-active .companyRegAddress").val(info.companyRegAddress);
+ 			$(".invType-info-active .companyFinanceTel").val(info.companyFinanceTel);
+ 			$(".invType-info-active .bank").val(info.bank);
+ 			$(".invType-info-active .bankNo").val(info.bankNo);
+ 		}
+ 		$(".invType-info-active .title").val(info.title);
+ 		$(".invType-info-active .serviceType").val(info.serviceType);
+ 		$(".invType-info-active .taxpayerId").val(info.taxpayerId);
+ 		$(".invType-info-active .remark").val(info.remark);
+ 		if(type !== '3') {
+ 			$('#gettype-wrap').show();
+ 			$(".getType[getType='"+ getType +"']").click();
+ 			if(getType == '2') {
+ 				$('.postName').val(info.postName);
+ 				$('.postTel').val(info.postTel);
+ 				$('.postAddress').val(info.postAddress);
+ 				$('#input_province').val(info.postProvince);
+ 				$('#input_province').change();
+ 				$('#input_city').val(info.postCity);
+ 				$('#input_city').change();
+ 				$('#input_area').val(info.postCounty);
+ 			}
+ 		}
+
  	};
  	/**
  	 * [rewritePay description]     支付方式回写

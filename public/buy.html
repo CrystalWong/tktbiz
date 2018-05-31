@@ -80,8 +80,9 @@
                                 {{else if radio}}
                                   <div class="dateRadio" rewrite="{{{value}}}">
                                     {{#each data}}
-                                    <div>
-                                      <input class="form-control" type="radio" name="{{{../code}}}" value="{{{value}}}"/>{{name}}
+                                    <div class="dateRadio-item">
+                                      <input class="form-control pull-left" type="radio" name="{{{../code}}}" value="{{{value}}}"/>
+                                      <span class="pull-left">{{name}}</span>
                                     </div>
                                     {{/each}}
                                   </div>
@@ -277,7 +278,7 @@
                         <div class="form-group">
                           <label for="bankNo" class="col-xs-2 control-label"><span class="red">*</span>银行账号:</label>
                           <div class="col-xs-10">
-                            <input type="text" class="form-control bankNo" maxlength="32">
+                            <input type="text" class="form-control bankNo" maxlength="32" name="bankNo">
                             <small class="required hint red">银行账号&nbsp;不能为空</small>                   
                           </div>
                         </div>

@@ -88,7 +88,7 @@ $(function(){
 			 			window.location.href="/index.html";
 			 		} else {
 			 			getData();
-				 		payTypeToggle();
+				 		// payTypeToggle();
 				 		invoiceToggle();
 				 		invTypeToggle();
 					 	$('#toggle-event').on('change', function() {
@@ -432,7 +432,26 @@ $(function(){
 		if(name === 'email') {
 			checkEmail(dom, val);
 		}
+		if(val && name === 'bankNo') {
+			checkBankNo(dom, val);
+		}
  	}
+ 	/**
+ 	 * [checkBankNo description]         校验银行卡号
+ 	 * @param  {[type]} dom [description]
+ 	 * @return {[type]}     [description]
+ 	 */
+ 	function checkBankNo (dom, val) {
+ 		var reg = /^[0-9]*$/;
+ 		if (reg.test(val)){
+		    dom.closest('.form-group').find('.hint').text('');
+		    dom.closest('.form-group').find('.hint').hide();
+		} else {
+			dom.closest('.form-group').find('.hint').text('请输入正确格式的 银行卡号');
+		    dom.closest('.form-group').find('.hint').show();
+		    arr.push(dom)
+		}
+ 	};
  	/**
  	 * [checkEmail description]          校验邮箱
  	 * @param  {[type]} dom [description]
@@ -764,21 +783,21 @@ $(function(){
  	 */
  	function payTypeToggle () {
  		$('.pay-item').eq(0).addClass('active');
- 		$('.pay').off();
  		$('.pay').on('click',function(){
  			$('.pay').removeClass('pay-active');
  			$(this).addClass('pay-active');
  		})
- 		$('.pay-item').off();
  		$('.pay-item').on('click',function(){
  			$('.pay-item').removeClass('active');
  			$(this).addClass('active');
  		})
- 		$('.pay-wrap .pay-type').off();
+ 		// $('.pay-wrap .pay-type').off();
  		$('.pay-wrap .pay-type').on('click', function(){
  			if($(this).text().replace(/(^\s+)|(\s+$)/g,"") == "在线支付平台"){
  				console.log($(this).closest('.pay'))
  				$(this).closest('.pay').find('.pay-item').eq(0).addClass('active');
+ 			} else {
+ 				$(this).closest('.pay').addClass('active');
  			}
  		})
  	};

@@ -123,21 +123,23 @@ $(function(){
  	 */
  	function payTypeToggle () {
  		$('.pay-item').eq(0).addClass('active');
- 		$('.pay').off();
+ 		// $('.pay').off();
  		$('.pay').on('click',function(){
  			$('.pay').removeClass('pay-active');
  			$(this).addClass('pay-active');
  		})
- 		$('.pay-item').off();
+ 		// $('.pay-item').off();
  		$('.pay-item').on('click',function(){
  			$('.pay-item').removeClass('active');
  			$(this).addClass('active');
  		})
- 		$('.pay-wrap .pay-type').off();
+ 		// $('.pay-wrap .pay-type').off();
  		$('.pay-wrap .pay-type').on('click', function(){
  			if($(this).text().replace(/(^\s+)|(\s+$)/g,"") == "在线支付平台"){
  				console.log($(this).closest('.pay'))
  				$(this).closest('.pay').find('.pay-item').eq(0).addClass('active');
+ 			} else {
+ 				$(this).closest('.pay').addClass('active');
  			}
  		})
  	};

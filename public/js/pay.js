@@ -125,7 +125,6 @@ $(function(){
 			$('.info-time .red').text(num);// 你倒计时显示的地方元素
 			if(num == 0){
 				clearInterval(name);
-				countDown()
 				getData ();
 			}
 		}, 1000);

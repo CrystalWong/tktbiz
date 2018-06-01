@@ -249,7 +249,24 @@ $(function(){
  		payTypeToggle();
  		bindPay();
  		rewriteAll(res);
- 	}
+ 		radioToggle();
+ 	};
+ 	/**
+ 	 * [radioToggle description]     radio选中状态切换
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function radioToggle () {
+ 		var radios = $('.dateRadio');
+ 		radios.each(function(){
+ 			var radioItems = $(this).find('.dateRadio-item');
+ 			console.log(radioItems.length)
+ 			radioItems.off();
+ 			radioItems.on('click',function(){
+ 				radioItems.removeClass('active');
+ 				$(this).addClass('active');
+ 			})
+ 		})
+ 	};
  	/**
  	 * [rewriteAll description]      全局数据回写
  	 * @return {[type]} [description]
@@ -284,8 +301,8 @@ $(function(){
  			var value = $(this).attr('rewrite');
  			if(value) {
  				// $("input[name='radio']:checked").val()
- 				var name = $(this).find('.form-control').eq(0).attr('name');
- 				$(":radio[name='" + name + "'][value='" + value + "']").prop("checked", "checked");
+ 				// var name = $(this).find('.form-control').eq(0).attr('name');
+ 				$(".form-control[value='" + value + "']").addClass('active');
  			}
  		})
  	};
@@ -412,12 +429,21 @@ $(function(){
  		var type = dom.attr('type');
  		if(type == 'file') {
  			val = dom.attr('path');
+ 		} else if (type == 'radio') {
+ 			var val = dom.closest('.dateRadio').find('.active').length;
  		} else {
  			val = dom.val();
  		}
 		if(!val || val == '请选择') {
 			dom.closest('.form-group').find('.hint').show();
-			arr.push(dom)
+			console.log(dom, 988)
+			if (type == 'radio') {
+				// var hideInput = dom.closest('.dateRadio').find('input');
+				var hideInput = dom.closest('.dateRadio').find('select');
+				arr.push(hideInput);
+			} else {
+				arr.push(dom);
+			}
 		} else {
 			dom.closest('.form-group').find('.hint').hide();
 		}
@@ -611,6 +637,7 @@ $(function(){
  			console.log("有效的购票者信息！");
  			submit(data);
  		} else {
+ 			console.log(arr,123)
  			arr[0].focus()
  		}
  	};
@@ -765,7 +792,8 @@ $(function(){
  				if(type == "file") {
  					var value = inputs.eq(k).attr("path");
  				} else if(type == "radio"){
- 					var value = $("input[name='" + key + "']:checked").val();
+ 					// var value = $("input[name='" + key + "']:checked").val();
+ 					var value = $(".active[name='" + key + "']").attr("value");
  				} else {
  					var value = inputs.eq(k).val();
  				}

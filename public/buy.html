@@ -51,13 +51,26 @@
                           <form class="form-horizontal">
                             {{#each formItems}}
                             <div class="form-group">
-                              <label for="inputName" class="col-xs-2 control-label">
-                              {{#if required}}
-                              <span class="red">*</span>
+                              {{#if radio}}
+                                <label for="inputName" class="col-xs-2 control-label radioLabel">
+                                {{#if required}}
+                                <span class="red">*</span>
+                                {{/if}}
+                                {{name}}:
+                                </label>
+                              {{else}}
+                                <label for="inputName" class="col-xs-2 control-label">
+                                {{#if required}}
+                                <span class="red">*</span>
+                                {{/if}}
+                                {{name}}:
+                                </label>
                               {{/if}}
-                              {{name}}:
-                              </label>
+                              {{#if radio}}
                               <div class="col-xs-10">
+                              {{else}}
+                              <div class="col-xs-10">
+                              {{/if}}
                                 {{#if list}}
                                   <select type="list" class="form-control {{{code}}}" posi="{{{code}}}" name="{{{code}}}" rewrite="{{{value}}}">
                                     <option>请选择</option>
@@ -79,9 +92,13 @@
                                   </div>
                                 {{else if radio}}
                                   <div class="dateRadio" rewrite="{{{value}}}">
+                                    <!-- <input type="text" name="radio"> -->
+                                    <select></select>
                                     {{#each data}}
-                                    <div class="dateRadio-item">
-                                      <input class="form-control pull-left" type="radio" name="{{{../code}}}" value="{{{name}}}"/>
+                                    <div class="form-control dateRadio-item" type="radio" name="{{{../code}}}" value="{{{name}}}">
+                                      <img class="img-outer" src="/imgs/empt-circle.jpg">
+                                      <img class="img-inner" src="/imgs/point.png">
+                                      <!-- <input class="form-control pull-left" type="radio" name="{{{../code}}}" value="{{{name}}}"/> -->
                                       <span class="pull-left">{{value}}</span>
                                     </div>
                                     {{/each}}

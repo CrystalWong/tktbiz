@@ -51,10 +51,12 @@
 	.cousor {
 		cursor: pointer;
 	}
-	.form-group label {
-	    font-size: 14px;
-	    color: #333333;
-	    font-weight: normal;
+	.form-group {
+    	font-size: 13px !important;
+		label {
+	    	color: #333333;
+	    	font-weight: normal;
+		}
 	}
 	.form-control {
 		border-radius: 0;
@@ -308,25 +310,55 @@
 			margin-left:10px;
 		}
 	}
+	.radioLabel {
+	    padding-left: 0;
+	    padding-top: 0;
+	}
 	.dateRadio {
+		position: relative;
+		select {
+			opacity: 0;
+			filter:alpha(opacity=0);
+			position: absolute;
+			width: 0;
+			height: 0;
+			margin-top: -15px;
+		}
+		.form-control {
+			box-shadow: none;
+		    width: 25px;
+		    height: 25px;
+		    display: inline-block;
+		    border: none;
+		    margin: 0;
+		}
 		.dateRadio-item {
 			width: 100%;
 			height: 25px;
 			line-height: 25px;
-			.form-control {
-				box-shadow: none;
-			    width: 25px;
-			    height: 25px;
-			    display: inline-block;
-			    border: none;
-			    margin: 0;
+			position: relative;
+			img {
+				position: absolute;
+			}
+			.img-outer {
+				top: 4px;
+				left: 1px;
+			}
+			.img-inner {
+				top: 7px;
+				left: 4px;
+				display: none;
 			}
 			span {
 		    	display: inline-block;
 		    	width: 100px;
 		    	line-height: 25px;
 		    	height: 25px;
+		    	margin: -6px 0 0 12px;
 		    }
+		}
+		.active .img-inner {
+			display: block;
 		}
 	}
 }

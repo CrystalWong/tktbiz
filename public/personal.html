@@ -36,26 +36,28 @@
             <div class="row floor text-center">
               <div class="col-xs-12 col-sm-4 text-left">
                 <div class="box_left">
-                  <div class="box_left_title green_bg white_color">
-                    <div class="portrait white_color">
-                      <img src="/imgs/portrait.png" width="100%">
-                    </div>
-                    <p>个人中心</p>
-                  </div>
                   <ul>
-                    <li>
-                      <img src="/imgs/ticket_1.png">
+                    <li class="nav box_left_title box_left_action2" type="title" listType='personal'>
+                      <div class="portrait white_color">
+                        <img src="/imgs/portrait.png" width="100%">
+                      </div>
+                      <p>个人中心</p>
+                    </li>
+                    <li class="nav box_left_action1" listType='ticket'>
+                      <img src="/imgs/ticket_1.png" class="box_left_img_1">
+                      <img src="/imgs/ticket_2.png" class="box_left_img_2">
                       <span class="gray_color">活动门票</span>
                     </li>
-                    <li>
-                      <img src="/imgs/order_1.png">
+                    <li class="nav box_left_action1" listType='order'>
+                      <img src="/imgs/order_1.png" class="box_left_img_1">
+                      <img src="/imgs/order_2.png" class="box_left_img_2">
                       <span class="gray_color">活动订单</span>
                     </li>
                   </ul>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-8 text-left">
-                <div class="box_right_center">
+                <div class="box_right box_right_center box_right_action" listType='personal'>
                   <ul>
                     <li>
                       <p class="name">尛瑶同学</p>
@@ -65,11 +67,11 @@
                     </li>
                     <li>
                       <p class="name">门票（1）</p>
-                      <p><a href="javascript:void(0)" class="green_color">查看</a></p>
+                      <p class="nav" listType='ticket'><a href="javascript:void(0)" class="green_color">查看</a></p>
                     </li>
                   </ul>
                 </div>
-                <div class="box_right_info">
+                <div class="box_right box_right_info" listType='info'>
                   <p class="title">参会详情</p>
                   <ul>
                     <li>姓名 : 尛瑶</li>
@@ -85,16 +87,14 @@
                       <img src="/imgs/download.png">
                       下载电子票
                     </a>
-                    <a href="javascript:void(0)" class="white_color green_bg">
+                    <a href="javascript:void(0)" class="white_color green_bg nav" listType='modify'>
                       <img src="/imgs/modify.png">
                       修改参会信息
                     </a>
                   </div>
-                  <div class="back_info">
-                    <a class="green_color" href="javascript:void(0)">< 返回</a>
-                  </div>
+                  <a class="back_info green_color backs" href="javascript:void(0)">< 返回</a>
                 </div>
-                <div class="box_right_modify">
+                <div class="box_right box_right_modify" listType='modify'>
                   <p class="title">参会详情</p>
                   <form class="form-horizontal">
                     <div class="form-group">
@@ -103,7 +103,7 @@
                       </label>
                       <div class="col-xs-10">
                         <input type="text" class="form-control" placeholder="" value="" maxlength="32">
-                        <small class="required hint red">不能为空</small>
+                        <small class="required hint red">姓名不能为空</small>
                       </div>
                     </div>
                     <div class="form-group">
@@ -112,7 +112,7 @@
                       </label>
                       <div class="col-xs-10">
                         <input type="text" class="form-control" placeholder="" value="" maxlength="32">
-                        <small class="required hint red">不能为空</small>
+                        <small class="required hint red">邮箱不能为空</small>
                       </div>
                     </div>
                     <div class="form-group">
@@ -121,7 +121,7 @@
                       </label>
                       <div class="col-xs-10">
                         <input type="text" class="form-control" placeholder="" value="" maxlength="32">
-                        <small class="required hint red">不能为空</small>
+                        <small class="required hint red">手机号不能为空</small>
                       </div>
                     </div>
                     <div class="form-group">
@@ -130,7 +130,7 @@
                       </label>
                       <div class="col-xs-10">
                         <input type="text" class="form-control" placeholder="" value="" maxlength="32">
-                        <small class="required hint red">不能为空</small>
+                        <small class="required hint red">单位不能为空</small>
                       </div>
                     </div>
                     <div class="form-group">
@@ -139,7 +139,7 @@
                       </label>
                       <div class="col-xs-10">
                         <input type="text" class="form-control" placeholder="" value="" maxlength="32">
-                        <small class="required hint red">不能为空</small>
+                        <small class="required hint red">职位不能为空</small>
                       </div>
                     </div>
                     <div class="form-group">
@@ -148,7 +148,7 @@
                       </label>
                       <div class="col-xs-10">
                         <input type="text" class="form-control" placeholder="" value="" maxlength="32">
-                        <small class="required hint red">不能为空</small>
+                        <small class="required hint red">备注不能为空</small>
                       </div>
                     </div>
                     <div class="form-group">
@@ -177,13 +177,11 @@
                   </form>
                   <div class="button">
                     <a href="javascript:void(0)" class="white_color green_bg preservation">保存</a>
-                    <a href="javascript:void(0)" class="white_color cancel">取消</a>
+                    <a href="javascript:void(0)" class="white_color cancel nav" listType='info'>取消</a>
                   </div>
-                  <div class="back_info">
-                    <a class="green_color" href="javascript:void(0)">< 返回</a>
-                  </div>
+                  <a class="back_info green_color nav" listType='info' href="javascript:void(0)">< 返回</a>
                 </div>
-                <div class="box_right_order">
+                <div class="box_right box_right_order" listType='order'>
                   <p class="title distance">活动订单</p>
                   <div class="empty">
                     <img src="/imgs/empty.png">
@@ -223,7 +221,7 @@
                               <td>
                                 <span class="red_bg white_color">未支付</span>
                               </td>
-                              <td class="green_color">
+                              <td class="green_color nav" listType='info'>
                                 <a href="javascript:void(0)" class="green_color">参会信息</a>
                               </td>
                             </tr>
@@ -233,10 +231,10 @@
                               <td>尛瑶</td>
                               <td>3535435@163.com</td>
                               <td>
-                                <span class="green_bg white_color">正常</span>
+                                <span class="red_bg white_color">未支付</span>
                               </td>
-                              <td class="green_color">
-                                <a href="javascript:void(0)" class="green_color">参会信息</a> | <a href="javascript:void(0)" class="green_color">下载电子票</a>
+                              <td class="green_color nav" listType='info'>
+                                <a href="javascript:void(0)" class="green_color">参会信息</a>
                               </td>
                             </tr>
                           </tbody>
@@ -281,7 +279,7 @@
                               <td>
                                 <span class="red_bg white_color">未支付</span>
                               </td>
-                              <td class="green_color">
+                              <td class="green_color nav" listType='info'>
                                 <a href="javascript:void(0)" class="green_color">参会信息</a>
                               </td>
                             </tr>
@@ -291,10 +289,10 @@
                               <td>尛瑶</td>
                               <td>3535435@163.com</td>
                               <td>
-                                <span class="green_bg white_color">正常</span>
+                                <span class="red_bg white_color">未支付</span>
                               </td>
-                              <td class="green_color">
-                                <a href="javascript:void(0)" class="green_color">参会信息</a> | <a href="javascript:void(0)" class="green_color">下载电子票</a>
+                              <td class="green_color nav" listType='info'>
+                                <a href="javascript:void(0)" class="green_color">参会信息</a>
                               </td>
                             </tr>
                           </tbody>
@@ -306,9 +304,66 @@
                       </div>
                     </div>
                   </div>
+                  <div class="list">
+                    <div class="list_info">
+                      <div class="list_info_head">
+                        <span class="white_color green_bg">已完成</span>
+                        <p>订单号 : 746543254353   订购日期 : 2018-05-21 15:30</p>
+                      </div>
+                      <div class="list_info_main">
+                        <p>订单信息</p>
+                        <p>购票者 : 尛瑶</p>
+                        <p>购票邮箱 : 354543543@163.com</p>
+                      </div>
+                      <div class="list_info_box">
+                        <p>参会信息</p>
+                        <table>
+                          <thead>
+                            <tr>
+                              <td width="11%">票种</td>
+                              <td width="10%">当前票价</td>
+                              <td width="10%">参会者</td>
+                              <td width="27%">邮箱</td>
+                              <td width="12%">状态</td>
+                              <td width="30%">操作</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>单日票</td>
+                              <td>￥0.1</td>
+                              <td>尛瑶</td>
+                              <td>3535435@163.com</td>
+                              <td>
+                                <span class="green_bg white_color">正常</span>
+                              </td>
+                              <td class="green_color nav" listType='info'>
+                                <a href="javascript:void(0)" class="green_color">参会信息</a> | <a href="javascript:void(0)" class="green_color">下载电子票</a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>单日票</td>
+                              <td>￥0.1</td>
+                              <td>尛瑶</td>
+                              <td>3535435@163.com</td>
+                              <td>
+                                <span class="green_bg white_color">正常</span>
+                              </td>
+                              <td class="green_color nav" listType='info'>
+                                <a href="javascript:void(0)" class="green_color">参会信息</a> | <a href="javascript:void(0)" class="green_color">下载电子票</a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="list_info_money">
+                        <p>实付金额 : <span class="green_color">￥0.2</span></p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="box_right_ticket">
-                  <p class="title distance">活动订单</p>
+                <div class="box_right box_right_ticket" listType='ticket'>
+                  <p class="title distance">活动门票</p>
                   <ul class="list">
                     <li>
                       <div class="col-xs-12 col-sm-3 text-left">
@@ -322,7 +377,7 @@
                         <p>订单 : <span class="green_color">3255765768</span></p>
                       </div>
                       <div class="col-xs-12 col-sm-3 text-center">
-                        <a href="javascript:void(0)" class="green_bg white_color">查看参会信息</a>
+                        <a href="javascript:void(0)" class="green_bg white_color nav" listType='info'>查看参会信息</a>
                         <a href="javascript:void(0)" class="green_bg white_color">下载电子票</a>
                       </div>
                     </li>
@@ -338,7 +393,7 @@
                         <p>订单 : <span class="green_color">3255765768</span></p>
                       </div>
                       <div class="col-xs-12 col-sm-3 text-center">
-                        <a href="javascript:void(0)" class="green_bg white_color">查看参会信息</a>
+                        <a href="javascript:void(0)" class="green_bg white_color nav" listType='info'>查看参会信息</a>
                         <a href="javascript:void(0)" class="green_bg white_color">下载电子票</a>
                       </div>
                     </li>
@@ -354,7 +409,7 @@
                         <p>订单 : <span class="green_color">3255765768</span></p>
                       </div>
                       <div class="col-xs-12 col-sm-3 text-center">
-                        <a href="javascript:void(0)" class="green_bg white_color">查看参会信息</a>
+                        <a href="javascript:void(0)" class="green_bg white_color nav" listType='info'>查看参会信息</a>
                         <a href="javascript:void(0)" class="green_bg white_color">下载电子票</a>
                       </div>
                     </li>
@@ -388,12 +443,17 @@
           </div>
         </div>
       </div>
+      <div id="return-top">
+        <div class="return-con up">
+          <img src="/imgs/top.png" width="100%">
+        </div>
+      </div>
     </div>
     <script src="/lib/jquery/jquery.js"></script>
     <script src="/lib/jquery/migrate.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.js"></script>
     <script src="/lib/bootstrap/js/bootstrap-toggle.min.js"></script>
     <script src="/lib/handlebars.js"></script>
-    <!-- <script src="/js/personal.js"></script> -->
+    <script src="/js/personal.js"></script>
   </body>
 </html>

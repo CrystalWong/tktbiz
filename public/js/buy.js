@@ -816,7 +816,7 @@ $(function(){
  		})
  	}
  	/**
- 	 * [mailAutoComplete description]   三级联动
+ 	 * [addressComplete description]   三级联动
  	 * @return {[type]} [description]
  	 */
  	function address () {

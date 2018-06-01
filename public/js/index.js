@@ -172,6 +172,15 @@ $(function(){
 	$('.home').on('click', function () {
 		window.location.href = '/index.html';
 	});
+	$('.personal').on('click', function () {
+		var r = confirm("确定去往个人中心吗？");
+		if (r==true){
+	    	window.location.href = '/personal.html';
+	    } else{
+	    	return;
+	    }
+		
+	});
 	//点击关闭弹出框
 	$('.subclose').on('click', function(){
 		$('.dialog').fadeOut(500)
@@ -239,10 +248,10 @@ $(function(){
 			$('.buy').stop(true,true).hide().siblings('.none').show(); // 如果小于等于 200 淡出
 		}
 		if($('#address').offset().top - $(window).scrollTop() <= 100) {
-			$('.col-xs-3').removeClass('active')
+			$('.col-xs-2').removeClass('active')
 			$('.address').addClass('active')
 		} else {
-			$('.col-xs-3').removeClass('active')
+			$('.col-xs-2').removeClass('active')
 			$('.introduction').addClass('active')
 		}
 	};

@@ -32,45 +32,46 @@
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 floor1 text-center">
           <div class="row">
             <div class="col-xs-12 col-sm-9">
-              <div class="row floor text-left" id="resultInfo-wrap">
-                <script id="resultInfo" type="text/x-handlebars-template">
-                  <div class="col-xs-2">
-                    <img src="/imgs/success.png" width="65%">
+              <div class="row floor text-left">
+                
+                <div class="col-xs-2">
+                  <img src="/imgs/success.png" width="65%">
+                </div>
+                <div class="col-xs-10">
+                  <div class="row hint">
+                    <p>恭喜您报名成功</p>
+                    <p class="hint-2">您的订单以及门票信息已经发送至您的邮箱中，请注意查收</p>
                   </div>
-                  <div class="col-xs-10">
-                    <div class="row hint">
-                      <p>恭喜您报名成功</p>
-                      <p class="hint-2">您的订单以及门票信息已经发送至您的邮箱中，请注意查收</p>
-                    </div>
-                    <div class="row order">
+                  <div class="row order" id="resultInfo-wrap">
+                    <script id="resultInfo" type="text/x-handlebars-template">
                       <p>订单号：<span>{{orderNo}}</span></p>
                       <p>购票人：<span>{{buyer}}</span></p>
                       <p>邮箱：<span>{{email}}</span></p>
                       <p>手机号：<span>{{mobile}}</span></p>
                       <p>购票数：<span>{{num}}</span></p>
-                    </div>
-                    <div class="row">
-                      <img src="/imgs/res-code.png" width="37%">
-                    </div>
-                    <div class="row tips">
-                      <p><strong>温馨提示：</strong></p>
-                      <p>
-                        <small> 
-                          如果您在收件箱中没有收到邮件，请您在垃圾收件箱中查看一下，并将我们设置为常用联系人，使邮件可以收发正常；
-                        </small>
-                      </p>
-                      <p>
-                        <small>
-                          如果您在垃圾收件箱中没有找到我们的邮件，请确认购票邮箱是否正确，如果不正确，联系我们进行修改，如果正确，请耐心等待几分钟，或者您可以关注官方微信号，报告给我们，我们将尽快为您处理。
-                        </small>                     
-                      </p>
-                    </div>
-                    <div class="row back">
-                      <a href="/index.html">返回活动网站</a>
-                      <a href="javascript:void(0)" style="margin-left: 20px;">查看我的门票(待开发)</a>
-                    </div>
+                    </script>
                   </div>
-                </script>
+                  <div class="row">
+                    <img src="/imgs/res-code.png" width="37%">
+                  </div>
+                  <div class="row tips">
+                    <p><strong>温馨提示：</strong></p>
+                    <p>
+                      <small> 
+                        如果您在收件箱中没有收到邮件，请您在垃圾收件箱中查看一下，并将我们设置为常用联系人，使邮件可以收发正常；
+                      </small>
+                    </p>
+                    <p>
+                      <small>
+                        如果您在垃圾收件箱中没有找到我们的邮件，请确认购票邮箱是否正确，如果不正确，联系我们进行修改，如果正确，请耐心等待几分钟，或者您可以关注官方微信号，报告给我们，我们将尽快为您处理。
+                      </small>                     
+                    </p>
+                  </div>
+                  <div class="row back">
+                    <a href="/index.html">返回活动网站</a>
+                    <a href="javascript:void(0)" style="margin-left: 20px;">查看我的门票(待开发)</a>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-xs-12 col-sm-3">

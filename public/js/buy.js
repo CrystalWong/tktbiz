@@ -6,13 +6,6 @@ $(function(){
 	var token = tokenStr.split('token=')[1];
 	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
 	var arr = [];
-	// console.log(orderNo,token, 678)
-	// invoiceToggle();
-	// invTypeToggle();
- // 	$('#toggle-event').on('change', function() {
- // 		invoiceToggle();
-	// })
-	// rewriteInvoice();
 	init();
 	$(window).scroll(function(){
 		// 滚动条距离顶部的距离 大于 200px时

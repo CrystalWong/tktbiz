@@ -429,7 +429,7 @@ $(function(){
  		}
 		if(!val || val == '请选择') {
 			dom.closest('.form-group').find('.hint').show();
-			console.log(dom, 988)
+			// console.log(dom, 988)
 			if (type == 'radio') {
 				// var hideInput = dom.closest('.dateRadio').find('input');
 				var hideInput = dom.closest('.dateRadio').find('select');
@@ -779,6 +779,7 @@ $(function(){
  			var inputs = attendants.eq(i).find('.form-group .form-control');
  			// console.log(inputs.length, 897)
  			attendant["tid"] = attendants.eq(i).attr('tid');
+ 			attendant["uid"] = attendants.eq(i).attr('uid') || '';
  			for(var k=0; k<inputs.length; k++) {
  				var key = inputs.eq(k).attr('name');
  				var type = inputs.eq(k).attr('type');

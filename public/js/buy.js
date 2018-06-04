@@ -429,9 +429,7 @@ $(function(){
  		}
 		if(!val || val == '请选择') {
 			dom.closest('.form-group').find('.hint').show();
-			// console.log(dom, 988)
 			if (type == 'radio') {
-				// var hideInput = dom.closest('.dateRadio').find('input');
 				var hideInput = dom.closest('.dateRadio').find('select');
 				arr.push(hideInput);
 			} else {

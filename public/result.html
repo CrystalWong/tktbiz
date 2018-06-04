@@ -33,26 +33,27 @@
           <div class="row">
             <div class="col-xs-12 col-sm-9">
               <div class="row floor text-left">
-                
                 <div class="col-xs-2">
                   <img src="/imgs/success.png" width="65%">
                 </div>
                 <div class="col-xs-10">
-                  <div class="row hint">
-                    <p>恭喜您报名成功</p>
-                    <p class="hint-2">您的订单以及门票信息已经发送至您的邮箱中，请注意查收</p>
-                  </div>
-                  <div class="row order" id="resultInfo-wrap">
+                  <div id="resultInfo-wrap">
                     <script id="resultInfo" type="text/x-handlebars-template">
-                      <p>订单号：<span>{{orderNo}}</span></p>
-                      <p>购票人：<span>{{buyer}}</span></p>
-                      <p>邮箱：<span>{{email}}</span></p>
-                      <p>手机号：<span>{{mobile}}</span></p>
-                      <p>购票数：<span>{{num}}</span></p>
+                      <div class="row hint">
+                        <p>恭喜您报名成功</p>
+                        <p class="hint-2">您的订单以及门票信息已经发送至您的邮箱中，请注意查收</p>
+                      </div>
+                      <div class="row order">
+                        <p>订单号：<span>{{orderNo}}</span></p>
+                        <p>购票人：<span>{{buyer}}</span></p>
+                        <p>邮箱：<span>{{email}}</span></p>
+                        <p>手机号：<span>{{mobile}}</span></p>
+                        <p>购票数：<span>{{num}}</span></p>
+                      </div>
+                      <div class="row">
+                        <img src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={{{wxTicket}}}" width="37%">
+                      </div>
                     </script>
-                  </div>
-                  <div class="row">
-                    <img src="/imgs/res-code.png" width="37%">
                   </div>
                   <div class="row tips">
                     <p><strong>温馨提示：</strong></p>

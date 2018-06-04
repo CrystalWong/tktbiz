@@ -4,11 +4,35 @@ $(function(){
 	var orderNo = url.split('&orderNo=')[1];
 	var tokenStr = url.split('&orderNo=')[0];
 	var token = tokenStr.split('token=')[1];
+	var param = getUrlParms("param");
+	console.log(param)
 	var baseUrl = "http://360.whereq.com/pco/common/api/" + mid;
 	init()
 
 	function init() {
-		orderStatus ()
+		if (param) {
+			order(param)
+		} else {
+			orderStatus ()
+		}
+	}
+	function order(param) {
+		$.ajax({
+	    	type: "GET",
+	     	url: 'http://360.whereq.com/pco/common/api/ticket/outer/pay.json',
+	     	data: {'param' : param},
+	     	dataType: "json",
+	     	success: function(res){
+	     		if (res.code == 0) {
+	     			orderNo = res.data.orderNo
+		     		token = res.token
+		     		mid = res.mid
+		     		orderStatus ()
+	     		} else {
+	     			alert(res.msg)
+	     		}
+	      	}
+	 	})
 	}
 	function orderStatus () {
 	    $.ajax({
@@ -20,16 +44,30 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		if (res.data.state == 'payed') {
-	     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
-		 		} else if (res.data.state == 'cancel') {
-		 			window.location.href="/index.html";
-		 		} else {
-		 			orderInfo ()
-		 		}
+	     		if (res.code == 0) {
+	     			if (res.data.state == 'payed') {
+		     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
+			 		} else if (res.data.state == 'cancel') {
+			 			window.location.href="/index.html";
+			 		} else {
+			 			orderInfo ()
+			 		}
+	     		} else {
+	     			alert(res.msg)
+	     		}
 	      	}
 	 	})		
  	};
+
+ 	//获取地址栏参数，name:参数名称
+	 function getUrlParms(name){
+	   var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	   var r = window.location.search.substr(1).match(reg);
+	   if(r!=null)
+	   return unescape(r[2]);
+	   return null;
+    }
+
  	function orderInfo () {
  		$.ajax({
 		  	type: "GET",
@@ -50,6 +88,8 @@ $(function(){
 		 			setInterval(function(){
          				orderEach();
          			}, 3000)
+		   		} else {
+		   			alert(res.msg)
 		   		}
 		   	}
 	 	});
@@ -184,6 +224,8 @@ $(function(){
 	         		} else {
 	         			window.location.href = '/scene.html?token=' + token + "&orderNo=" + orderNo;
 	         		}
+	     		} else {
+	     			alert(res.msg)
 	     		}
 	      	}
 	 	})		

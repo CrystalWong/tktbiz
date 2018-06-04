@@ -70,6 +70,8 @@ $(function(){
 	         	}
 	         	$('.QRcode').remove();
 	         	if(res.code == '0'){
+	         	// image src=“https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=wxTicket”
+	         		// var QRcode = '<img class="QRcode" src="data:image/png;base64,' + res.codeURL + '" width="30%" alt="支付二维码" />'
 	         		var QRcode = '<img class="QRcode" src="' + baseUrl + '/ticket/codepay/barcode.png?codeURL=' + res.codeURL + '" width="30%" alt="支付二维码">'
 	         		$(".pay").before(QRcode);
 	         		var prepayId = res.prepayId;

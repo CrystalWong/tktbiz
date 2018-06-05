@@ -14,6 +14,13 @@ $(function(){
 		} else{
 			$("#return-top").stop(true,true).hide(); // 如果小于等于 200 淡出
 		}
+		if($(window).scrollTop() >= $('.banner').height() + 30){
+			$('#orderInfo-left').addClass('fixed_left')
+			$('#orderInfo-right').addClass('fixed_right')
+		} else{
+			$('#orderInfo-left').removeClass('fixed_left')
+			$('#orderInfo-right').removeClass('fixed_right')
+		}
 	})
 	//点击 up
 	$('#return-top').on('click', function(){
@@ -22,6 +29,11 @@ $(function(){
 	$('.nav').on('click',function () {
 		var listType = $(this).attr('listType');
 		list (listType)
+		bodyRight (listType)
+	})
+	$('.infoNav').on('click',function () {
+		var listType = $(this).attr('listType');
+		bodyRight (listType)
 	})
 	/**
  	 * [radioComplete description]   选择日期
@@ -38,13 +50,13 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
 	function list (listType) {
-		$('.box_right').removeClass('box_right_action');
 		$('.nav').removeClass('box_left_action2');
 		$('.nav[listType= '+ listType +']').addClass('box_left_action2');
+	}
+	function bodyRight (listType) {
+		$('.box_right').removeClass('box_right_action');
 		$('.box_right[listType= '+ listType +']').addClass('box_right_action');
-		if (listType == 'info' || listType == 'modify') {
-			$('.nav[listType=personal]').addClass('box_left_action2');
-		} else if (listType == 'order' || listType == 'ticket') {
+		if (listType == 'order' || listType == 'ticket') {
 			type = listType
 		}
 	}
@@ -53,7 +65,7 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
 	$('.box_right_info .backs').on('click', function () {
-		list (type)
+		bodyRight (type)
 	})
 	/**
  	 * [mailAutoComplete description]   邮箱自动补全

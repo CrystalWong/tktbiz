@@ -30,11 +30,11 @@
     <div class="personal">
       <div class="main">
         <a class="back" href="/index.html">< 返回首页</a>
-        <img src="/imgs/banner.png" width="100%">
+        <img src="/imgs/banner.png" width="100%" class="banner">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
           <div class="row">
             <div class="row floor text-center">
-              <div class="col-xs-12 col-sm-4 text-left">
+              <div class="col-xs-12 col-sm-4 text-left" id="orderInfo-left">
                 <div class="box_left">
                   <ul>
                     <li class="nav box_left_title box_left_action2" type="title" listType='personal'>
@@ -56,7 +56,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="col-xs-12 col-sm-8 text-left">
+              <div class="col-xs-12 col-sm-8 text-left" id="orderInfo-right">
                 <div class="box_right box_right_center box_right_action" listType='personal'>
                   <ul>
                     <li>
@@ -87,7 +87,7 @@
                       <img src="/imgs/download.png">
                       下载电子票
                     </a>
-                    <a href="javascript:void(0)" class="white_color green_bg nav" listType='modify'>
+                    <a href="javascript:void(0)" class="white_color green_bg infoNav" listType='modify'>
                       <img src="/imgs/modify.png">
                       修改参会信息
                     </a>
@@ -177,9 +177,9 @@
                   </form>
                   <div class="button">
                     <a href="javascript:void(0)" class="white_color green_bg preservation">保存</a>
-                    <a href="javascript:void(0)" class="white_color cancel nav" listType='info'>取消</a>
+                    <a href="javascript:void(0)" class="white_color cancel infoNav" listType='info'>取消</a>
                   </div>
-                  <a class="back_info green_color nav" listType='info' href="javascript:void(0)">< 返回</a>
+                  <a class="back_info green_color infoNav" listType='info' href="javascript:void(0)">< 返回</a>
                 </div>
                 <div class="box_right box_right_order" listType='order'>
                   <p class="title distance">活动订单</p>
@@ -221,7 +221,7 @@
                               <td>
                                 <span class="red_bg white_color">未支付</span>
                               </td>
-                              <td class="green_color nav" listType='info'>
+                              <td class="green_color infoNav" listType='info'>
                                 <a href="javascript:void(0)" class="green_color">参会信息</a>
                               </td>
                             </tr>
@@ -233,7 +233,7 @@
                               <td>
                                 <span class="red_bg white_color">未支付</span>
                               </td>
-                              <td class="green_color nav" listType='info'>
+                              <td class="green_color infoNav" listType='info'>
                                 <a href="javascript:void(0)" class="green_color">参会信息</a>
                               </td>
                             </tr>
@@ -279,7 +279,7 @@
                               <td>
                                 <span class="red_bg white_color">未支付</span>
                               </td>
-                              <td class="green_color nav" listType='info'>
+                              <td class="green_color infoNav" listType='info'>
                                 <a href="javascript:void(0)" class="green_color">参会信息</a>
                               </td>
                             </tr>
@@ -291,7 +291,7 @@
                               <td>
                                 <span class="red_bg white_color">未支付</span>
                               </td>
-                              <td class="green_color nav" listType='info'>
+                              <td class="green_color infoNav" listType='info'>
                                 <a href="javascript:void(0)" class="green_color">参会信息</a>
                               </td>
                             </tr>
@@ -337,7 +337,7 @@
                               <td>
                                 <span class="green_bg white_color">正常</span>
                               </td>
-                              <td class="green_color nav" listType='info'>
+                              <td class="green_color infoNav" listType='info'>
                                 <a href="javascript:void(0)" class="green_color">参会信息</a> | <a href="javascript:void(0)" class="green_color">下载电子票</a>
                               </td>
                             </tr>
@@ -349,7 +349,7 @@
                               <td>
                                 <span class="green_bg white_color">正常</span>
                               </td>
-                              <td class="green_color nav" listType='info'>
+                              <td class="green_color infoNav" listType='info'>
                                 <a href="javascript:void(0)" class="green_color">参会信息</a> | <a href="javascript:void(0)" class="green_color">下载电子票</a>
                               </td>
                             </tr>
@@ -377,7 +377,7 @@
                         <p>订单 : <span class="green_color">3255765768</span></p>
                       </div>
                       <div class="col-xs-12 col-sm-3 text-center">
-                        <a href="javascript:void(0)" class="green_bg white_color nav" listType='info'>查看参会信息</a>
+                        <a href="javascript:void(0)" class="green_bg white_color infoNav" listType='info'>查看参会信息</a>
                         <a href="javascript:void(0)" class="green_bg white_color">下载电子票</a>
                       </div>
                     </li>
@@ -393,7 +393,7 @@
                         <p>订单 : <span class="green_color">3255765768</span></p>
                       </div>
                       <div class="col-xs-12 col-sm-3 text-center">
-                        <a href="javascript:void(0)" class="green_bg white_color nav" listType='info'>查看参会信息</a>
+                        <a href="javascript:void(0)" class="green_bg white_color infoNav" listType='info'>查看参会信息</a>
                         <a href="javascript:void(0)" class="green_bg white_color">下载电子票</a>
                       </div>
                     </li>
@@ -409,7 +409,7 @@
                         <p>订单 : <span class="green_color">3255765768</span></p>
                       </div>
                       <div class="col-xs-12 col-sm-3 text-center">
-                        <a href="javascript:void(0)" class="green_bg white_color nav" listType='info'>查看参会信息</a>
+                        <a href="javascript:void(0)" class="green_bg white_color infoNav" listType='info'>查看参会信息</a>
                         <a href="javascript:void(0)" class="green_bg white_color">下载电子票</a>
                       </div>
                     </li>

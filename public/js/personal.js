@@ -14,7 +14,7 @@ $(function(){
 		} else{
 			$("#return-top").stop(true,true).hide(); // 如果小于等于 200 淡出
 		}
-		if($(window).scrollTop() >= $('.banner').height() + 30){
+		if($(window).scrollTop() >= $('.banner').height() + 60){
 			$('#orderInfo-left').addClass('fixed_left')
 			$('#orderInfo-right').addClass('fixed_right')
 		} else{

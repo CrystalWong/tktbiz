@@ -72,23 +72,29 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		if (res.data.payMethod == 'LocalePay') {
-     				window.location.href = '/scene.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
-     			} else {
-     				if (res.data.state == 'payed') {
-		     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
-			 		} else if (res.data.state == 'cancel') {
-			 			window.location.href="/index.html";
-			 		} else {
-			 			getData();
-				 		// payTypeToggle();
-				 		invoiceToggle();
-				 		invTypeToggle();
-					 	$('#toggle-event').on('change', function() {
+	     		if (res.code == 0) {
+	     			if (res.data.payMethod == 'LocalePay') {
+	     				window.location.href = '/scene.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
+	     			} else {
+	     				if (res.data.state == 'payed') {
+			     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
+				 		} else if (res.data.state == 'cancel') {
+				 			window.location.href="/index.html";
+				 		} else {
+				 			getData();
+					 		// payTypeToggle();
 					 		invoiceToggle();
-				    	})
-			 		}
-     			}
+					 		invTypeToggle();
+						 	$('#toggle-event').on('change', function() {
+						 		invoiceToggle();
+					    	})
+				 		}
+	     			}
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})		
  	};
@@ -106,9 +112,15 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		if (res.data.state == 'cancel') {
-		 			window.location.href="/index.html";
-		 		}
+	     		if (res.code == 0) {
+	     			if (res.data.state == 'cancel') {
+			 			window.location.href="/index.html";
+			 		}
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})
  	};
@@ -158,21 +170,27 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		if (Number(res.data.order.orderAmt) !== 0){
-	     			$('#submit').text('去付款')
-	     			renderPayMethods(res);
-	     			$('.invoice').show()
-	     		}
-	     		renderOrderInfo(res);
-	     		renderAttendForms(res);
-	     		renderBuyerForm(res);
-	     		if(res.data.invoiceForm) {
-	     			rewriteInvoice(res.data.invoiceForm);
-	     		}
-	     		setInterval(function(){
-     				orderEach();
-     			}, 3000)
-	         	console.log(res)
+	     		if (res.code == 0) {
+	     			if (Number(res.data.order.orderAmt) !== 0){
+		     			$('#submit').text('去付款')
+		     			renderPayMethods(res);
+		     			$('.invoice').show()
+		     		}
+		     		renderOrderInfo(res);
+		     		renderAttendForms(res);
+		     		renderBuyerForm(res);
+		     		if(res.data.invoiceForm) {
+		     			rewriteInvoice(res.data.invoiceForm);
+		     		}
+		     		setInterval(function(){
+	     				orderEach();
+	     			}, 3000)
+		         	console.log(res)
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})		
  	};
@@ -542,9 +560,15 @@ $(function(){
 			    contentType: false
 			}).done(function(res) {
 				// console.log(res);
-				$(e.target).attr('picName', name);
-				$(e.target).attr('path', res.path);
-				alert('上传成功')
+				if (res.code == 0) {
+					$(e.target).attr('picName', name);
+					$(e.target).attr('path', res.path);
+					alert('上传成功')
+				} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 			}).fail(function(res) {
 				alert(res.msg);
 			});               
@@ -660,6 +684,10 @@ $(function(){
 	         		} else {
 	         			window.location.href = '/result.html?token=' + token + "&orderNo=" + orderNo;
 	         		}
+	         	} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
 	         	}
 	      	}
 	 	})

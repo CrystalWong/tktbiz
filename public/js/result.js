@@ -29,7 +29,13 @@ $(function(){
 	     	data: {},
 	     	dataType: "json",
 	     	success: function(res){
-	     		renderResultInfo(res);
+	     		if (res.code == 0) {
+	     			renderResultInfo(res);
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})
  	}; 	
@@ -44,7 +50,13 @@ $(function(){
 	     	data: {},
 	     	dataType: "json",
 	     	success: function(res){
-	     		renderResultInfo(res);
+	     		if (res.code == 0) {
+	     			renderResultInfo(res);
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})
  	};
@@ -62,7 +74,13 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		renderResultInfo(res);
+	     		if (res.code == 0) {
+	     			renderResultInfo(res);
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})		
  	};
@@ -80,7 +98,13 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		renderResultInfo(res);
+	     		if (res.code == 0) {
+	     			renderResultInfo(res);
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})		
  	};

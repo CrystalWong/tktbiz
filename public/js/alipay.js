@@ -25,6 +25,10 @@ $(function(){
 	         	console.log(res,666)
 	         	if(res.code == "0") {
 	         		document.write(res.html);
+	         	} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
 	         	}
 	      	}
 	 	})

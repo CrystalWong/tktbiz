@@ -22,8 +22,14 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-				console.log(res)
-	     		renderResultInfo (res)
+	     		if (res.code == 0) {
+	     			console.log(res)
+		     		renderResultInfo (res)
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})		
  	};

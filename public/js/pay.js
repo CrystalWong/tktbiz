@@ -22,13 +22,19 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		if (res.data.state == 'payed') {
-	     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
-		 		} else if (res.data.state == 'cancel') {
-		 			window.location.href="/index.html";
-		 		} else {
-			 		getData();
-		 		}
+	     		if (res.code == 0) {
+	     			if (res.data.state == 'payed') {
+		     			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
+			 		} else if (res.data.state == 'cancel') {
+			 			window.location.href="/index.html";
+			 		} else {
+				 		getData();
+			 		}
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})		
  	};
@@ -43,9 +49,15 @@ $(function(){
 	     	data: {'orderNo': orderNo},
 	     	dataType: "json",
 	     	success: function(res){
-	     		if (res.data.state == 'cancel') {
-		 			window.location.href="/order.html?token=" + token + "&orderNo=" + orderNo;
-		 		}
+	     		if (res.code == 0) {
+	     			if (res.data.state == 'cancel') {
+			 			window.location.href="/order.html?token=" + token + "&orderNo=" + orderNo;
+			 		}
+	     		} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
+	         	}
 	      	}
 	 	})
  	};
@@ -80,6 +92,10 @@ $(function(){
          				checkStatus(prepayId);
          				orderEach();
          			}, 3000)
+	         	} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
 	         	}
 	      	}
 	 	})		
@@ -111,6 +127,10 @@ $(function(){
 	         		} else {
 	         			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
 	         		}
+	         	} else if (res.code == "408") {
+	         		window.location.href="/index.html"
+	         	} else {
+	         		alert(res.msg)
 	         	}
 	      	}
 	 	})		

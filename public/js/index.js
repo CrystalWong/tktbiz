@@ -80,7 +80,7 @@ $(function(){
 			$(this).find('p').hide().siblings().show()
 			$('#wechat-code').hide()
 		});
-		ares (res)
+		// ares (res)
 	};
 
 	function click (res) {
@@ -267,16 +267,20 @@ $(function(){
 			if (promType == 0) {
 				couponCode = false;
 			}
-			if (type == 0 || !type) {
-				priceNow.text(item).next().hide()
-			} else if (type == 1) {
-				priceNow.text(item - promValue).next().show()
-			} else if (type == 2) {
-				priceNow.text(item * Number(1 - promValue)).next().show()
-			} else if (type == 3) {
-				priceNow.text(promValue).next().show()
-			} else if (type == 4) {
-				priceNow.text(promValue).next().show()
+			if (priceNow.text() == 0) {
+				priceNow.text(item).next().show()
+			} else {
+				if (type == 0 || !type) {
+					priceNow.text(item).next().hide()
+				} else if (type == 1) {
+					priceNow.text(item - promValue).next().show()
+				} else if (type == 2) {
+					priceNow.text(item * Number(1 - promValue)).next().show()
+				} else if (type == 3) {
+					priceNow.text(promValue).next().show()
+				} else if (type == 4) {
+					priceNow.text(promValue).next().show()
+				}
 			}
 		}
 	};

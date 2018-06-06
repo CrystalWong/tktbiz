@@ -293,13 +293,21 @@ $(function(){
  		return prices;
  	};
 
+ 	function toDecimal(x) {    
+	    var val = Number(x)   
+	    if(!isNaN(parseFloat(val))) {    
+	       val = val.toFixed(2);//把 Number 四舍五入为指定小数位数的数字。
+	    }  
+	    return  val;     
+	}
+
  	function calculation (res) {
  		var payment = 0;//实付金额
  		var discount = 0;//优惠金额
  		var amount;
- 		var reduce = 0;
  		//计算已选票数
  		for( i in res.data.tickets) {
+ 			var reduce = 0;
 	 		if (res.data.tickets[i].open) {
 	 			var number = Number($('.tickets').eq(i).find('.num').text())
 	 			if (couponCode) {
@@ -318,8 +326,9 @@ $(function(){
 			 		}
 	 			}
 		 		var price = Number($('.tickets').eq(i).find('.green .prices').text())
+		 		console.log(reduce)
 				discount += Number(reduce * number)
-				payment += price * number
+				payment += Number(price * number)
 	 		}
  		}
  		//优惠特殊样式
@@ -328,7 +337,7 @@ $(function(){
 		} else {
 			$('.discountMoney').show().css('line-height','30px').prev('.money').css('line-height','30px')
 		}
- 		$('.payment').text(payment)
- 		$('.discount').text(discount)
+ 		$('.payment').text(toDecimal(payment))
+ 		$('.discount').text(toDecimal(discount))
  	};
 })

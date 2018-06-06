@@ -379,11 +379,21 @@ $(function(){
  			htmlStr +="<option value='"+ i +"'>" + htmlSele[i].innerText + "</option>";
  		}
  		var tarHtml = "<select class='copySele form-control'><option>请选择要复制的参会者信息</option>" + htmlStr + "</select>"
- 		// console.log(htmlSele, tarHtml)
 		$('.copySele-wrap').html(tarHtml);
-		$('.copySele-wrap').eq(0).html('')
+		$('.copySele-wrap').eq(0).html('');
 		copyInfo();
 		bindVld();
+		deleCurrOption();
+ 	}
+ 	/**
+ 	 * [deleCurrOption description]   删除复制当前panel信息选项
+ 	 * @return {[type]} [description]
+ 	 */
+ 	function deleCurrOption () {
+ 		var panel = $('.panel');
+ 		for (var i=0; i < panel.length; i++) {
+ 			panel.eq(i+1).find('option[value="'+ (i+1) +'"]').remove();
+ 		}
  	}
  	/**
  	 * [copyInfo description]			实现信息复制功能

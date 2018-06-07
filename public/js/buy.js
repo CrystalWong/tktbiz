@@ -413,7 +413,7 @@ $(function(){
 				if(headerTit == '购票者信息') {
 					$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
 				} else {
-					if(name !== "name") {
+					if(name !== "name" && name !== "mobile" && name !== "email") {
 						if(type == "file") {
 							var path = $(this).attr('path');
 							var target = $('.panel').eq(tarIndex+1).find("[posi='" + name + "']");

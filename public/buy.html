@@ -429,16 +429,25 @@
                         {{#each payMethodList}}
                           {{#if AlipayQuick}}
                           <div class="pay-item pull-left text-center" payType="AlipayQuick">
+                            <div class="triangle_border_nw">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </div>
                             <img src="/imgs/AlipayQuick.png" width="80%">
                           </div>
                           {{/if}}
                           {{#if CodePay}}
                           <div class="pay-item pull-left text-center" payType="CodePay">
+                            <div class="triangle_border_nw">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </div>
                             <img src="/imgs/CodePay.png" width="80%">
                           </div>
                           {{/if}}
                           {{#if PayPal}}
                           <div class="pay-item pull-left text-center" payType="PayPal">
+                            <div class="triangle_border_nw">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </div>
                             <img src="/imgs/PayPal.png" width="80%">
                           </div> 
                           {{/if}}

@@ -376,7 +376,7 @@ $(function(){
  	 * @return {[type]} [description]
  	 */
  	function creatCopySele () {
- 		var htmlSele = $('.header-tit');
+ 		var htmlSele = $('#attendForms-wrap .header-tit');
  		var htmlStr = '';
  		for(var i=0; i<htmlSele.length; i++) {
  			htmlStr +="<option value='"+ i +"'>" + htmlSele[i].innerText + "</option>";

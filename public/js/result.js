@@ -32,6 +32,7 @@ $(function(){
 	     		if (res.code == 0) {
 	     			renderResultInfo(res);
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -53,6 +54,7 @@ $(function(){
 	     		if (res.code == 0) {
 	     			renderResultInfo(res);
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -77,6 +79,7 @@ $(function(){
 	     		if (res.code == 0) {
 	     			renderResultInfo(res);
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -101,6 +104,7 @@ $(function(){
 	     		if (res.code == 0) {
 	     			renderResultInfo(res);
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)

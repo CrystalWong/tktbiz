@@ -31,6 +31,7 @@ $(function(){
 				 		getData();
 			 		}
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -54,6 +55,7 @@ $(function(){
 			 			window.location.href="/order.html?token=" + token + "&orderNo=" + orderNo;
 			 		}
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -93,6 +95,7 @@ $(function(){
          				orderEach();
          			}, 3000)
 	         	} else if (res.code == "408") {
+	         		alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -128,6 +131,7 @@ $(function(){
 	         			window.location.href = '/result.html?from=wechat&token=' + token + "&orderNo=" + orderNo;
 	         		}
 	         	} else if (res.code == "408") {
+	         		alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)

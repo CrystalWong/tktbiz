@@ -91,6 +91,7 @@ $(function(){
 				 		}
 	     			}
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -117,6 +118,7 @@ $(function(){
 			 			window.location.href="/index.html";
 			 		}
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -151,9 +153,9 @@ $(function(){
  	 */
  	function sendToggle () {
  		if($('.sendTkt input').prop('checked')) {
- 			$('.img-inner').show();
+ 			$('.sendTkt-inner').show();
  		} else {
- 			$('.img-inner').hide();
+ 			$('.sendTkt-inner').hide();
  		}
  	}
  	/**
@@ -187,6 +189,7 @@ $(function(){
 	     			}, 3000)
 		         	console.log(res)
 	     		} else if (res.code == "408") {
+	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -575,6 +578,7 @@ $(function(){
 					$(e.target).attr('path', res.path);
 					alert('上传成功')
 				} else if (res.code == "408") {
+					alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)
@@ -695,6 +699,7 @@ $(function(){
 	         			window.location.href = '/result.html?token=' + token + "&orderNo=" + orderNo;
 	         		}
 	         	} else if (res.code == "408") {
+	         		alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
 	         	} else {
 	         		alert(res.msg)

@@ -187,7 +187,6 @@ $(function(){
 		     		setInterval(function(){
 	     				orderEach();
 	     			}, 3000)
-		         	console.log(res)
 	     		} else if (res.code == "408") {
 	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
@@ -273,7 +272,6 @@ $(function(){
  		var radios = $('.dateRadio');
  		radios.each(function(){
  			var radioItems = $(this).find('.dateRadio-item');
- 			console.log(radioItems.length)
  			radioItems.off();
  			radioItems.on('click',function(){
  				radioItems.removeClass('active');
@@ -369,7 +367,6 @@ $(function(){
  		var target = $(".pay-item[paytype='"+ payMethod +"']");
  		$('.pay-item').removeClass('active');
  		target.addClass('active');
- 		// console.log(target, 666)
  	}
  	/**
  	 * [creatCopySele description]     创建复制信息下拉框
@@ -407,27 +404,40 @@ $(function(){
 			var tarIndex = $('.copySele').index(this);
 			var index = $(this).children('option:selected').val();
 			var doms = $('.panel').eq(index).find(".form-control")
-			// console.log(doms, 99)
-			doms.each(function(){
-				var name = $(this).attr('posi');
-				var type = $(this).attr('type');
-				var value = $(this).val();
-				var headerTit = $('.panel').eq(tarIndex+1).find('.header-tit').text();
-				if(headerTit == '购票者信息') {
-					$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
-				} else {
-					if(name !== "name" && name !== "mobile" && name !== "email") {
-						if(type == "file") {
-							var path = $(this).attr('path');
-							var target = $('.panel').eq(tarIndex+1).find("[posi='" + name + "']");
-							target.attr('path',path);
-							target.closest('.upload-wrap').find('.upload-text').text(path);
-						} else {
-							$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
+			if(doms.length) {
+				doms.each(function(){
+					var name = $(this).attr('posi');
+					var type = $(this).attr('type');
+					var value = $(this).val();
+					var headerTit = $('.panel').eq(tarIndex+1).find('.header-tit').text();
+					if(headerTit == '购票者信息') {
+						$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
+					} else {
+						if(name !== "name" && name !== "mobile" && name !== "email") {
+							if(type == "file") {
+								var path = $(this).attr('path');
+								var target = $('.panel').eq(tarIndex+1).find("[posi='" + name + "']");
+								target.attr('path',path);
+								target.closest('.upload-wrap').find('.upload-text').text(path);
+							} else {
+								$('.panel').eq(tarIndex+1).find("[posi='" + name + "']").val(value);
+							}
 						}
 					}
-				}
-			})
+				});
+			} else {
+				var domsWrap = $(this).closest('.panel').find('.form-horizontal');
+				var doms = domsWrap.find('.form-control');
+				doms.each(function(){
+					var type = $(this).attr('type');
+					if(type == "file") {
+						$(this).attr('path', '');
+						$(this).closest('.upload-wrap').find('.upload-text').text('上传您的学生证扫描件');
+					} else {
+						$(this).val('');
+					}
+				});
+			}
 		})
  	}
  	/**
@@ -508,7 +518,6 @@ $(function(){
  	 */
  	function checkEmail (dom) {
  		var val = dom.val();
- 		console.log(val,88)
  		var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
 		if (reg.test(val)){
 		    dom.closest('.form-group').find('.hint').text('');
@@ -555,10 +564,9 @@ $(function(){
  		$(".upload-wrap").off();
 		$(".upload-wrap").on("change", "input[type=file]", function(e) {
 			var imgObj = e.target.files[0];
-			var name = imgObj.name;
+			// var name = imgObj.name;
 			var domWrap = e.target.closest('.upload-wrap');
-			$(domWrap).find('.upload-text').text(name);
-			// console.log(e.target, imgObj, 777)
+			// $(domWrap).find('.upload-text').text(name);
 			var formData = new FormData();
 			formData.append('file', imgObj);
 			$.ajax({
@@ -574,7 +582,8 @@ $(function(){
 			}).done(function(res) {
 				// console.log(res);
 				if (res.code == 0) {
-					$(e.target).attr('picName', name);
+					$(domWrap).find('.upload-text').text(res.path);
+					// $(e.target).attr('picName', name);
 					$(e.target).attr('path', res.path);
 					alert('上传成功')
 				} else if (res.code == "408") {
@@ -666,7 +675,6 @@ $(function(){
  			console.log("有效的购票者信息！");
  			submit(data);
  		} else {
- 			console.log(arr,123)
  			arr[0].focus()
  		}
  	};
@@ -685,7 +693,6 @@ $(function(){
 	     	data: JSON.stringify(data),
 	     	contentType: 'application/json',
 	     	success: function(res){
-	         	console.log(data.payMethod)
 	         	if(res.code == '0') {
 	         		if (data.payMethod == "CodePay") {
 	         			window.location.href = '/pay.html?token=' + token + "&orderNo=" + orderNo;
@@ -857,7 +864,6 @@ $(function(){
  		// $('.pay-wrap .pay-type').off();
  		$('.pay-wrap .pay-type').on('click', function(){
  			if($(this).text().replace(/(^\s+)|(\s+$)/g,"") == "在线支付平台"){
- 				console.log($(this).closest('.pay'))
  				$(this).closest('.pay').find('.pay-item').eq(0).addClass('active');
  			} else {
  				$(this).closest('.pay').addClass('active');

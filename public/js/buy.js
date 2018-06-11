@@ -62,6 +62,10 @@ $(function(){
    		orderStatus ()
    		address ()
  	};
+ 	/**
+ 	 * [orderStatus description]    查询订单状态
+ 	 * @return {[type]} [description]
+ 	 */
  	function orderStatus () {
 	    $.ajax({
 	    	type: "POST",
@@ -198,6 +202,11 @@ $(function(){
 	      	}
 	 	})		
  	};
+ 	/**
+ 	 * [renderPayMethods description]    回显支付方式
+ 	 * @param  {[type]} res [description]
+ 	 * @return {[type]}     [description]
+ 	 */
  	function renderPayMethods (res) {
  		var payMethods = res.data.payMethods;
  		var payMethodList = [];

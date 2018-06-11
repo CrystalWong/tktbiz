@@ -91,9 +91,9 @@ $(function(){
 		 			payTypeToggle ()
 		 			modify ()
 		 			pay ()
-		 			setInterval(function(){
-         				orderEach();
-         			}, 3000)
+		 			// setInterval(function(){
+      //    				orderEach();
+      //    			}, 3000)
 		   		} else if (res.code == "408") {
 		   			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
@@ -133,29 +133,29 @@ $(function(){
  	 * @param  {[type]} data  [description]
  	 * @return {[type]}       [description]
  	 */
-	function orderEach () {
- 		$.ajax({
-	    	type: "POST",
-	     	url: baseUrl + "/ticket/order/query.json",
-            headers: {
-		        'x-access-token': token
-		    },
-	     	data: {'orderNo': orderNo},
-	     	dataType: "json",
-	     	success: function(res){
-	     		if (res.code == 0) {
-	     			if (res.data.state == 'cancel') {
-			 			window.location.href="/order.html?token=" + token + "&orderNo=" + orderNo;
-			 		}
-	     		} else if (res.code == "408") {
-	     			alert('token已失效，请重新提交')
-	         		window.location.href="/index.html"
-	         	} else {
-	         		alert(res.msg)
-	         	}
-	      	}
-	 	})
- 	};
+	// function orderEach () {
+ // 		$.ajax({
+	//     	type: "POST",
+	//      	url: baseUrl + "/ticket/order/query.json",
+ //            headers: {
+	// 	        'x-access-token': token
+	// 	    },
+	//      	data: {'orderNo': orderNo},
+	//      	dataType: "json",
+	//      	success: function(res){
+	//      		if (res.code == 0) {
+	//      			if (res.data.state == 'cancel') {
+	// 		 			window.location.href="/order.html?token=" + token + "&orderNo=" + orderNo;
+	// 		 		}
+	//      		} else if (res.code == "408") {
+	//      			alert('token已失效，请重新提交')
+	//          		window.location.href="/index.html"
+	//          	} else {
+	//          		alert(res.msg)
+	//          	}
+	//       	}
+	//  	})
+ // 	};
  	/**
  	 * [bindHtml description]			数据注入html模版
  	 * @param  {[type]} domId [description]

@@ -179,8 +179,8 @@ $(function(){
 	    } else{
 	    	return;
 	    }
-		
 	});
+	
 	//点击关闭弹出框
 	$('.subclose').on('click', function(){
 		$('.dialog').fadeOut(500)

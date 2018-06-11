@@ -103,29 +103,29 @@ $(function(){
  	 * [invoiceToggle description]		查询订单状态
  	 * @return {[type]} [description]
  	 */
- 	function orderEach () {
- 		$.ajax({
-	    	type: "POST",
-	     	url: baseUrl + "/ticket/order/query.json",
-            headers: {
-		        'x-access-token': token
-		    },
-	     	data: {'orderNo': orderNo},
-	     	dataType: "json",
-	     	success: function(res){
-	     		if (res.code == 0) {
-	     			if (res.data.state == 'cancel') {
-			 			window.location.href="/index.html";
-			 		}
-	     		} else if (res.code == "408") {
-	     			alert('token已失效，请重新提交')
-	         		window.location.href="/index.html"
-	         	} else {
-	         		alert(res.msg)
-	         	}
-	      	}
-	 	})
- 	};
+ 	// function orderEach () {
+ 	// 	$.ajax({
+	 //    	type: "POST",
+	 //     	url: baseUrl + "/ticket/order/query.json",
+  //           headers: {
+		//         'x-access-token': token
+		//     },
+	 //     	data: {'orderNo': orderNo},
+	 //     	dataType: "json",
+	 //     	success: function(res){
+	 //     		if (res.code == 0) {
+	 //     			if (res.data.state == 'cancel') {
+		// 	 			window.location.href="/index.html";
+		// 	 		}
+	 //     		} else if (res.code == "408") {
+	 //     			alert('token已失效，请重新提交')
+	 //         		window.location.href="/index.html"
+	 //         	} else {
+	 //         		alert(res.msg)
+	 //         	}
+	 //      	}
+	 // 	})
+ 	// };
  	/**
  	 * [invoiceToggle description]		控制发票面板展示
  	 * @return {[type]} [description]
@@ -184,9 +184,11 @@ $(function(){
 		     		if(res.data.invoiceForm) {
 		     			rewriteInvoice(res.data.invoiceForm);
 		     		}
-		     		setInterval(function(){
-	     				orderEach();
-	     			}, 3000)
+
+		     		// setInterval(function(){
+	     			// 	orderEach();
+	     			// }, 3000)
+		       //   	console.log(res)
 	     		} else if (res.code == "408") {
 	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"

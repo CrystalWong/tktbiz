@@ -138,19 +138,19 @@ $(function(){
  		if($('#toggle-event').prop('checked')) {
  			$('#invoice').show();	
  		} else {
- 			$('#invoice').hide();	
+ 			$('#invoice').hide();
  		}
  	}
  	/**
  	 * [bindSendToggle description]		绑定电子票是否发送给每个参会者监听
  	 * @return {[type]} [description]
- 	 */
+ 	 */  
  	function bindSendToggle () {
  		$('.sendTkt').off();
     	$('.sendTkt').on('click', function() {
  			sendToggle();
 		}) 		
- 	}
+ 	} 
  	/**
  	 * [sendToggle description]		电子票是否发送给每个参会者展示控制
  	 * @return {[type]} [description]
@@ -189,10 +189,6 @@ $(function(){
 		     			rewriteInvoice(res.data.invoiceForm);
 		     		}
 
-		     		// setInterval(function(){
-	     			// 	orderEach();
-	     			// }, 3000)
-		       //   	console.log(res)
 	     		} else if (res.code == "408") {
 	     			alert('token已失效，请重新提交')
 	         		window.location.href="/index.html"
@@ -872,7 +868,6 @@ $(function(){
  			$('.pay-item').removeClass('active');
  			$(this).addClass('active');
  		})
- 		// $('.pay-wrap .pay-type').off();
  		$('.pay-wrap .pay-type').on('click', function(){
  			if($(this).text().replace(/(^\s+)|(\s+$)/g,"") == "在线支付平台"){
  				$(this).closest('.pay').find('.pay-item').eq(0).addClass('active');
